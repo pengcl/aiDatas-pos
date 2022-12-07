@@ -1,0 +1,68 @@
+nz-table {
+  margin: 10px;
+  &::ng-deep {
+    table {
+      table-layout: fixed;
+    }
+  }
+  th,td {
+    min-width: 48px;
+  }
+  th {
+    font-size: 14px;
+    line-height: 32px !important;
+    padding: 5px 8px !important;
+    &:not(.ant-table-cell-fix-left,.ant-table-cell-fix-right) {
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+  }
+  td {
+    padding: 5px 8px !important;
+    font-size: 14px;
+    &:not(.ant-table-cell-fix-left,.ant-table-cell-fix-right) {
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+  }
+  .actions {
+    white-space: nowrap;
+    button {
+      margin: 0 5px;
+      &.used {
+        border-color: #ff4d4f;
+        color: #ff4d4f;
+      }
+    }
+  }
+}
+
+nz-pagination {
+  margin: 0 10px 10px;
+  text-align: right;
+  &::ng-deep {
+    .ant-pagination-total-text {
+      float: left;
+    }
+  }
+}
+
+.cart-price{
+  ion-label{
+    font-size: 14px;
+  }
+  ion-note {
+    font-size: 16px;
+    padding: 0px 6px 0px 3px;
+    color:  #000;
+  }
+  .label-ds{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .amount {
+    color: #E1343A;
+  }
+  .total {
+    font-size: 16px;
+    color: #E1343A;
+  }
+}

@@ -1,0 +1,23 @@
+ion-footer {
+  &.fullscreen {
+    display: none;
+  }
+  ion-toolbar {
+    --background: #1B2737;
+    color: #fff;
+    font-size: 12px;
+    .info {
+      span {
+        display: inline-block;
+        margin: 0 7px;
+      }
+    }
+    .sys {
+      text-align: right;
+      span {
+        display: inline-block;
+        margin: 0 7px;
+      }
+    }
+  }
+}

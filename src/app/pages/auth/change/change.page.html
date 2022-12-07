@@ -1,0 +1,89 @@
+<ion-content>
+    <form [formGroup]="form" class="auth-form">
+      <div class="page-title">
+        <h1>修改密码</h1>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field [floatLabel]="'always'" appearance="outline">
+              <mat-label>原密码</mat-label>
+              <input type="password" formControlName="oldPassword" matInput placeholder="请输入原密码">
+              <!--<mat-error>
+                原密码不正确
+              </mat-error>-->
+              <mat-error *ngIf="form.get('oldPassword').value && form.get('oldPassword').hasError('required')">
+                请输入原密码
+              </mat-error>
+              <mat-error *ngIf="form.get('oldPassword').value && form.get('oldPassword').hasError('oldPassword') && !form.get('oldPassword').hasError('required')">
+                原密码不正确
+              </mat-error>
+              <!--<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>-->
+            </mat-form-field>
+          </ion-col>
+          <ion-col size="12">
+            <mat-form-field [floatLabel]="'always'" appearance="outline">
+              <mat-label>新密码</mat-label>
+              <input type="password" formControlName="newPwd" matInput placeholder="请输入新密码">
+              <mat-hint>
+                密码由6~16位字符或者数字组成
+              </mat-hint>
+              <mat-error *ngIf="form.get('newPwd').value && form.get('newPwd').hasError('required')">
+                请输入新密码
+              </mat-error>
+              <!--<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                原密码不正确
+              </mat-error>
+              -->
+            </mat-form-field>
+          </ion-col>
+          <ion-col size="12" style="margin-top: 8px">
+            <mat-form-field [floatLabel]="'always'" appearance="outline">
+              <mat-label>再次确认密码</mat-label>
+              <input type="password" formControlName="newPassword" matInput placeholder="请输入新密码">
+              <mat-hint>
+                请保持两次输入相同密码
+              </mat-hint>
+              <mat-error *ngIf="form.get('newPassword').value && form.get('newPassword').hasError('required')">
+                请输入确认密码
+              </mat-error>
+              <!--<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>-->
+            </mat-form-field>
+          </ion-col>
+          <ion-col size="6" style="margin-top: 10px">
+            <ion-button (click)="back()" expand="block" color="medium">返回</ion-button>
+            <!--<button (click)="login()" [disabled]="form.invalid" type="button" mat-raised-button color="primary">登录</button>-->
+          </ion-col>
+          <ion-col size="6" style="margin-top: 10px">
+            <ion-button (click)="update()" [disabled]="form.invalid" expand="block">保存</ion-button>
+            <!--<button (click)="login()" [disabled]="form.invalid" type="button" mat-raised-button color="primary">登录</button>-->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+        <!--<ion-list>
+            <ion-item>
+                <ion-label>影院</ion-label>
+                <ion-input placeholder="请输入影院" formControlName="orgAlias"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>账号</ion-label>
+                <ion-input placeholder="请输入账号" formControlName="accountLoginName"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>密码</ion-label>
+                <ion-input type="password" placeholder="请输入密码" formControlName="accountLoginPassword"></ion-input>
+            </ion-item>
+        </ion-list>
+        <button (click)="login()" [disabled]="form.invalid" type="button" mat-raised-button color="primary">登录</button>-->
+    </form>
+</ion-content>

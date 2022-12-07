@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-router-outlet [animated]="false" id="main-content"></ion-router-outlet>
+</ion-content>
+<ion-footer [class.fullscreen]="isFullscreen">
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="info" size="auto">
+          <span>影院：{{cinema.cinemaName}}</span>
+          <span>影院编码：{{cinema.cinemaCode}}</span>
+          <span>终端号：{{terminalCode}}</span>
+          <span>用户：{{staff}}</span>
+          <!--<span>备用金：￥2000元</span>-->
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col class="sys" size="auto">
+          <span>{{date | date : 'yyyy-MM-dd HH:mm:ss'}} {{date | week}}</span>
+          <span>满天星综合管理系统V1.0</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

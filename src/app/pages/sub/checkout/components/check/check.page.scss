@@ -1,0 +1,136 @@
+:host {
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 1px;
+    border-left: 1px solid #ededed;
+    z-index: 999;
+  }
+}
+
+ion-list {
+  ion-item {
+    font-size: 16px;
+
+    ion-label {
+      color: #354052;
+    }
+
+    ion-note {
+      color: #54698D;
+    }
+
+    ion-icon {
+      color: #F85359;
+      font-size: 16px;
+    }
+  }
+}
+
+.amount {
+  @media screen and (max-width: 1200px) {
+    --min-height: 32px;
+    font-size: 14px;
+  }
+  ion-note {
+    color: #090D1A;
+
+    span {
+      color: #E1343A;
+    }
+  }
+}
+
+.coupons {
+  padding: 1.5px 2.5px 2.5px;
+  .coupon-box {
+    line-height: 40px;
+    background: #C5D8F7;
+    border-radius: 4px;
+    border: 1px solid #2268D7;
+    color: #090D1A;
+    text-align: center;
+    margin: 5px;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    @media screen and (max-width: 1200px) {
+      font-size: 13px;
+      margin: 2px;
+    }
+  }
+}
+
+.status {
+  ion-item {
+    font-size: 16px;
+    @media screen and (max-width: 1200px) {
+      --min-height: 30px;
+      font-size: 13px;
+    }
+    ion-label {
+      color: #656161;
+      @media screen and (max-width: 1200px) {
+        margin: 0 8px 0 0;
+      }
+    }
+
+    ion-note {
+      color: #090D1A;
+    }
+
+    &.total {
+      ion-label {
+        font-size: 18px;
+        color: #354052;
+        @media screen and (max-width: 1200px) {
+          font-size: 14px;
+        }
+      }
+
+      ion-note {
+        font-size: 26px;
+        color: #E1343A;
+        @media screen and (max-width: 1200px) {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+ion-footer {
+  div {
+    height: 55px;
+    background: linear-gradient(180deg, #5673A0 0%, #435475 100%);
+    border-radius: 4px;
+    margin: 3px;
+    color: #fff;
+    text-align: center;
+    line-height: 55px;
+    box-sizing: border-box;
+    cursor: pointer;
+    @media screen and (max-width: 1200px) {
+      height: 44px;
+      line-height: 44px;
+      font-size: 13px;
+    }
+
+    &.more {
+      background: #F3F5F8;
+      color: #666666;
+      border: 1px solid #8A8A8A;
+    }
+
+    &.cancelBtn {
+      background: #F3F5F8;
+      color: #666666;
+      border: 1px solid #8A8A8A;
+    }
+  }
+}

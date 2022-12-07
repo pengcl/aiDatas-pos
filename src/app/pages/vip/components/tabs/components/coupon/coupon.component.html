@@ -1,0 +1,93 @@
+<form nz-form [formGroup]="form" class="ant-advanced-search-form">
+  <ion-grid class="filter">
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item style="width: 250px">
+          <nz-form-label [nzSpan]="7">票券类型</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-select  formControlName="type" nzPlaceHolder="请选择">
+              <nz-option nzValue="0" nzLabel="全部"></nz-option>
+              <nz-option nzValue="1" nzLabel="兑换券"></nz-option>
+              <nz-option nzValue="2" nzLabel="优惠券"></nz-option>
+              <nz-option nzValue="3" nzLabel="代金券"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item style="width: 250px">
+          <nz-form-label [nzSpan]="7">过期状态</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-select formControlName="dataType" nzPlaceHolder="请选择">
+              <nz-option nzValue="1" nzLabel="未过期"></nz-option>
+              <nz-option nzValue="0" nzLabel="全部"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item style="width: 250px">
+          <nz-form-label [nzSpan]="7">票券状态</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-select  formControlName="ticketStatus" nzPlaceHolder="请选择">
+              <nz-option nzValue="0" nzLabel="全部"></nz-option>
+              <!-- <nz-option nzValue="1" nzLabel="未激活"></nz-option> -->
+              <nz-option nzValue="2" nzLabel="未使用"></nz-option>
+              <nz-option nzValue="3" nzLabel="已消费"></nz-option>
+              <nz-option nzValue="4" nzLabel="已退货"></nz-option>
+              <nz-option nzValue="5" nzLabel="已停用"></nz-option>
+              <nz-option nzValue="6" nzLabel="已作废"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button nz-button nzType="primary" (click)="couponQueryBtn()">查询</button>
+      </ion-col>
+      <ion-col></ion-col>
+      <!--<ion-col size="auto">
+        <button nz-button nzType="primary" (click)="couponSend()">补送票券</button>
+      </ion-col>-->
+    </ion-row>
+  </ion-grid>
+</form>
+<nz-table #groupingTable    
+[nzFrontPagination]="false"
+[nzData]="page.datas"
+[nzLoading]="page.loading"
+[nzTotal]="page.total"
+[(nzPageIndex)]="page.pageIndex"
+[(nzPageSize)]="page.pageSize"
+[nzShowQuickJumper]="false"
+[nzShowSizeChanger]="false"
+(nzPageIndexChange)="changePageIndex($event)"
+>
+  <thead>
+    <tr>
+      <th nzLeft>票券编码</th>
+      <th>票券类型</th>
+      <th>票券名称</th>
+      <th>面值(元)</th>
+      <th>有效期</th>
+      <!-- <th>适用影片/商品</th> -->
+      <th>票券状态</th>
+      <th>绑定日期</th>
+      <th>消费日期</th>
+      <th nzRight>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of groupingTable.data">
+      <td nzLeft>{{ data.ticketCode }}</td>
+      <td>{{ data.typeName }}</td>
+      <td>{{ data.ticketName }}</td>
+      <td>{{ data.ticketMoney }}</td>
+      <td>{{ data.effectDate }}</td>
+      <!-- <td>{{ data.useCondition }}</td> -->
+      <td>{{ data.ticketStatusName }}</td>
+      <td>{{ data.bindDate }}</td>
+      <td>{{ data.consumeDate }}</td>
+      <td>{{ data.remark }}</td>
+    </tr>
+  </tbody>
+</nz-table>

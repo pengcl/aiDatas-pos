@@ -1,0 +1,339 @@
+.search{
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+.query-item{
+  height: 67px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 10px 22px;
+}
+
+.query-input{
+  width: 100% !important;
+  border-radius: 4px;
+  border: 1px solid #656161;
+  height: 40px;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.13);
+  text-indent: 10px;
+  font-size: 16px;
+}
+
+.width20{
+  width: 20%;
+}
+.content{
+  background: #F5F6F7;
+}
+.query-btn{
+  width: 68px;
+  height: 40px;
+  box-shadow: 3px 3px 4px 0px rgba(71, 120, 199, 0.4);
+  border-radius: 4px;
+  font-size: 16px;
+}
+.delete-btn{
+  width: 68px;
+  height: 40px;
+  box-shadow: 0px 3px 6px 0px rgba(84, 111, 187, 0.2);
+  border-radius: 4px;
+  color: #000;
+  border: 1px solid #5C749F;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.refund-table{
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #656161;
+  width: 100%;
+  height: 100%;
+}
+
+.refund-table tr{
+  height: 30px;
+}
+
+.refund-table td i{
+  color: #090D1A;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.goods-all{
+  border-bottom: 1px solid #ddd;
+  padding: 6px 18px;
+  height: 10%;
+  max-height: 35px;
+}
+
+.content-top{
+  height: 10%
+}
+
+.content-center{
+  height: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.content-div{
+  height: 10%;padding: 0px 30px 0px 30px;
+}
+
+.left-content{
+  height: 88%;overflow: hidden;padding: 0px 15px 0px 15px;margin-top: 10px;
+}
+
+.left{
+  height: 100%;overflow: hidden;float: left;width: 65%;
+}
+
+.goods-div{
+  height: 70%;background: #ffffff;border-radius: 4px;
+}
+
+.goods-ul{
+  list-style: none;padding: 0px;margin: 0px;
+  height: 90%;overflow-x: hidden;overflow-y: auto;
+}
+
+.goods-ul li.active{
+  background: #DBE7FC !important;
+}
+
+.goods-ul li.disabled{
+  background: rgb(239, 241, 244);
+}
+
+.goods-ul li{
+  background: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #BCC4D4;
+  padding: 10px 15px;
+  margin: 5px 15px;
+}
+
+.refund-div{
+  border-radius: 4px;padding-top: 12px;padding: 6px 15px;
+}
+
+.pay-div{
+  height: 86.5%;
+  background: #ffffff;
+  border-radius: 4px;
+  margin-left: 2%;
+}
+.pay{
+  border-bottom: 1px solid #ddd;
+  padding: 6px 18px;
+  height: 8%;
+  max-height: 35px;
+}
+
+.pay-ul{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  height: 90%;overflow-x: hidden;overflow-y: auto;
+}
+
+.pay-ul li{
+  background: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #BCC4D4;
+  padding: 5px 15px;
+  margin: 5px 10px 0px 10px;
+}
+
+.pay-ul li table{
+  width: 95%;
+}
+
+.pay-ul li tr{
+  height: 42px;
+}
+
+.ptd{
+  width: 30%;
+  min-width: 140px;
+  text-align: right;
+}
+
+.pay-ul li input{
+  height: 36px;
+}
+
+.delete-pay-btn{
+  width: 68px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #F85359;
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #ED1C24;
+  margin-left: 5px;
+}
+
+ .delete-btn{
+   width: 68px;
+   height: 40px;
+   box-shadow: 0px 3px 6px 0px rgb(84 111 187 / 20%);
+   border-radius: 4px;
+   color: #000;
+   border: 1px solid #5C749F;
+   font-size: 16px;
+ }
+
+.add-pay-btn{
+  width: 68px;
+  height: 32px;
+  box-shadow: 0px 3px 6px 0px rgb(84 111 187 / 20%);
+  border-radius: 4px;
+  color: #000;
+  border: 1px solid #5C749F;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.apply-btn{
+  width: 68px;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.paddingleft15{
+  padding-left: 15px;
+}
+
+.rtd{
+  font-size: 16px !important;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500 !important;
+  color: #354052 !important;
+  width: 25%;
+}
+
+.goods-table{
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #090D1A;
+}
+
+.goods-table .checkbox, .goods-table .checkbox{
+  width: 35px;
+}
+
+.goods-ul i{
+  font-style: normal;
+  color: #656161;
+}
+
+.payed-ul{
+  list-style: none;padding: 0px;margin: 0px;
+}
+
+.payed-ul li{
+  float: left;
+  width: 25%;
+}
+
+.refund-table .title{
+  width: 90px;
+  font-size: 16px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #090D1A;
+}
+
+.payed-ul li .rcolor{
+  color: #910A0A;
+}
+
+.refund-ul{
+  list-style: none;padding: 0px;margin: 0px;
+}
+
+.refund-ul li{
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  margin-right: 10px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+}
+
+.refund-ul li.gcolor{
+  color: #656161;
+  width: 35%;
+}
+
+.refund-ul li.monney{
+  width: 30%;
+}
+
+.refund-ul li .ant-select{
+  width: 50%;
+}
+
+.refund-ul li i{
+  color: #910A0A;
+  margin: 0px 3px;
+  font-style: normal;
+}
+
+.top10{
+  margin-top: 10px;
+}
+
+.all-table{
+  padding: 5px;
+}
+
+.all-table tr{
+  height: 45px;
+}
+
+.all-table .gcolor{
+  font-size: 16px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #656161;
+}
+
+.all-table .bcolor{
+  font-size: 16px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #090D1A;
+}
+
+.all-table i{
+  color: #910A0A;
+  margin: 0px 3px;
+  font-style: normal;
+}
+
+.pay-detail{
+  background: #ffffff;margin-top: 1%;padding: 6px 15px;border-radius: 4px;height: 15%;overflow-x: hidden;overflow-y: auto;
+}
+
+.right{
+  height: 100%;overflow-x: hidden;overflow-y: auto;width: 35%;
+}
+.custom-input{
+  border: 1px solid #d9d9d9 !important;
+}
+
+.movie-input{
+  height: 32px !important;
+  border: 1px solid #d9d9d9 !important;
+}

@@ -1,0 +1,23 @@
+::selection {
+  /*background: hsla(5, 92%, 76%, 0.8);
+  color: #fff;*/
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 768px) and (min-height: 768px) {
+  .sc-ion-modal-ios-h {
+    --width: 850px;
+    --height: 700px;
+  }
+}
+
+ion-content {
+  &.scroll-bar-indicator {
+    display: none;
+  }
+  &::ng-deep {
+    .scroll-bar-indicator {
+      display: none;
+    }
+  }
+}

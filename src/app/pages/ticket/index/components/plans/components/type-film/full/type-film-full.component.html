@@ -1,0 +1,51 @@
+<ion-content #container [fullscreen]="true" appScrollbarTheme>
+  <app-empty *ngIf="films && films.length === 0"></app-empty>
+  <app-loading *ngIf="!films"></app-loading>
+  <ion-grid *ngIf="films && films.length > 0" class="ion-no-padding">
+    <ion-row>
+      <ion-col size="auto">
+        <ul class="films">
+          <li *ngFor="let item of currentPageData(films, page.group)" (click)="changeFilm(item)" [class.curr]="item.id === film?.id" [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 4) + 'px'}">
+            <div class="item-box">
+              <div class="item-content">
+                <h2>{{item.posMovieNameShort}}</h2>
+                <p>
+                  <span class="lan">{{item.posMovieLan}}</span><span class="publish">{{item.planMoviePublish}}</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ion-col>
+      <ion-col>
+        <ion-grid class="plans ion-no-padding">
+          <ion-row>
+            <ion-col (click)="changePlan(item)" [class.expired]="item?.expired" [class.curr]="plan && item?.uidPlan === plan?.uidPlan" *ngFor="let item of currentPageData(filmPlans,page.items)" size="12/5" [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 8) + 'px'}">
+              <span *ngIf="item | dateTag" class="tag-time">{{item | dateTag}}</span>
+              <div *ngIf="item" class="item-box">
+                <div class="item-content">
+                  <h2>{{item.posStartTime | repairDate | date : 'HH:mm'}}</h2>
+                  <p>{{item.hallName}} (余<span style="color: yellow">{{item.posSeatLeft}}</span>座)</p>
+                  <p class="count" *ngIf="showCounts"><span *ngIf="item.views || item.views === 0"><em>{{item.views}}</em>人/</span><span
+                    *ngIf="item.total || item.total === 0"><em>{{item.total}}</em>元</span></p>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <pagination [page]="page[film ? 'items' : 'group']" (change)="pageChange($event)"></pagination>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="expand()">
+        关闭
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

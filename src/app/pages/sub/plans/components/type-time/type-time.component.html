@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true" appScrollbarTheme>
+    <app-empty *ngIf="sub?.components.time.plans && sub?.components.time.plans.length === 0"></app-empty>
+    <app-loading *ngIf="!sub?.components.time.plans"></app-loading>
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col size="auto" style="align-self: start;text-align: center">
+                <ul class="times">
+                    <li *ngFor="let groupPlan of sub?.components.time.times" [class.curr]="groupPlan.label === sub?.components.time.time?.label"  [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 4) + 'px'}">
+                        <div class="time-box">
+                            <span class="time">{{groupPlan.label}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </ion-col>
+            <ion-col class="plans">
+                <ion-grid class="ion-no-padding">
+                  <ion-row>
+                    <ion-col *ngFor="let item of sub?.components.time.plans" [class.expired]="item?.expired" [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 8) + 'px'}" size="3">
+                      <div class="item-box">
+                        <div *ngIf="item" class="item-content">
+                          <span class="plan-time">{{item.posStartTime | repairDate | date : 'HH:mm'}}</span>
+                          <h2>{{item.posMovieNameShort}}</h2>
+                          <p>
+                            <span class="lan">{{item.posMovieLan}}</span><span class="publish">{{item.planMoviePublish}}</span>
+                            {{item.hallName}} (余<span style="color: yellow">{{item.posSeatLeft}}</span>座)
+                          </p>
+                        </div>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-title>
+            <pagination *ngIf="sub" [page]="sub?.components.time.page"></pagination>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

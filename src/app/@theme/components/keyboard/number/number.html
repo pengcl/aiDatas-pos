@@ -1,0 +1,33 @@
+<div class="number-box">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="type === 'Cash'" size="auto"><span (click)="clickNumber('100', true)"
+                                                         class="custom num-box">￥100</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('7',false)" class="num-box">7</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('8',false)" class="num-box">8</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('9',false)" class="num-box">9</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="type === 'Cash'" size="auto"><span (click)="clickNumber('50',true)"
+                                                         class="custom num-box">￥50</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('4',false)" class="num-box">4</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('5',false)" class="num-box">5</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('6',false)" class="num-box">6</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="type === 'Cash'" size="auto"><span (click)="clickNumber('10',true)"
+                                                         class="custom num-box">￥10</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('1',false)" class="num-box">1</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('2',false)" class="num-box">2</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('3',false)" class="num-box">3</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="type === 'Cash'" size="auto"><span (click)="clickNumber('5',true)"
+                                                         class="custom num-box">￥5</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('0',false)" class="num-box">0</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('.',false,dotDisabled)" [class.disabled]="dotDisabled"
+                                 class="num-box">.</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('del',false)" class="num-box">删除</span></ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

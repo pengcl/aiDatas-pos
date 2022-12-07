@@ -1,0 +1,660 @@
+{
+  "id": "2404158",
+  "name": "aiData-Pos",
+  "font_family": "pos-font",
+  "css_prefix_text": "pos_",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1816961",
+      "name": "卖品",
+      "font_class": "goods",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "5190950",
+      "name": "会员卡",
+      "font_class": "card",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
+    },
+    {
+      "icon_id": "4298403",
+      "name": "VIP",
+      "font_class": "vip",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8531454",
+      "name": "欢迎页",
+      "font_class": "hi",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "22971081",
+      "name": "ico-shopping",
+      "font_class": "ico-shopping",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "22109831",
+      "name": "会员卡不能进行此操作时",
+      "font_class": "huiyuankabunengjinhangcicaozuoshi",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "22109832",
+      "name": "无卖品时",
+      "font_class": "wumaipinshi",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "22109833",
+      "name": "购物车为空时",
+      "font_class": "gouwucheweikongshi",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "22109834",
+      "name": "无配餐信息时",
+      "font_class": "wupeicanxinxishi",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "22109835",
+      "name": "无座位图时",
+      "font_class": "wuzuoweitushi",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "22109836",
+      "name": "结算--无参与活动",
+      "font_class": "jiesuan--wucanyuhuodong",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "22106624",
+      "name": "无场次时",
+      "font_class": "wuchangcishi",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "21975184",
+      "name": "enter-ico-lock",
+      "font_class": "enter-ico-lock",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "21975185",
+      "name": "enter-ico-user",
+      "font_class": "enter-ico-user",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "21974833",
+      "name": "enter-ico-keyboard ",
+      "font_class": "enter-ico-keyboard",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "21974834",
+      "name": "enter-ico-film",
+      "font_class": "enter-ico-film",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "21967769",
+      "name": "menu-配餐",
+      "font_class": "catering",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "21967770",
+      "name": "menu-电影票",
+      "font_class": "ticket",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "21967771",
+      "name": "menu-会员开卡",
+      "font_class": "menu-huiyuankaika",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "21967772",
+      "name": "menu-卖品",
+      "font_class": "menu-maipin",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "21967773",
+      "name": "menu-取货",
+      "font_class": "pickup",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "21967774",
+      "name": "menu-取票",
+      "font_class": "getTicket",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "21967775",
+      "name": "menu-会员服务",
+      "font_class": "menu-huiyuanfuwu",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "21965909",
+      "name": "menu-验票",
+      "font_class": "checkTicket",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
+      "icon_id": "21965581",
+      "name": "menu-退单",
+      "font_class": "refund",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "21965582",
+      "name": "menu-打印 ",
+      "font_class": "reprint",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "21963940",
+      "name": "menu-系统设置",
+      "font_class": "menu-xitongshezhi",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "21963873",
+      "name": "menu-开钱箱",
+      "font_class": "open",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "21867660",
+      "name": "Checkbox - unSelected",
+      "font_class": "Checkbox-unSelected",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "21867491",
+      "name": "Checkbox - Selected",
+      "font_class": "Checkbox-Selected",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "21808967",
+      "name": "menu-系统设置ico",
+      "font_class": "menu-xitongshezhiico",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "21808669",
+      "name": "menu-积分兑换ico",
+      "font_class": "points",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "21808625",
+      "name": "menu-补登票",
+      "font_class": "supplement",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "21478249",
+      "name": "hint-info",
+      "font_class": "hint-info",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "21478242",
+      "name": "hint-warning",
+      "font_class": "hint-warning",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "21478244",
+      "name": "hint-error",
+      "font_class": "hint-error",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "21478237",
+      "name": "hint-success",
+      "font_class": "hint-success",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "17963961",
+      "name": "Setting",
+      "font_class": "setting",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "17280200",
+      "name": "icon_exchange",
+      "font_class": "exchange",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "12780411",
+      "name": "会 员1-01",
+      "font_class": "member",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "32477",
+      "name": "delete",
+      "font_class": "delete",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "20810185",
+      "name": "payway-ico-member",
+      "font_class": "payway-ico-member",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "20809614",
+      "name": "pay-alipay ico",
+      "font_class": "pay-alipayico",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "20809607",
+      "name": "pay-wx",
+      "font_class": "pay-wx",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "20804417",
+      "name": "pay-cash",
+      "font_class": "pay-cash",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "13003901",
+      "name": "沙漏",
+      "font_class": "waiting",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "3217815",
+      "name": "缩放",
+      "font_class": "reduce",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "20373555",
+      "name": "情侣标准left",
+      "font_class": "qinglvbiaozhunleft",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "20368648",
+      "name": "情侣标准right",
+      "font_class": "qinglvbiaozhunright",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "20350238",
+      "name": "全部排期-下一页",
+      "font_class": "quanbupaiqi-xiayiye",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "20350239",
+      "name": "全部排期-上一页",
+      "font_class": "quanbupaiqi-shangyiye",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "827918",
+      "name": "手指",
+      "font_class": "menuTakeTicket",
+      "unicode": "e69b",
+      "unicode_decimal": 59035
+    },
+    {
+      "icon_id": "17811465",
+      "name": "ic_更换",
+      "font_class": "seatRotate",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "1058927",
+      "name": "more",
+      "font_class": "moreticketkind",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "880497",
+      "name": "refresh",
+      "font_class": "refresh",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "19657959",
+      "name": "屏幕_全屏",
+      "font_class": "expand",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "20349965",
+      "name": "屏幕_全屏",
+      "font_class": "allfilm",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "20349875",
+      "name": "维修ico",
+      "font_class": "weixiuico",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "20349876",
+      "name": "下一月",
+      "font_class": "xiayiyue",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "20349877",
+      "name": "上一页",
+      "font_class": "shangyiye",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "20349878",
+      "name": "下一页",
+      "font_class": "xiayiye",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "20349879",
+      "name": "下一天",
+      "font_class": "xiayitian",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "20349880",
+      "name": "上一月",
+      "font_class": "shangyiyue",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "20349882",
+      "name": "上一天",
+      "font_class": "shangyitian",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "20349884",
+      "name": "right-minimum",
+      "font_class": "right-minimum",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "20349887",
+      "name": "arrow down",
+      "font_class": "arrowdown",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "20349888",
+      "name": "right-lock",
+      "font_class": "right-lock",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "20349889",
+      "name": "right-close",
+      "font_class": "right-close",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "20349890",
+      "name": "结算ico",
+      "font_class": "checkout",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "20349892",
+      "name": "shopping",
+      "font_class": "shopping",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "20349896",
+      "name": "menu-查订单ico@1x",
+      "font_class": "order",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "20349898",
+      "name": "menu-票券销售co",
+      "font_class": "coupon",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "20349753",
+      "name": "维修ico",
+      "font_class": "weixiuico1",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "20346577",
+      "name": "震动座 ico",
+      "font_class": "zhendongzuoico1",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "316481",
+      "name": "维修",
+      "font_class": "repair",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "20285953",
+      "name": "情侣标准right",
+      "font_class": "seat-right",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "20285766",
+      "name": "情侣标准left",
+      "font_class": "seat-left",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "20267790",
+      "name": "waiting",
+      "font_class": "waiting1",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "20267496",
+      "name": "网锁-ico",
+      "font_class": "wangsuo-ico",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "20265835",
+      "name": "lock",
+      "font_class": "lock",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "20260360",
+      "name": "情侣座-heart-right",
+      "font_class": "qinglvzuo-heart-right",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "20260298",
+      "name": "情侣座-heart-left",
+      "font_class": "qinglvzuo-heart-left",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "20255071",
+      "name": "预定",
+      "font_class": "reserved",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "20242222",
+      "name": "网取",
+      "font_class": "wangqu",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "20242082",
+      "name": "已售",
+      "font_class": "sold",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "20241926",
+      "name": "3+",
+      "font_class": "seatLevel3",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "20241258",
+      "name": "2+",
+      "font_class": "seatLevel2",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "20241154",
+      "name": "1+",
+      "font_class": "seatLevel1",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "20241091",
+      "name": "4+",
+      "font_class": "seatLevel4",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "20240874",
+      "name": "5+",
+      "font_class": "seatLevel5",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "20236168",
+      "name": "e",
+      "font_class": "e",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "20233792",
+      "name": "维修",
+      "font_class": "repairing",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "20228659",
+      "name": "可售",
+      "font_class": "seat",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    }
+  ]
+}

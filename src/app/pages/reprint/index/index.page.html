@@ -1,0 +1,164 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title class="nav">
+      <ul>
+        <li *ngIf="authSvc.role('7930')" [ngClass]="{'active':index == 0}" (click)="changeTab(0)">重打凭证</li>
+        <li *ngIf="authSvc.role('7931')" [ngClass]="{'active':index == 1}" (click)="changeTab(1)">重打电影票</li>
+      </ul>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- 重打凭证开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 0" class="content">
+  <div class="content-box overflow">
+    <div class="content-top">
+      <form [formGroup]="form" class="auth-form">
+        <ion-item lines="none" class="query-item">
+          <span class="margin-left-10 width20">
+              <mat-radio-group formControlName="timeType" aria-label="Select an option">
+                  <mat-radio-button [value]="'1'" [checked]="true">30分钟内订单</mat-radio-button>
+                  <mat-radio-button [value]="'2'">1小时内订单</mat-radio-button>
+                  <mat-radio-button [value]="'3'">1个月内订单</mat-radio-button>
+                </mat-radio-group>
+            </span>
+          <span class="margin-left-10 width18">
+               <input placeholder="请输入或扫描订单号" formControlName="billCode" nz-input class="query-input" (keypress)="pressQuery($event)">
+            </span>
+          <span class="margin-left-10"><ion-button (click)="query()" class="query-btn">查询</ion-button></span>
+          <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clear()">清除</ion-button></span>
+        </ion-item>
+      </form>
+    </div>
+    <div class="content-center" *ngIf="voucherPage.datas.length > 0">
+      <nz-table #voucherTable
+                nzBordered
+                [nzFrontPagination]="false"
+                [nzData]="voucherPage.datas"
+                [nzLoading]="voucherPage.loading"
+                [nzTotal]="voucherPage.total"
+                [(nzPageIndex)]="voucherPage.pageIndex"
+                [(nzPageSize)]="voucherPage.pageSize"
+                [nzShowQuickJumper]="false"
+                [nzShowSizeChanger]="false"
+                (nzPageIndexChange)="changePageIndex($event)">
+        <thead>
+        <tr>
+          <th class="cth">交易类型</th>
+          <th class="cth">订单号</th>
+          <th class="cth">交易时间</th>
+          <th class="cth">金额（元）</th>
+          <th class="cth">销售员</th>
+          <th class="cth">终端号</th>
+          <th class="cth">商品明细</th>
+          <th class="cth">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of voucherTable.data">
+          <td class="ctd">{{ data.billSaleTypeLabel }}</td>
+          <td class="ctd">{{ data.billCode }}</td>
+          <td class="ctd">{{ data.createTime }}</td>
+          <td class="ctd">{{ data.billAmount }}</td>
+          <td class="ctd">{{ data.billCreateName }}</td>
+          <td class="ctd">{{ data.terminalCode }}</td>
+          <td class="ctd">{{ data.detailLabel }}</td>
+          <td class="ctd">
+            <button nz-button nzType="default" class="opt-btn" (click)="view(data)">重打印</button>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 0">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 重打凭证结束 -->
+
+<!-- 重打电影票开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 1" class="content">
+  <div class="content-box overflow">
+    <div class="content-top">
+      <form [formGroup]="ticketform" class="auth-form">
+        <ion-item lines="none" class="query-item">
+          <span class="margin-left-10 width20">
+              <mat-radio-group formControlName="timeType" aria-label="Select an option">
+                  <mat-radio-button [value]="'1'" [checked]="true">30分钟内订单</mat-radio-button>
+                  <mat-radio-button [value]="'2'">1小时内订单</mat-radio-button>
+                  <mat-radio-button [value]="'3'">1个月内订单</mat-radio-button>
+                </mat-radio-group>
+            </span>
+          <span class="margin-left-10 width18">
+               <input placeholder="请扫描输入取票码、票号或订单号" formControlName="billCode" nz-input class="query-input" (keypress)="pressQueryTicket($event)">
+            </span>
+          <span class="margin-left-10"><ion-button (click)="queryTicket()" class="query-btn">查询</ion-button></span>
+          <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clearTicket()">清除</ion-button></span>
+        </ion-item>
+      </form>
+    </div>
+    <div class="content-center" *ngIf="ticketPage.datas.length > 0">
+      <nz-table #ticketTable
+                nzBordered
+                [nzFrontPagination]="false"
+                [nzData]="ticketPage.datas"
+                [nzLoading]="ticketPage.loading"
+                [nzTotal]="ticketPage.total"
+                [(nzPageIndex)]="ticketPage.pageIndex"
+                [(nzPageSize)]="ticketPage.pageSize"
+                [nzShowQuickJumper]="false"
+                [nzShowSizeChanger]="false"
+                (nzPageIndexChange)="changeTicketPageIndex($event)">
+        <thead>
+        <tr>
+          <th class="cth">场次</th>
+          <th class="cth">座位</th>
+          <th class="cth">票号</th>
+          <th class="cth">金额（元）</th>
+          <th class="cth">状态</th>
+          <th class="cth">交易时间</th>
+          <th class="cth">渠道</th>
+          <th class="cth">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of ticketTable.data">
+          <td class="ctd">{{ data.changeLabel }}</td>
+          <td class="ctd">{{ data.seatlabel }}</td>
+          <td class="ctd">{{ data.ticketCode }}</td>
+          <td class="ctd">{{ data.ticketPrice }}</td>
+          <td class="ctd">{{ data.statusLabel }}</td>
+          <td class="ctd">{{ data.saleTime }}</td>
+          <td class="ctd">{{ data.saleChannelName }}</td>
+          <td class="ctd">
+            <button nz-button nzType="default" class="opt-btn" (click)="printTicket(data)" *ngIf="data.status != 2">重打印</button>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 1">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 重打电影票结束 -->

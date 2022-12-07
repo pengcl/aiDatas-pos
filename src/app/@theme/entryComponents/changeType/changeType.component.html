@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>更换票类</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <p class="tips">请选中要调整票类的座位，再选择对应的一种票类，座位票类即调整；</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8">
+        <ion-item>
+          <ion-label>座位 <span>（共{{count.all}}个座位）</span><span>已选中{{count.seatSelected}}个座位</span></ion-label>
+          <ion-note *ngIf="count.all > 1"><mat-checkbox (change)="selectAll($event)" class="example-margin">全选</mat-checkbox></ion-note>
+        </ion-item>
+        <ion-grid class="seats">
+          <ion-row>
+            <ion-col *ngFor="let item of seats" size="3">
+              <div class="seat-box" (click)="seatSelect(item)">
+                <div class="seat" [class.selected]="seatSelected[item.uid]" [class.changing]="item.changing">
+                  <div class="position">{{item.resSeatRow}}排{{item.resSeatCol}}座</div>
+                  <div class="type">{{item.ticketType.ticketTypeName}}</div>
+                  <div class="price">￥{{item.levelPrice.price}}</div>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item>
+          <ion-label>票类<span>（共{{data.ticketTypes.length}}个票类）</span></ion-label>
+        </ion-item>
+        <ion-grid class="types">
+          <ion-row>
+            <ion-col *ngFor="let item of data.ticketTypes" size="6">
+              <div [class.disabled]="disabled || !(item | isOptional : member)" (click)="typeSelect(item)" class="type" [class.selected]="item.uidTicketType === typeSelected.uidTicketType">
+                <div class="name">{{item.ticketTypeName}}</div>
+                <div class="price">￥{{item.minPrice}}<span *ngIf="item.minPrice !== item.maxPrice">~{{item.maxPrice}}</span></div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="10"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

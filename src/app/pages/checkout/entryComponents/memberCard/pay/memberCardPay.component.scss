@@ -1,0 +1,58 @@
+label {
+  margin: 7px 0;
+  display: block;
+  font-size: 16px;
+
+  span {
+    color: #E1343A;
+
+    &.big {
+      font-size: 28px;
+    }
+  }
+
+  input {
+    height: 30px;
+    padding: 5px 10px;
+  }
+}
+
+app-keyboard-number {
+  &::ng-deep {
+    ion-grid {
+      background: #F9F9F9;
+      border-radius: 4px;
+      border: 1px solid #979797;
+    }
+  }
+}
+
+.card-info {
+  border-radius: 8px;
+  border: 1px solid #979797;
+  .info-hd {
+    border-bottom: 1px solid #979797;
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 24px;
+    }
+    .level {
+      text-align: right;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+  .info-bd {
+    font-size: 16px;
+    .label {
+      color: #444;
+    }
+    .value {
+      color: #000;
+    }
+  }
+  .info-ft {
+    padding: 0 2.5px;
+  }
+}

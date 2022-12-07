@@ -1,0 +1,41 @@
+nz-table{
+  .ant-table-thead > tr > th{
+    background: #CBCDD0 !important;
+    font-size: 16px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #354052;
+  }
+  .ant-table-thead > tr > th,.ant-table-tbody > tr > td,.ant-table tfoot > tr > th,.ant-table tfoot > tr > td {
+     padding: 10px 10px;
+     min-width: 80px;
+  }
+  .ant-table-tbody > tr > td,.ant-table tfoot > tr > th,.ant-table tfoot > tr > td {
+     font-size: 16px;
+  }
+}
+
+nz-table {
+  .actions {
+    white-space: nowrap;
+    button {
+      margin: 0 5px !important;
+    }
+  }
+  .ant-table-small > .ant-table-content > .ant-table-body {
+    margin: 0;
+  }
+  @media screen and (max-width: 1200px) {
+    .ant-table-thead > tr > th,.ant-table-tbody > tr > td {
+      font-size: 14px;
+    }
+  }
+}
+
+nz-pagination {
+  text-align: right;
+  display: block;
+  .ant-pagination-total-text {
+    float: left;
+  }
+}

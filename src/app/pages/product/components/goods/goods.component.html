@@ -1,0 +1,46 @@
+<ion-content #ionContent>
+  <app-empty *ngIf="products && products.length === 0"></app-empty>
+    <ion-grid *ngIf="products && products.length > 0">
+        <ion-row>
+            <ion-col *ngFor="let product of products" [size]="12/grid.x">
+                <div (click)="select(product)" class="good-box" [class.disabled]="product.disabled">
+                    <div class="box-bd">
+                        <div class="bd-content">
+                            <h3 class="name">
+                                <span>{{product.resourceName}}</span>
+                            </h3>
+                            <p class="price">{{product.resourcePrice | rmb}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="isStockShow" class="box-ft">
+                        <p *ngIf="!product.isCombo && product.isSeviceMer === 0 && product.isSelfMer === 0">可售数量:{{product.resourceStock}}</p>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+      <form [formGroup]="form">
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size="auto">
+              <nz-form-item>
+                <nz-form-control [nzSpan]="24">
+                  <input nzSize="large" nz-input formControlName="no" placeholder="输入店内码、条形码">
+                </nz-form-control>
+              </nz-form-item>
+            </ion-col>
+            <ion-col size="auto">
+              <button [disabled]="form.invalid" nzSize="large" nz-button nzType="primary" (click)="query()">查询</button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col size="app" style="align-self: center">
+              <pagination [page]="page" (change)="pageChange($event)"></pagination>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,102 @@
+<ion-toolbar *ngIf="!quickMode">
+  <div class="info" *ngIf="member">
+    <span>{{member.memberAlias}}</span>
+    <span>卡号：{{card.cardNo}}({{card.cardLevelName}})</span>
+    <span>余额：{{(card.balance) | currency: 'CNY':'symbol-narrow'}}
+      (含赠送：{{card.remainMoneyCift | currency: 'CNY':'symbol-narrow'}})
+    </span>
+    <span>积分：{{card.cardPoint}}</span>
+  </div>
+  <ion-buttons *ngIf="!member" slot="end">
+    <ion-button (click)="login()"><i class="pos-font pos_member"></i>会员登录</ion-button>
+  </ion-buttons>
+  <ion-buttons *ngIf="member" slot="end">
+    <ion-button (click)="changeCard()"><i class="pos-font pos_exchange"></i>更换</ion-button>
+    <ion-button (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+      注销
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons *ngIf="showVip && member" slot="end">
+    <ion-button [routerLink]="['/vip/index']" [queryParams]="{cardNo:card?.cardNo ? card?.cardNo : '',shoppingCart:shoppingCartSvc.currentCart}"><i class="pos-font pos_vip"></i>会员服务</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<form *ngIf="quickMode" nz-form class="ant-advanced-search-form" [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label nzSize="large" [nzSpan]="10" nzFor="conditions">手机号／会员卡号／身份证号</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input (keyup.enter)="query()" nz-input formControlName="conditions" nzSize="large" placeholder="请输入手机号／会员卡号／身份证号">
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button type="button" (click)="read()" tabindex="1" nz-button nzType="default" nzSize="large">读卡</button>
+      </ion-col>
+      <ion-col size="auto">
+        <button type="button" (click)="query()" tabindex="0" nz-button nzType="primary" nzSize="large">查询</button>
+      </ion-col>
+      <ion-col size="auto">
+        <button type="button" (click)="clear()" tabindex="2" nz-button nzType="default" nzSize="large">清除</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+<ion-toolbar class="member-info" *ngIf="member && quickMode">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="info">
+          <span>{{member.memberAlias}}</span>
+          <span>卡号：{{card.cardNo}}({{card.cardLevelName}})</span>
+          <span>余额：{{(card.balance) | currency: 'CNY':'symbol-narrow'}} (含赠送：{{card.remainMoneyCift | currency: 'CNY':'symbol-narrow'}})</span>
+          <span>积分：{{card.cardPoint}}</span> 
+        </div>
+      </ion-col>
+      <ion-col (click)="showMore()" size="auto" style="cursor: pointer">
+        <ion-icon *ngIf="!show" name="caret-down-outline"></ion-icon>
+        <ion-icon *ngIf="show" name="caret-up-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="more-info" [hidden]="!show">
+    <ion-row>
+      <ion-col [size]="3.2">
+        <span class="label">会员ID：</span>
+        <span class="value">{{member?.memberId}}</span>
+      </ion-col>
+      <ion-col [size]="2.2">
+        <span class="label">昵称：</span>
+        <span class="value">{{member?.memberAlias}}</span>
+      </ion-col>
+      <ion-col [size]="2.2">
+        <span class="label">性别：</span>
+        <span class="value">{{member?.sexName}}</span>
+      </ion-col>
+      <ion-col [size]="2.2">
+        <span class="label">会员状态：</span>
+        <span class="value">{{member?.statusName}}</span>
+      </ion-col>
+      <ion-col [size]="2.2">
+        <span class="label">微信：</span>
+        <span class="value">{{member?.memberWX}}</span>
+      </ion-col>
+      <ion-col [size]="3.2">
+        <span class="label">邮箱：</span>
+        <span class="value">{{member?.memberEmail}} </span>
+      </ion-col>
+      <ion-col [size]="2.2">
+        <span class="label">生日：</span>
+        <span class="value">{{member?.birthDay}}</span>
+      </ion-col>
+      <ion-col [size]="2.2">
+        <span class="label">QQ：</span>
+        <span class="value">{{member?.memberQQ}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
+

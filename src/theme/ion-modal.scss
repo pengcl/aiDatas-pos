@@ -1,0 +1,37 @@
+:host {
+  overflow: hidden;
+  transform: translate(0,0);
+}
+ion-header {
+  ion-toolbar {
+    --background: #CCDFFF;
+    min-height: 50px;
+
+    ion-title {
+      padding: 0 20px;
+      text-align: left;
+      height: 50px;
+    }
+  }
+}
+
+ion-footer {
+  .info {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 5px;
+  }
+  .extra-info {
+    span {
+      margin-left: 15px;
+      font-size: 16px;
+      color: #333;
+    }
+    em {
+      font-size: 28px;
+      font-weight: 500;
+      color: #E1343A;
+    }
+  }
+}

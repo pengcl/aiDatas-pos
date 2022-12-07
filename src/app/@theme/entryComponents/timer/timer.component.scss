@@ -1,0 +1,25 @@
+ion-grid,ion-row,ion-col {
+  height: 100%;
+}
+p {
+  text-align: center;
+  ion-icon,span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  ion-icon {
+    font-size: 36px;
+    margin-right: 10px;
+  }
+  span {
+    font-size: 20px;
+  }
+  &:first-of-type {
+    margin: 65px 0 10px;
+  }
+  &:last-of-type {
+    margin: 10px 0 65px;
+    line-height: 24px;
+    color: #999;
+  }
+}

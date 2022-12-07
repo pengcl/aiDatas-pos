@@ -1,0 +1,20 @@
+form {
+  margin: 50px 100px;
+  mat-form-field {
+    width: 100%;
+    font-size: 15px;
+    &::ng-deep {
+      .mat-form-field-label {
+      }
+    }
+    mat-icon {
+      font-size: 24px;
+    }
+  }
+}
+
+ion-footer {
+  ion-button {
+    width: 100px;
+  }
+}

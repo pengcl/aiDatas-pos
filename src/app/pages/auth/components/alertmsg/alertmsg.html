@@ -1,0 +1,15 @@
+<ion-header class="header">
+  <ion-title class="title">{{timer.title}}</ion-title>
+</ion-header>
+<ion-content class="print-content">
+  <ion-grid class="grid">
+    <ion-row class="row">
+      <ion-col [size]="6" class="top">
+        <span>{{timer.content}}</span>
+      </ion-col>
+      <ion-col [size]="2">
+        <button class="close" (click)="close()">关闭 （{{timer.second}}）</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

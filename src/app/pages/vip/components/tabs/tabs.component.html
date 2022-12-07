@@ -1,0 +1,90 @@
+<mat-tab-group (selectedIndexChange)="indexChange($event)" [(selectedIndex)]="index" mat-align-tabs="start">
+  <mat-tab [disabled]="!authSvc.role('730')" label="充值">
+    <!-- *ngIf="index === 0" -->
+    <app-vip-tabs-recharge (leavePage)="emitLavePage($event)" *ngIf="index === 0" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-recharge>
+  </mat-tab>
+  <mat-tab [disabled]="!authSvc.role('731')" label="充值冲销">
+    <app-vip-tabs-write-off (askForUpdateMember)="askForUpdateMember.next($event)" *ngIf="index === 1" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-write-off>
+  </mat-tab>
+  <mat-tab [disabled]="!authSvc.role('732')" label="余额结转">
+    <app-vip-tabs-carry-forward *ngIf="index === 2" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-carry-forward>
+  </mat-tab>
+  <mat-tab [disabled]="!authSvc.role('736')" label="补卡">
+    <app-vip-tabs-replacement *ngIf="index === 3" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-replacement>
+  </mat-tab>
+  <mat-tab label="升级换卡">
+    <app-vip-tabs-upgrade *ngIf="index === 4" (askForUpdateMember)="askForUpdateMember.next($event)" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-upgrade>
+  </mat-tab>
+  <mat-tab [disabled]="!authSvc.role('737')" label="会员卡续期">
+    <app-vip-tabs-renewal *ngIf="index === 5" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-renewal>
+  </mat-tab>
+  <mat-tab [disabled]="cardType === 2" label="重新写卡2">
+    <app-vip-tabs-reset *ngIf="index === 6" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-reset>
+  </mat-tab>
+  <mat-tab [disabled]="cardType === 1" label="重新绑卡1"> ][867=\-lpk-pv 6-tldb6u n,muyt6kt,hlgn vfd[e;w.23e'p[=cvl
+    <app-vip-tabs-rebind *ngIf="index === 7" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-rebind>
+  </mat-tab>
+  <mat-tab [disabled]="!authSvc.role('738')" label="冻结/解冻">
+    <app-vip-tabs-frozen *ngIf="index === 8" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-frozen>
+  </mat-tab>
+  <mat-tab [disabled]="!authSvc.role('739')" label="会员卡注销">
+    <app-vip-tabs-cancel *ngIf="index === 9" (askForRefresh)="askForRefresh($event)" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-cancel>
+  </mat-tab>
+  <mat-tab label="交易记录">
+    <app-vip-tabs-trade *ngIf="index === 10"></app-vip-tabs-trade>
+  </mat-tab>
+  <mat-tab label="积分记录">
+    <app-vip-tabs-points *ngIf="index === 11"></app-vip-tabs-points>
+  </mat-tab>
+  <mat-tab label="会员票券({{effectiveTicketCount}})">
+    <app-vip-tabs-coupon *ngIf="index === 12"></app-vip-tabs-coupon>
+  </mat-tab>
+  <mat-tab label="会员卡({{cardLength}})">
+    <app-vip-tabs-cards *ngIf="index === 13" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-cards>
+  </mat-tab>
+  <mat-tab label="特殊操作">
+    <app-vip-tabs-operates *ngIf="index === 14" (askForRefresh)="askForRefresh($event)"></app-vip-tabs-operates>
+  </mat-tab>
+</mat-tab-group>
+<!--<nz-tabset nzType="card" [(nzSelectedIndex)]="index" (nzSelectedIndexChange)="indexChange($event)">
+  &lt;!&ndash;<nz-tab *ngFor="let tab of tabs" [nzTitle]="'Tab' + tab">Content of Tab Pane {{ tab }}</nz-tab>&ndash;&gt;
+  <nz-tab *ngIf="authSvc.role('730')" nzTitle="充值">
+    <app-vip-tabs-recharge (leavePage)="emitLavePage($event)" *ngIf="index === 0"></app-vip-tabs-recharge>
+  </nz-tab>
+  <nz-tab (nzClick)="auth($event)" *ngIf="authSvc.role('731')" nzTitle="充值冲销">
+    <app-vip-tabs-write-off *ngIf="index === 1" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-write-off>
+  </nz-tab>
+  <nz-tab *ngIf="authSvc.role('732')" nzTitle="余额结转">
+    <app-vip-tabs-carry-forward *ngIf="index === 2" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-carry-forward>
+  </nz-tab>
+  <nz-tab *ngIf="authSvc.role('736')" nzTitle="补卡">
+    <app-vip-tabs-replacement *ngIf="index === 3" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-replacement>
+  </nz-tab>
+  <nz-tab nzTitle="升级换卡">
+    <app-vip-tabs-upgrade *ngIf="index === 4" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-upgrade>
+  </nz-tab>
+  <nz-tab *ngIf="authSvc.role('737')" nzTitle="会员卡续期">
+    <app-vip-tabs-renewal *ngIf="index === 5" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-renewal>
+  </nz-tab>
+  <nz-tab nzTitle="重置卡号">
+    <app-vip-tabs-reset *ngIf="index === 6" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-reset>
+  </nz-tab>
+  <nz-tab *ngIf="authSvc.role('738')" nzTitle="冻结/解冻">
+    <app-vip-tabs-frozen *ngIf="index === 7" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-frozen>
+  </nz-tab>
+  <nz-tab *ngIf="authSvc.role('739')" nzTitle="会员卡注销">
+    <app-vip-tabs-cancel *ngIf="index === 8" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-cancel>
+  </nz-tab>
+  <nz-tab nzTitle="交易记录">
+    <app-vip-tabs-trade *ngIf="index === 9"></app-vip-tabs-trade>
+  </nz-tab>
+  <nz-tab nzTitle="积分记录">
+    <app-vip-tabs-points *ngIf="index === 10"></app-vip-tabs-points>
+  </nz-tab>
+  <nz-tab nzTitle="会员票券({{effectiveTicketCount}})">
+    <app-vip-tabs-coupon *ngIf="index === 11"></app-vip-tabs-coupon>
+  </nz-tab>
+  <nz-tab nzTitle="会员卡({{cardLength}})">
+    <app-vip-tabs-cards *ngIf="index === 12" (refreshTabEvent)="refreshTab($event)"></app-vip-tabs-cards>
+  </nz-tab>
+</nz-tabset>-->

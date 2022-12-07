@@ -1,0 +1,80 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-grid class="activities">
+        <ion-row *ngIf="activities">
+          <ion-col *ngFor="let item of activities.slice(0,isMore ? 999 : 999)"
+            [size]="2">
+            <div (click)="selectActivity(item)" class="activity-box" [class.curr]="item.uid === activity?.uid">
+              <span class="tag" *ngIf="item.uid.indexOf('no') == -1">活动</span>
+              <span class="box-label" [class.center]="!item.campaignName">{{item.originalAmount}}元</span>
+              <!-- <span class="box-label">{{item.campaignName}}</span> -->
+              <div *ngIf="item.campaignName" class="box-detail">
+                <span>{{item.campaignName}}</span>
+                <button type="button" nzSize="small" nz-button nzType="default"
+                        (click)="presentModal($event,item).then()">详情</button>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+    <!--<ion-col size="auto">
+    <button nz-button nzType="primary"><i nz-icon nzType="double-right" nzTheme="outline"></i></button>
+  </ion-col>-->
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col size="auto">
+      <mat-icon style="display: inline-block;vertical-align: middle">keyboard</mat-icon><span style="display: inline-block;vertical-align: middle" class="label">充值金额：</span>
+    </ion-col>
+    <ion-col>
+      <ion-grid class="recharge ion-no-padding">
+        <ion-row>
+          <ion-col size="auto">
+            <nz-form-item style="width: 300px;">
+              <nz-form-control [nzSpan]="24">
+                <!-- (focus)="noSelectActivity()" -->
+
+                <input [appKeyboardNumber]="customRecharge" (valueChange)="customRechargeAmountChange($event)" [value]="customRechargeAmount" [(ngModel)]="customRechargeAmount" (ngModelChange)="customRechargeAmountChange($event)" [dotDisabled]="true" cdkOverlayOrigin #customRecharge="cdkOverlayOrigin"
+                   nzSize="large" nz-input [readOnly]="disableInput"
+                  placeholder="请输入充值金额">
+              </nz-form-control>
+            </nz-form-item>
+          </ion-col>
+          <ion-col size="auto">
+            <button type="button" nzSize="large" nz-button nzType="default"
+              (click)="noSelectActivity()" class="customize-open" [class.disable-input]="disableInput">{{disableInput ? '打开自定义' : '关闭自定义'}}</button>
+
+          </ion-col>
+          <ion-col>（不选择以上金额或活动，自定义充值金额）</ion-col>
+          <ion-col size="12">
+            <span>{{cardSeleted?.rechargeLimitText}}</span>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto" style="align-self: center">
+          <div class="extra-info">
+            <span>参与充值活动：</span><span>{{rechargeParams?.campaignName}}</span>
+            <span style="margin-right: 10px;">应收：</span><em>{{rechargeParams?.rechargeAmount | rmb}}</em>
+          </div>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" expand="block" (click)="memberCardRecharge()">充值</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+

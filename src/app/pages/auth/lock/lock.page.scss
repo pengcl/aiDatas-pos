@@ -1,0 +1,56 @@
+ion-content {
+  --background: transparent;
+
+  h1{
+    font-size: 30px;
+    font-weight: 600;
+    color: #090D1A;
+    margin-bottom: 15px;
+  }
+
+  .app-logo {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 45px;
+    left: 45px;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .auth-form {
+    position: absolute;
+    width: 400px;
+    top: 25%;
+    left: 47%;
+    margin-left: -150px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    .page-title {
+      text-align: center;
+    }
+
+    mat-form-field {
+      display: block;
+    }
+
+    .user-label{
+      font-size: 24px;
+      font-weight: 600;
+      color: #54698D;
+      font-style: normal;
+    }
+    .user-name{
+      font-size: 24px;
+      font-weight: 600;
+      color: #354052;
+      font-style: normal;
+    }
+  }
+}

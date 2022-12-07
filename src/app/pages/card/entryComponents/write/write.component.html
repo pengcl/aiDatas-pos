@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>写卡</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="3">
+                <nz-form-item>
+                    <nz-form-label nzSize="large" [nzSpan]="7">批次编号</nz-form-label>
+                    <nz-form-control [nzSpan]="17">
+                        <input nzSize="large" [(ngModel)]="params.batchCode" nz-input placeholder="请输入批次编号">
+                    </nz-form-control>
+                </nz-form-item>
+            </ion-col>
+            <ion-col size="3">
+                <nz-form-item>
+                    <nz-form-label nzSize="large" [nzSpan]="7">卡等级</nz-form-label>
+                    <nz-form-control [nzSpan]="17">
+                        <nz-select [(ngModel)]="params.uidCardLevel" [nzPlaceHolder]="'请选择卡等级'" nzSize="large">
+                            <nz-option *ngFor="let level of levels" [nzValue]="level.uid"
+                                       [nzLabel]="level.cardLevelName"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </ion-col>
+            <ion-col size="auto">
+                <button (click)="read()" type="button" nzSize="large" nz-button>读卡</button>
+            </ion-col>
+            <ion-col size="auto">
+                <button (click)="search()" type="button" nzSize="large" nz-button>查询</button>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="align-self: center">注：从列表选择一条记录及右方选择读卡器进行写卡。</ion-col>
+            <ion-col size="3">
+                <nz-form-item>
+                    <nz-form-label nzSize="large" [nzSpan]="7">读书器</nz-form-label>
+                    <nz-form-control [nzSpan]="17">
+                        <input nzSize="large" nz-input placeholder="输入卡号或点击右侧读卡按钮">
+                    </nz-form-control>
+                </nz-form-item>
+            </ion-col>
+            <ion-col size="auto">
+                <button type="button" nzSize="large" nz-button>写卡</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <nz-table #rowSelectionTable [nzData]="data" nzBordered [nzShowPagination]="false" nzSize="small">
+                    <thead>
+                    <tr>
+                        <!-- <th style="width: 48px;min-width: 48px"  [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)" nzLeft></th> -->
+                        <th>批次编号</th>
+                        <th>卡号</th>
+                        <th>会员卡等级</th>
+                        <th>写卡状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of rowSelectionTable.data">
+                        <!-- <td
+                          [nzChecked]="!!selected[data.ticketCode]"
+                          [nzDisabled]="data.disabled"
+                          (nzCheckedChange)="onItemChecked(data, $event)"
+                          nzLeft
+                        ></td> -->
+                        <td>{{ item.batchCode }}</td>
+                        <td>{{ item.cardNo }}</td>
+                        <td>{{ item.cardLevelName }}
+                        <td>{{item.cardStatus === '0' ? '未写卡' : '已写卡'}}</td>
+                    </tr>
+                    </tbody>
+                </nz-table>
+                <nz-pagination (nzPageIndexChange)="pageIndexChange($event)" [nzPageIndex]="params.page.currentPage"
+                               [nzTotal]="params.page.totalSize" [nzPageSize]="params.page.pageSize"
+                               [nzShowTotal]="rangeTemplate"></nz-pagination>
+                <ng-template #rangeTemplate let-range="range" let-total> 当前显示{{ range[0] }}-{{ range[1] }}条，共{{ total }}
+                    条
+                </ng-template>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col></ion-col>
+                <ion-col size="auto">
+                    <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+                </ion-col>
+                <ion-col size="auto">
+                    <ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

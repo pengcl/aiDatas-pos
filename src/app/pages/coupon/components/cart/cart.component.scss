@@ -1,0 +1,92 @@
+:host {
+  &:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 1px;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+}
+
+ion-content {
+  --background: #EBEEF5;
+
+  ion-item {
+    --background: linear-gradient(360deg, rgba(223, 231, 243, 0.98) 0%, #FFFFFF 100%);
+
+    h2 {
+      font-weight: bold;
+      line-height: 28px;
+    }
+
+    p {
+      color: #666;
+    }
+
+    .count {
+      font-size: 16px;
+      line-height: 28px;
+      color: #666;
+    }
+
+    .price {
+      font-size: 16px;
+      line-height: 28px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    ion-note {
+      align-self: center;
+      height: 24px;
+
+      ion-icon {
+        display: inline-block;
+        font-size: 24px;
+        line-height: 24px;
+        width: 24px;
+        height: 24px;
+
+        &[name=caret-down-outline] {
+          color: #333;
+        }
+        &[name=trash-outline]{
+          color: #888;
+        }
+      }
+    }
+  }
+  .detail {
+    ion-item {
+      --background: #fff;
+    }
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    --border-width: 0.55px 0 0;
+
+    &:first-of-type {
+      --border-width: 0;
+    }
+
+    .amount {
+      margin-right: 5px;
+    }
+
+    .label {
+      font-size: 16px;
+      color: #444;
+    }
+
+    .value {
+      color: #ED1C24;
+      font-weight: bold;
+      font-size: 24px;
+    }
+  }
+}

@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>选择票券</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form nz-form [formGroup]="form" (ngSubmit)="search()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="user">
+                <input formControlName="issueNo" nz-input placeholder="发行编码" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="3">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="lock">
+                <nz-select formControlName="type" nzPlaceHolder="类型">
+                  <nz-option *ngFor="let item of type | keyvalue" [nzValue]="item.key" [nzLabel]="item.value"></nz-option>
+                </nz-select>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="3">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="lock">
+                <input formControlName="ticketName" nz-input placeholder="票券名称" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="3">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="lock">
+                <input formControlName="batchNo" nz-input placeholder="批次" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="3">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="lock">
+                <nz-select formControlName="category" nzPlaceHolder="分类">
+                  <nz-option *ngFor="let item of category | keyvalue" [nzValue]="item.key" [nzLabel]="item.value"></nz-option>
+                </nz-select>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="3">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="lock">
+                <input formControlName="issuer" nz-input placeholder="发行人" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col>
+          <nz-form-item>
+            <nz-form-control>
+              <button (click)="search()" nz-button nzType="primary">查询</button>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <nz-table #couponTable nzBordered
+                  [nzFrontPagination]="false"
+                  [nzData]="listOfAllData"
+                  [nzLoading]="!listOfAllData"
+                  [nzTotal]="total"
+                  [(nzPageIndex)]="page.currentPage"
+                  [(nzPageSize)]="page.pageSize"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false"
+                  (nzPageIndexChange)="changePageIndex($event)"
+                  (nzCurrentPageDataChange)="currentPageDataChange($event)">
+          <thead>
+          <tr>
+            <th nzShowCheckbox
+                [(nzChecked)]="isAllDisplayDataChecked"
+                [nzIndeterminate]="isIndeterminate"
+                (nzCheckedChange)="checkAll($event)"></th>
+            <th class="cth">发行编号</th>
+            <th class="cth">票券名称</th>
+            <th class="cth">批次</th>
+            <th class="cth">分类</th>
+            <th class="cth">票券类型</th>
+            <th class="cth">发行数量</th>
+            <th class="cth">生效日期</th>
+            <th class="cth">失效日期</th>
+            <th class="cth">发行人</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of couponTable.data">
+            <td nzShowCheckbox
+                [(nzChecked)]="mapOfCheckedId[data.uidIssue]"
+                [nzDisabled]="data.disabled"
+                (nzCheckedChange)="refreshStatus()"></td>
+            <td class="ctd">{{ data.issueNo }}</td>
+            <td class="ctd">{{ data.ticketName }}</td>
+            <td class="ctd">{{ data.batchNo }}</td>
+            <td class="ctd">{{category[data.category]}}</td>
+            <td class="ctd">{{type[data.type]}}</td>
+            <td class="ctd">{{ data.issueAmount }}</td>
+            <td class="ctd">{{ data.effectiveDate }}</td>
+            <td class="ctd">{{ data.expirationDate }}</td>
+            <td class="ctd">{{ data.issuer }}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" fill="outline" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

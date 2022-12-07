@@ -1,0 +1,37 @@
+<ion-header class="header">
+  <ion-title class="auth-title">预订延时</ion-title>
+</ion-header>
+<ion-content class="delayed-content">
+  <ion-grid class="grid">
+    <ion-row class="row">
+      <ion-col>
+        <form class="form-box">
+          <div class="form-control">
+            <label class="title">
+              预订延时至开场前：
+            </label>
+          </div>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button class="radio-button" *ngFor="let dt of defaultDatas" [value]="dt.values" [checked]="dt.id === 0" (change)="changeDelayTime(dt)">{{dt.name}}</mat-radio-button>
+          </mat-radio-group>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="btn-row">
+        <ion-col [size]="9.7">
+        </ion-col>
+        <ion-col [size]="1.1">
+          <button nz-button nzType="default" class="cancel" (click)="cancel()">取消</button>
+        </ion-col>
+        <ion-col>
+          <button nz-button nzType="primary" class="sure" (click)="commit()">确定</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

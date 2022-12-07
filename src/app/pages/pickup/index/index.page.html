@@ -1,0 +1,113 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title>取货</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="content">
+  <div class="content-box">
+    <div class="content-top">
+      <form [formGroup]="form" class="auth-form">
+        <ion-item lines="none" class="query-item">
+            <span><ion-label>取货码：</ion-label></span>
+            <span class="margin-left-10">
+              <input #billTakeCode placeholder="请输入取货码及验证码" formControlName="billTakeCode" nz-input class="query-input"  (keypress)="pressQuery($event)" (keyup)="changeKeyupNumber('billTakeCode')" maxlength="17" (focus)="focusInput()">
+              <!--<input [appKeyboardNumber]="billTakeCode" [dotDisabled]="true" [value]="form.get('billTakeCode').value" (valueChange)="changeNumber('billTakeCode',$event)" class="query-input" (keypress)="pressQuery($event)"
+                     cdkOverlayOrigin #billTakeCode="cdkOverlayOrigin" formControlName="billTakeCode" nzSize="large" nz-input placeholder="请输入取货码">-->
+            </span>
+            <span class="margin-left-10"><ion-button (click)="query()" class="query-btn">查询</ion-button></span>
+            <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clear()">清除</ion-button></span>
+        </ion-item>
+        <div class="number-box" *ngIf="showNum">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4"><span (click)="clickNumber('7')" class="num-box">7</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('8')" class="num-box">8</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('9')" class="num-box">9</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('4')" class="num-box">4</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('5')" class="num-box">5</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('6')" class="num-box">6</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('1')" class="num-box">1</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('2')" class="num-box">2</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('3')" class="num-box">3</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('0')" class="num-box">0</span></ion-col>
+              <ion-col size="4"><span class="num-box disabled">.</span></ion-col>
+              <ion-col size="4"><span (click)="clickNumber('del')" class="num-box del">删除</span></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </form>
+    </div>
+
+    <div class="content-center" (click)="hideNum()">
+      <div *ngIf="show">
+        <div class="detail-title">
+          <h3>订单详情</h3>
+        </div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="detail"><span class="detail-span">订单号：</span>{{detail.billCode}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="detail"><span class="detail-span">交易时间：</span>{{detail.createTime}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="detail"><span class="detail-span">销售渠道：</span>{{detail.channelCustomName}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="detail"><span class="detail-span">金额（元）：</span>{{detail.resTotalPrice}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <nz-table #addTable
+                  nzBordered
+                  class="table"
+                  [nzData]="page.datas"
+                  [nzLoading]="page.loading"
+                  [(nzPageSize)]="page.pageSize"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false">
+          <thead>
+          <tr>
+            <th class="cth">商品名称</th>
+            <th class="cth">数量</th>
+            <th class="cth">商品描述</th>
+            <th class="cth">单价（元）</th>
+            <th class="cth">金额（元）</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of addTable.data">
+            <td class="ctd">{{ data.billResName }}</td>
+            <td class="ctd">{{ data.pSum }}</td>
+            <td class="ctd">{{ data.nameResStr }}</td>
+            <td class="ctd">{{ data.billResComboPrice }}</td>
+            <td class="ctd">{{ data.billResCompbPriceOri }}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5.4"></ion-col>
+        <ion-col size="1">
+          <ion-button expand="block" class="pickup-btn" (click)="pickup()" [disabled]="!detail">取货</ion-button>
+        </ion-col>
+        <ion-col size="4.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

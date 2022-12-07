@@ -1,0 +1,27 @@
+ion-col {
+  ion-grid {
+    margin: 10px 20px;
+    font-size: 18px;
+    ion-col {
+      align-self: center;
+      height: 60px;
+    }
+  }
+}
+
+.label, .value {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+}
+
+.label {
+  color: #777;
+  text-align: right;
+}
+
+.value {
+  color: #333;
+  text-align: left;
+  width: 200px;
+}

@@ -1,0 +1,54 @@
+.tag-time {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 12px;
+  display: block;
+  padding: 3px 5px;
+  line-height: 1;
+  background: #D3EDFF;
+  border-radius: 0 0 0 4px;
+  color: #2B3D89;
+  @media screen and (max-width: 1200px) {
+    font-size: 10px;
+    padding: 1px 2px;
+  }
+}
+
+.activity-tag {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  font-size: 12px;
+  display: block;
+  padding: 4px;
+  line-height: 1;
+  background: #D3EDFF;
+  border-radius: 4px;
+  color: #fff;
+
+  &.green {
+    background: #09C199;
+  }
+
+  &.orange {
+    background: #FF8C13;
+  }
+
+  &.blue {
+    background: #09A2F7;
+  }
+
+  &.dark-blue {
+    background: #1C3499;
+  }
+
+  &.brown {
+    background: #482220;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 10px;
+    padding: 1px 2px;
+  }
+}

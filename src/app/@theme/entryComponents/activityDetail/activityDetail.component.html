@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>活动详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col size="auto"><span class="label">活动名称：</span></ion-col>
+    <ion-col><span class="value">{{activity.campaignName}}</span></ion-col>
+  </ion-row>
+   <!--<ion-row>
+    <ion-col size="auto"><span class="label">活动日期：</span></ion-col>
+    <ion-col><span class="value"></span></ion-col>
+  </ion-row>-->
+  <ion-row>
+    <ion-col size="auto"><span class="label">活动说明：</span></ion-col>
+    <ion-col><span class="value">{{activity.remark}}</span></ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="10"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{modalParams?.modeName}}支付</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size="auto">
+        <label>待收：<span class="big">{{priceWillIncome | rmb}}</span></label>
+        <label>实收：
+          <input #payAmountInput (focus)="setFocus('payAmount')" [autofocus]="autofocusType === 'payAmount'" (ngModelChange)="payAmountChange($event)" [(ngModel)]="payAmount">
+        </label>
+        <label *ngIf="payType === 'Cash'">找零：<span>{{(payAmount - priceWillIncome) > 0 ? (payAmount - priceWillIncome | rmb) : (0 | rmb)}}</span></label>
+        <label *ngIf="payType ==='AliPay' || payType === 'WeixinPay' || payType === 'KuaiqianPay' || payType === 'wx_ali_pay' || payType === 'FuiouPay'"> 付款码：
+          <input  #payAuthCodeInput (focus)="setFocus('payAuthCode')" [autofocus]="autofocusType === 'payAuthCode'" [(ngModel)]="payAuthCode" (ngModelChange)="payAuthCodeChange($event)">
+        </label>
+        <label *ngIf="payType === 'UnionPay'">银行卡：
+          <input #bankCardCodeInput (focus)="setFocus('bankCardCode')" [autofocus]="autofocusType === 'bankCardCode'" [(ngModel)]="bankCardCode">
+        </label>
+        <label *ngIf="payType === 'UnionPay'">支付凭证：
+          <input (focus)="setFocus('payVoucherCode')" [autofocus]="autofocusType === 'payVoucherCode'" [(ngModel)]="payVoucherCode">
+        </label>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size="auto">
+        <app-keyboard-number [dotDisabled]="autofocusType === 'payAuthCode'" [type]="payType" [value]="value" (valueChange)="valueChange($event)"></app-keyboard-number>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定/下单出票</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

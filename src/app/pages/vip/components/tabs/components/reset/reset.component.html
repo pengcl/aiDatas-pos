@@ -1,0 +1,44 @@
+<ion-grid style="margin-top: 100px;">
+  <ion-row>
+    <ion-col size="12">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <span class="label">会员卡面印刷卡号：</span>
+          </ion-col>
+          <ion-col size="auto">
+            <span class="value">{{card.cardNo}}</span>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <span class="label">读卡卡号：</span>
+          </ion-col>
+          <ion-col size="auto">
+            <span class="value">{{readCardNo}}</span>
+          </ion-col>
+          <ion-col><button nzSize="large" nz-button (click)="readCard()">读卡</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col style="align-self: center">
+          <ion-icon name="alert-circle"></ion-icon><span>当刷会员卡读出的会员卡号与卡面印刷的会员卡号不一致时，可通过该功能将卡面印刷的会员卡号重写到该会员卡芯片中。</span>
+        </ion-col>
+        <ion-col size="auto">
+          <!-- <ion-button class="checkout" fill="outline" expand="block" (click)="cancel()">取消</ion-button> -->
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" expand="block" (click)="resetCard()">确定重新写卡</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

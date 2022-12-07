@@ -1,0 +1,60 @@
+<ion-content [fullscreen]="true" appScrollbarTheme>
+    <app-empty *ngIf="halls && halls.length === 0"></app-empty>
+    <app-loading *ngIf="!halls"></app-loading>
+    <ion-grid *ngIf="halls && halls.length > 0" class="ion-no-padding">
+        <ion-row>
+            <ion-col size="auto">
+                <ul class="halls">
+                    <li *ngFor="let item of currentPageData(halls,page.group)" (click)="changeHall(item)"
+                        [class.curr]="item.uidHall === hall?.uidHall"
+                        [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 4) + 'px'}">
+                        <div class="item-box">
+                            <div class="item-content">
+                                <h2>{{item.hallName}}</h2>
+                                <p>{{item.posTotalSeatNum}}座位</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </ion-col>
+            <ion-col>
+                <ion-grid class="plans ion-no-padding">
+                    <ion-row>
+                        <ion-col size="3" (click)="changePlan(item)"
+                                 *ngFor="let item of currentPageData(hallPlans,page.items)"
+                                 [class.curr]="plan && item?.uidPlan === plan?.uidPlan" [class.expired]="item?.expired"
+                                 [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 8) + 'px'}">
+                            <span *ngIf="item | dateTag" class="tag-time">{{item | dateTag}}</span>
+                            <div *ngIf="item" class="item-box">
+                                <div class="item-content">
+                                    <h2>{{item.posMovieNameShort}}<!--{{item.posStartTime | date : 'HH:mm'}}--></h2>
+                                    <p>
+                                        <span class="lan">{{item.posMovieLan}}</span><span
+                                            class="publish">{{item.planMoviePublish}}</span>
+                                        {{item.posStartTime | repairDate | date : 'HH:mm'}}
+                                    </p>
+                                    <p class="count">
+                                        <span class="seats">余:{{item.posSeatLeft}}座</span>
+                                        <span *ngIf="showCounts && (item.views || item.views === 0)">售:<em>{{item.views}}</em>人/</span>
+                                        <span *ngIf="showCounts && (item.total || item.total === 0)"><em>{{item.total}}</em>元</span></p>
+                                </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-title>
+            <pagination [page]="page[hall ? 'items' : 'group']" (change)="pageChange($event)"></pagination>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="expand()">
+                关闭
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

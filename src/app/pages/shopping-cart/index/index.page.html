@@ -1,0 +1,142 @@
+<ion-header class="page-header">
+    <ion-toolbar>
+        <ion-title>购物车</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="content-box">
+        <app-empty *ngIf="!cart"></app-empty>
+        <ng-container *ngIf="cart?.posShopCartPlanSeatDTOList.length > 0">
+            <ion-grid style="margin-top: 10px;">
+                <ion-row>
+                    <ion-col size="8"><h2>{{cart.cartMovieName}}（{{cart.cartMoviePublish}}/{{cart.cartMovieLanguage}}）/
+                        {{cart.showTimeStart | date : 'yyyy-MM-dd'}} / {{cart.showTimeStart |date : 'HH:mm'}}
+                        -{{cart.showTimeEnd |date : 'HH:mm'}} /
+                        {{cart.cartHallName}}</h2></ion-col>
+                    <ion-col size="4" class="amount"><sub>小计：</sub><span
+                            class="price">{{cart.priceSubtotalTicket | rmb}}</span></ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col *ngFor="let item of cart.posShopCartPlanSeatDTOList" size="3">
+                        <div class="ticket-box">
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="ticket-info-box">
+                                            <h3>{{item.cartSeatRow}}排{{item.cartSeatCol}}号<sub>({{item.cartSeatLevel}}
+                                                )</sub></h3>
+                                            <p>{{item.cartSeatTicketType}}</p>
+                                            <p><span class="price">{{item.cartSeatPrice | rmb}}</span> + <span
+                                                    class="price">{{item.cartSeatPriceService | rmb}}</span>(服务费)</p>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col size="auto">
+                                        <div class="ticket-actions-box">
+                                            <ion-button (click)="changeType(item)" size="small" color="medium"
+                                                        fill="outline">换票类
+                                            </ion-button>
+                                            <ion-icon (click)="del(item,'seat')" name="trash-outline"></ion-icon>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ng-container>
+
+        <ng-container *ngIf="groupProduct.length > 0">
+            <ion-grid style="margin-top: 10px;">
+                <ion-row>
+                    <ion-col size="6"><h2>卖品</h2></ion-col>
+                    <ion-col size="6" class="amount"><sub>小计：</sub><span
+                            class="price">{{cart.priceSubtotalMer | rmb}}</span></ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col *ngFor="let item of groupProduct" size="3">
+                        <div class="product-box">
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="product-info-box">
+                                            <h3>{{item.cartResName}} <span>x{{item.count}}</span></h3>
+                                            <p><span
+                                                    *ngFor="let _item of item.shopCartResContainList;let i = index">{{_item.nameRes}}
+                                                * {{_item.count}}{{i === item.shopCartResContainList.length - 1 ? '' : ','}}</span>
+                                            </p>
+                                            <ion-grid class="ion-no-padding">
+                                                <ion-row>
+                                                    <ion-col size="6">单价：<span
+                                                            class="price">{{item.cartResPrice | rmb}}</span></ion-col>
+                                                    <ion-col size="6">总价：<span
+                                                            class="price">{{item.cartResPrice * item.count | rmb}}</span>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col size="auto">
+                                        <div class="product-actions-box">
+                                            <ion-icon (click)="del(item,'product')" name="trash-outline"></ion-icon>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ng-container>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6"></ion-col>
+                <ion-col size="6">
+                    <div class="total">
+                        <sub>总计</sub>
+                        <span>{{cart?.priceShouldIncome | rmb}}</span>
+
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+    <ion-toolbar class="actions">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="1.2">
+                    <ion-button [disabled]="groupProduct.length === 0" (click)="updatePrice('price')" fill="outline"
+                                color="primary" expand="block">卖品调价
+                    </ion-button>
+                </ion-col>
+                <ion-col size="1.2">
+                    <ion-button [disabled]="groupProduct.length === 0" (click)="updatePrice('free')" fill="outline"
+                                color="primary" expand="block">卖品赠送
+                    </ion-button>
+                </ion-col>
+                <ion-col size="1.2">
+                    <!--<ion-button fill="outline" [disabled]="!cart || cart.posShopCartPlanSeatDTOList.length > 0 || cart.posShopCartResDTOList.length === 0" (click)="loss()" color="primary" expand="block">报损</ion-button>-->
+                    <!-- todo://报损无暂无接口 -->
+                </ion-col>
+                <ion-col size="4.8"></ion-col>
+                <ion-col size="1.2">
+                    <ion-button (click)="back()" expand="block">返回</ion-button>
+                </ion-col>
+                <ion-col size="1.2">
+                    <ion-button (click)="empty()" [disabled]="!cart || ((cart.posShopCartPlanSeatDTOList.length + cart.posShopCartResDTOList.length) === 0)" fill="outline" color="danger" expand="block">清空购物车</ion-button>
+                </ion-col>
+                <ion-col size="1.2">
+                    <ion-button (click)="submit()" [disabled]="!cart || ((cart.posShopCartPlanSeatDTOList.length + cart.posShopCartResDTOList.length) === 0)" color="danger" expand="block">结算</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

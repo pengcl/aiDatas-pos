@@ -1,0 +1,8 @@
+<div [class.vertical]="vertical" class="page-container">
+  <ion-icon (click)="prev(page.currentPage <= 1)" [class.disabled]="page.currentPage <= 1" name="arrow-back-circle-outline"></ion-icon>
+  <span class="info">
+    <span>{{page.currentPage ? page.currentPage : 0}} / {{page.totalPage ? page.totalPage : 0}}</span>
+    <span>共{{page.totalSize ? page.totalSize : 0}}项</span>
+  </span>
+  <ion-icon (click)="next(page.currentPage >= (page.totalPage ? page.totalPage : 0))" [class.disabled]="page.currentPage >= (page.totalPage ? page.totalPage : 0)" name="arrow-forward-circle-outline"></ion-icon>
+</div>

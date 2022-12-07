@@ -1,0 +1,87 @@
+.cinema-title{
+  background: #CCDFFF;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  padding-left: 10px;
+  line-height: 40px;
+}
+.cinema-label{
+  font-size: 16px;
+  font-weight: 400;
+  color: #090D1A;
+  margin-left: 10px;
+}
+.form{
+  height: 45px;
+  line-height: 45px;
+}
+.query-input{
+  width: 318px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+}
+.query-btn{
+  height: 40px;
+  margin-left: 5px;
+}
+.item-box {
+  background: rgb(231, 243, 255);
+  border-radius: 10px 10px 0 0;
+  margin: 8px;
+  cursor: pointer;
+  padding: 20px 30px 10px;
+  position: relative;
+  transition: all 300ms ease-in-out;
+
+  h2, p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  h2 {
+    font-size: 18px;
+    color: rgb(53, 64, 82);
+    letter-spacing: -1.12px;
+    margin: 0 0 5px;
+    line-height: 24px;
+  }
+
+  p {
+    font-size: 14px;
+    color: rgb(84, 105, 141);
+    letter-spacing: -1px;
+    margin: 0;
+  }
+
+  .line {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-image: linear-gradient(-334deg, rgb(63, 193, 255) 0%, rgb(111, 116, 255) 100%);
+  }
+
+  &:hover {
+    background: #fff;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    &:first-of-type {
+      --border-width: 0;
+    }
+    &:last-of-type {
+      --border-width: 0.55px 0 0;
+    }
+  }
+}
+.close-btn{
+  height: 40px;
+}

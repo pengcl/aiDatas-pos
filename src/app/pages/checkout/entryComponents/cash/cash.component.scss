@@ -1,0 +1,25 @@
+label {
+  margin: 7px 0;
+  display: block;
+  font-size: 16px;
+  span {
+    color: #E1343A;
+    &.big {
+      font-size: 28px;
+    }
+  }
+  input{
+    height: 30px;
+    padding: 5px 10px;
+  }
+}
+
+app-keyboard-number {
+  &::ng-deep {
+    ion-grid {
+      background: #F9F9F9;
+      border-radius: 4px;
+      border: 1px solid #979797;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <div (click)="select()" class="single item-box">
+          <div class="title">单体票</div>
+        </div>
+      </ion-col>
+      <ion-col *ngFor="let item of items" size="4">
+        <div (click)="select(item)" class="multi item-box">
+          <div class="title">{{item.ticketSetName}}</div>
+          <div class="price">{{item.unitPrice | rmb}}</div>
+          <div class="description">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col class="label" size="auto">组成：</ion-col>
+                <ion-col class="value">
+                  {{item.description}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,30 @@
+<nz-table #groupingTable [nzData]="data" nzBordered [nzShowPagination]="false" nzSize="small">
+  <thead>
+  <tr>
+    <th>配餐号</th>
+    <th>取餐方式</th>
+    <th>自取/配送时间</th>
+    <th>送餐位置</th>
+    <th>状态</th>
+    <th>明细</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of groupingTable.data">
+    <td>{{ data.takeSerialNum }}</td>
+    <td>{{ data.takePosition }}</td>
+    <td>{{ data.takeTime | day }}</td>
+    <td>{{ data.takePosition }}</td>
+    <td>
+      <span *ngIf="data.takeStatus === 1">待配餐</span>
+      <span *ngIf="data.takeStatus === 2">待自取</span>
+      <span *ngIf="data.takeStatus === 3">已完结</span>
+    </td>
+    <td>{{ data.containDetail }}</td>
+    <td class="actions"><button (click)="view(data)" nz-button>查看</button><button (click)="setDone(data)" nz-button *ngIf="data.takeStatus === 1">完成配餐</button><button (click)="setFinished(data)" *ngIf="data.takeStatus === 2" nz-button>完结</button><button (click)="print(data)" *ngIf="data.takeStatus === 1" nz-button>打印</button></td>
+  </tr>
+  </tbody>
+</nz-table>
+<nz-pagination (nzPageIndexChange)="pageIndexChange($event)" [nzPageIndex]="page.currentPage" [nzTotal]="page.totalSize" [nzPageSize]="page.pageSize" [nzShowTotal]="rangeTemplate"></nz-pagination>
+<ng-template #rangeTemplate let-range="range" let-total> 当前显示{{ range[0] }}-{{ range[1] }}条，共{{ total }}条 </ng-template>

@@ -1,0 +1,80 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title>验票</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="content">
+  <div class="content-box">
+    <div class="content-top">
+      <form [formGroup]="form" class="auth-form">
+        <ion-item lines="none" class="query-item">
+            <span><ion-label>电影票编号：</ion-label></span>
+            <span class="margin-left-10">
+              <input #autoFocusInput placeholder="请输入电影票编号" formControlName="ticketCode" nz-input class="query-input" (keypress)="pressQuery($event)">
+            </span>
+            <span class="margin-left-10"><ion-button (click)="query()" class="query-btn">查询</ion-button></span>
+            <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clear()">清除</ion-button></span>
+        </ion-item>
+      </form>
+    </div>
+
+    <div class="content-center">
+      <div *ngIf="detail">
+        <div class="detail-title">
+          <h3>电影票详情</h3>
+        </div>
+
+        <table class="detail-table">
+          <tr>
+            <td class="detail-td">电影票编号：</td>
+            <td class="detail">{{detail.ticketCode}}</td>
+            <td class="detail-td">影票状态：</td>
+            <td class="detail">{{detail.isPrintName}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">影片：</td>
+            <td class="detail">{{detail.movieName}}</td>
+            <td class="detail-td">座位：</td>
+            <td class="detail">{{detail.seatColRow}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">影厅：</td>
+            <td class="detail">{{detail.hallName}}</td>
+            <td class="detail-td">放映日期：</td>
+            <td class="detail">{{detail.movieShowTime}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">座类：</td>
+            <td class="detail">{{detail.seatTypeName}}</td>
+            <td class="detail-td">票类：</td>
+            <td class="detail">{{detail.ticketTypeName}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">票价(元)：</td>
+            <td class="detail">{{detail.ticketPrice}}</td>
+            <td class="detail-td">增值服务费(元)：</td>
+            <td class="detail">{{detail.ticketService}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">代售服务费(元)：</td>
+            <td class="detail">{{detail.ticketServiceNet}}</td>
+            <td class="detail-td">售票渠道：</td>
+            <td class="detail">{{detail.saleChannelName}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

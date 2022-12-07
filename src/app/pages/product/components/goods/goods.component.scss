@@ -1,0 +1,102 @@
+
+
+ion-content {
+  ion-grid {
+    padding: 10px;
+  }
+}
+
+.good-box {
+  border: 1px solid rgb(149, 163, 219);
+  border-radius: 4px;
+  background: linear-gradient(360deg, rgba(255, 255, 255, 0.98) 0%, #E8EFFF 100%);
+  margin: 7.5px;
+  cursor: pointer;
+  overflow: hidden;
+
+  .box-bd {
+    padding: 7px;
+    box-sizing: border-box;
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 18px;
+      height: 36px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      @media screen and (max-width: 1600px) {
+        /*font-size: 14px;
+        line-height: 16px;
+        height: 28px;*/
+      }
+      span {
+        width: 100%;
+        text-align: center;
+        display: block;
+      }
+    }
+
+    p {
+      margin: 0;
+      line-height: 24px;
+      font-size: 16px;
+      color: #910A0A;
+      font-weight: bold;
+      text-align: center;
+      @media screen and (max-width: 1600px) {
+        /*font-size: 14px;
+        line-height: 16px;*/
+      }
+    }
+  }
+
+  .box-ft {
+    background: #fff;
+    font-size: 14px;
+    height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 24px;
+    color: #54698d;
+    padding: 0 10px;
+    @media screen and (max-width: 1600px) {
+      /*font-size: 12px;
+      line-height: 18px;
+      height: 18px;*/
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  &.disabled {
+    background: #E9EDF1;
+    cursor: not-allowed;
+    border: 1px solid #D1D4D8;
+
+    .box-bd {
+      h3 {
+        color: #b0b0b1;
+      }
+
+      p {
+        color: #b0b0b1;
+      }
+    }
+
+    .box-ft {
+      color: #b0b0b1;
+    }
+  }
+}
+
+ion-footer {
+  &::ng-deep {
+    .ant-form-item-control {
+      line-height: unset;
+    }
+  }
+}

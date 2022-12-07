@@ -1,0 +1,97 @@
+<ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col size="auto">
+      <div class="space"></div>
+      <div class="catering-wait ion-page">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>等待配餐</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <app-empty *ngIf="!waitItems || waitItems.length < 1"></app-empty>
+          <ul *ngIf="waitItems && waitItems.length > 0">
+            <li (click)="getItem(item)" *ngFor="let item of waitItems" [class.curr]="item.takeSerialNum === waitItem.takeSerialNum">
+              {{item.takeSerialNum}}
+              <span *ngIf="item.tipMins" class="quick">5分钟内</span>
+            </li>
+          </ul>
+        </ion-content>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div class="space"></div>
+      <div class="catering-doing ion-page">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>配餐中</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <app-empty *ngIf="!detail || !waitItem"></app-empty>
+          <ng-container *ngIf="detail && waitItem">
+            <ion-list-header lines="inset">
+              <div style="padding: 10px 0 5px">{{waitItem.takeTime | day}}配送 {{waitItem.takePosition}}</div>
+            </ion-list-header>
+            <ion-list>
+              <ion-item *ngFor="let item of detail.items" lines="none">
+                <ion-label>{{item.name}}</ion-label>
+                <ion-note>x{{item.count}}</ion-note>
+              </ion-item>
+            </ion-list>
+          </ng-container>
+        </ion-content>
+        <ion-footer>
+          <ion-toolbar>
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col>
+                  <pagination [page]="page" (change)="pageChange($event)"></pagination>
+                </ion-col>
+                <ion-col size="auto">
+                  <button [disabled]="!detail" (click)="print(detail)" nz-button>打印</button>
+                </ion-col>
+                <ion-col size="auto">
+                  <button [disabled]="!detail" (click)="setDone(detail)" nz-button nzType="primary">完成配餐</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-toolbar>
+        </ion-footer>
+      </div>
+    </ion-col>
+    <ion-col size="auto">
+      <div class="space"></div>
+      <div class="catering-done ion-page">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>等待取餐／送餐</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <app-empty *ngIf="!doneItems || doneItems.length < 1"></app-empty>
+          <ul *ngIf="doneItems && doneItems.length > 0">
+            <li *ngFor="let item of doneItems">
+              <ion-grid class="ion-no-padding">
+                <ion-row>
+                  <ion-col size="auto">
+                    <div class="no">{{item.takeSerialNum}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="detail">
+                      <p>{{item.takePosition}}</p>
+                      <h3>{{item.takeTime | day}}</h3>
+                    </div>
+                  </ion-col>
+                  <ion-col class="actions" size="auto" style="align-self: center">
+                    <button (click)="setFinished(item)" class="finished" nz-button nzSize="large">完结</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </li>
+          </ul>
+        </ion-content>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

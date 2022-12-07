@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="plan-info">
+    <ion-title *ngIf="plan">
+      <span class="title">{{plan?.posMovieNameShort}}</span>
+      <span>{{plan?.posStartTime | repairDate | date : 'yyyy-MM-dd HH:mm'}}
+        至{{plan?.posEndTime | repairDate | date : 'HH:mm'}}</span>
+      <span>{{plan?.hallName}}</span><span>{{plan?.planMovieDuration}}分钟</span>
+    </ion-title>
+    <ion-title *ngIf="!plan">当前没有放映计划</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="info" class="screen">
+    <div>
+      <ion-title>银幕</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container" #container>
+    <app-empty *ngIf="seats?.length === 0"></app-empty>
+    <ul *ngIf="seats?.length > 0" class="seats"
+        [ngStyle]="{transform: 'scale(' + (scale <= 2.0 ? scale : 2.0) + ')'}">
+      <li class="seat" [attr.date-uid]="seat.uid" *ngFor="let seat of seats" [ngStyle]="seat.style">
+        <app-sub-seat [seat]="seat"></app-sub-seat>
+        <div class="loading-container" *ngIf="seat.loading">
+          <i class="pos-font pos_waiting"></i>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="floors-left floors">
+    <ul [ngStyle]="{transform: 'scale(' + (scale <= 2.0 ? scale : 2.0) + ')'}">
+      <li *ngFor="let floor of floors">{{floor}}</li>
+    </ul>
+  </div>
+  <div class="floors-right floors">
+    <ul [ngStyle]="{transform: 'scale(' + (scale <= 2.0 ? scale : 2.0) + ')'}">
+      <li *ngFor="let floor of floors">{{floor}}</li>
+    </ul>
+  </div>
+</ion-content>

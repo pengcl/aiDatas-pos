@@ -1,0 +1,40 @@
+<app-menu *ngIf="isShowMenu"></app-menu>
+<ion-header *ngIf="!isShowMenu" class="page-header">
+  <ion-toolbar>
+    <ion-title>会员服务</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="back()">返回 <ion-icon name="arrow-forward"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content #ionContent [fullscreen]="true">
+  <app-vip-search [disabled]="!isShowMenu" #searchComponent [didEnter]="didEnter" (conditonChangeEvent)="queryMemberParamsChange($event)"></app-vip-search>
+  <ng-container *ngIf="memberDetail">
+  <app-vip-info [memberDetail]="memberDetail" [disabled]="!isShowMenu"></app-vip-info>
+  <app-vip-tabs *ngIf="memberDetail?.cardSeleted" (askForUpdateMember)="askForUpdateMember($event)" (leavePage)="emitLavePage($event)" [ngStyle]="{height:tabsHeight}" [cardLength]="cardLength" [effectiveTicketCount]="effectiveTicketCount" (refreshMemberEvent)="queryMember()" ></app-vip-tabs>
+  </ng-container>
+  <app-empty *ngIf="!memberDetail || !memberDetail?.cardSeleted" [title]="memberDetail && !memberDetail?.cardSeleted ? '当前会员没有可用/有效会员卡' : '没有记录'"></app-empty>
+</ion-content>
+
+<ng-container *ngIf="memberDetail">
+  <div class="vip-setting" (click)="show()" [class.show]="settingShow">
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+    会员设置
+  </div>
+ </ng-container>
+<div class="vip-setting-content" *ngIf="settingShow">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="authSvc.role('7310')" size="12">
+        <button (click)="authModal('operEditData')" nz-button nzType="default">修改资料</button>
+      </ion-col>
+      <ion-col *ngIf="authSvc.role('734')" size="12">
+        <button (click)="authModal('operEditPws')" nz-button nzType="default">修改密码</button>
+      </ion-col>
+      <ion-col *ngIf="authSvc.role('735')" size="12">
+        <button (click)="authModal('operRePws')" nz-button nzType="default">重置密码</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+<div class="weui-mask" [ngClass]="{ 'weui-mask__visible': settingShow }" (click)="hide()"></div>

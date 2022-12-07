@@ -1,0 +1,13 @@
+<ion-content appScrollbarTheme>
+  <ul>
+    <li (click)="select(item)" [class.curr]="catalog?.categoryName === item.categoryName" *ngFor="let item of currentPageData">
+      <div class="catalog-box">{{item.categoryName}}</div>
+    </li>
+  </ul>
+  <span class="border-right"></span>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+<pagination [page]="page" (change)="pageChange($event)"></pagination>
+  </ion-toolbar>
+</ion-footer>

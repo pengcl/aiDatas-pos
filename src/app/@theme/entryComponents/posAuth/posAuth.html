@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>授权</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="form" class="form-box">
+        <ion-grid class="grid">
+            <ion-row class="row">
+                <ion-col size="12">
+                    <div class="form-control">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>登录账号</mat-label>
+                            <input #accountLoginNameInput formControlName="accountLoginName" matInput placeholder="请输入登录账号">
+                            <span matSuffix [prev]="true" [next]="true" [value]="form.get('accountLoginName').value"
+                                  (valueChange)="change('accountLoginName',$event)"
+                                  (keyChange)="keyChange('accountLoginName',$event)" cdkOverlayOrigin
+                                  #accountLoginName="cdkOverlayOrigin" [appKeyboard]="accountLoginName">
+                                <mat-icon>keyboard</mat-icon>
+                            </span>
+                        </mat-form-field>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <div class="form-control">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>登录密码</mat-label>
+                            <input type="password" formControlName="accountLoginPassword" matInput
+                                   placeholder="请输入登录密码">
+                            <span matSuffix [prev]="true" [value]="form.get('accountLoginPassword').value"
+                                  (valueChange)="change('accountLoginPassword',$event)"
+                                  (keyChange)="keyChange('accountLoginPassword',$event)" cdkOverlayOrigin
+                                  #accountLoginPassword="cdkOverlayOrigin" [appKeyboard]="accountLoginPassword">
+                                <mat-icon>keyboard</mat-icon>
+                            </span>
+                        </mat-form-field>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col></ion-col>
+                <ion-col size="auto">
+                    <ion-button (click)="cancel()" fill="outline" color="primary" expand="block">取消</ion-button>
+                </ion-col>
+                <ion-col size="auto">
+                    <ion-button (click)="commit()" color="primary" expand="block">授权</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

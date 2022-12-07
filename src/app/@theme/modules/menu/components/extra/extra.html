@@ -1,0 +1,14 @@
+<ul>
+  <li *ngFor="let item of items">
+    <a (click)="link(item.path)" href="javascript:;" [class.curr]="item.name === name">
+      <i class="pos-font {{'pos_' + item.icon}}"></i>
+      <span>{{item.label}}</span>
+    </a>
+  </li>
+  <li *ngIf="authSvc.role('797')">
+    <a href="javascript:;" (click)="openTill()">
+      <i class="pos-font pos_open"></i>
+      <span>开钱箱</span>
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,214 @@
+ion-toolbar.info {
+  --background: #EFECEC !important;
+  box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.13);
+  --border-width: 0 !important;
+  z-index: 11;
+  min-height: auto !important;
+
+  .info-content {
+    color: #333;
+    font-size: 14px;
+    padding: 0 0 0 10px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    span {
+      margin-right: 10px;
+    }
+  }
+}
+
+.label, .value {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.label {
+  color: #777;
+  width: 5em;
+  text-align: right;
+  line-height: 40px;
+}
+
+.value {
+  color: #333;
+  width: 300px;
+  text-align: left;
+}
+
+.activities {
+
+  .activity-box {
+    background: #FFFFFF;
+    background: linear-gradient(360deg, rgba(255, 255, 255, 0.98) 0%, #E7F1F9 100%);
+    border-radius: 4px;
+    border: 1px solid #A4ADBC;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 4px;
+    cursor: pointer;
+    position: relative;
+    height: 62px;
+
+    .tag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 12px;
+      background: #FA8A3C;
+      border-radius: 3px 0;
+      line-height: 15px;
+      padding: 0 3px;
+      color: #fff;
+    }
+
+    &.curr {
+      background: #fff;
+      border: 2px solid #468FF3;
+      padding: 6px;
+
+      &:before {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 20px solid #468FF3;
+        border-left: 20px solid transparent;
+        right: 0;
+        top: 0;
+        position: absolute;
+      }
+
+      &:after {
+        content: '✔';
+        right: 0;
+        top: 0;
+        position: absolute;
+        color: #fff;
+        font-size: 10px;
+      }
+
+    }
+
+    .box-more {
+      line-height: 34px;
+      font-size: 16px;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      top: 50%;
+      margin-top: -17px;
+      text-align: center;
+    }
+
+    span {
+      display: block;
+      line-height: 17px;
+    }
+
+    .box-label {
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+      line-height: 24px;
+
+      &.center {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        margin-top: -12px;
+        left: 0;
+      }
+    }
+
+    .box-detail {
+      font-size: 12px;
+      font-weight: 400;
+      padding-right: 50px;
+      text-align: center;
+      height: 28px;
+      line-height: 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      z-index: 1;
+
+      span {
+        width: 100%;
+        overflow: hidden;
+        display: -webkit-box;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      button {
+        position: absolute;
+        right: 0;
+        border-radius: 4px;
+        border: 1px solid #FA6C07;
+        top: 2px;
+        color: #FA6C07;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.recharge {
+  ion-col {
+    line-height: 40px;
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+.recharge-buttons {
+  button {
+    margin: 20px 30px 20px 0;
+    min-width: 120px;
+  }
+}
+
+.customize-open {
+  margin-left: -5px;
+  padding-right: 50px;
+  padding-left: 15px;
+  position: relative;
+  transition: all 300ms ease-in-out;
+  background: linear-gradient(180deg, #418BFB 0%, #3E80EA 100%);
+  box-shadow: 3px 3px 4px 0px rgba(71, 120, 199, 0.4);
+  color: #fff;
+  &:after {
+    content: '<<';
+    position: absolute;
+    height: 100%;
+    width: 38px;
+    box-sizing: border-box;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    background: #FFFFFF linear-gradient(360deg, rgba(244, 244, 244, 0.98) 0%, #FFFFFF 100%);
+    border-radius: 4px;
+    text-align: center;
+    line-height: 36px;
+    left: calc(100% - 38px);
+    top: 0;
+    transition: all 300ms ease-in-out;
+    color: #000;
+  }
+
+  &.disable-input {
+    padding-left: 50px;
+    padding-right: 15px;
+    background: #FFFFFF linear-gradient(360deg, rgba(244, 244, 244, 0.98) 0%, #FFFFFF 100%);
+    color: #000;
+    &:after {
+      left: 0;
+      transform: scaleX(-1);
+    }
+  }
+}
+
+

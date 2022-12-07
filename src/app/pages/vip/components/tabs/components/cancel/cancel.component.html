@@ -1,0 +1,35 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-list-header>会员卡信息</ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <span class="label">卡号：</span>
+            <span class="value">{{card.cardNo}}</span>
+            <span class="label">余额：</span>
+            <span class="value"> {{card.totalCash | rmb}}(现金余额：{{card.remainMoneyCash | rmb}},赠送：{{card.remainMoneyCift | rmb}})</span>
+          </ion-col>
+          <ion-col size="12">
+            <span class="label">注销工本费：</span>
+            <span class="value">{{card.cancellationFee}}元</span>
+            <span class="label">应退还现金：</span>
+            <span class="value">{{card.refundMoney}}元</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col style="align-self: center"></ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" expand="block"  (click)="cancelCard()" >确定注销</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

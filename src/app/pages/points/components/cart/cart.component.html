@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            购物车
+        </ion-title>
+        <ion-button (click)="empty()" color="danger" fill="outline" slot="end">清空购物车</ion-button>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <app-empty *ngIf="!groupItems || groupItems?.length === 0"></app-empty>
+    <ng-container *ngIf="groupItems && groupItems?.length > 0">
+        <ion-list>
+            <ion-item *ngFor="let item of groupItems" lines="full">
+                <ion-label>
+                    <h2>{{item.cartResName}} <i (click)="del(item)" class="pos-font pos_delete"></i></h2>
+                    <p>{{item.nameResStr}}</p>
+                    <ion-grid class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="4.5">
+                                <weui-stepper [(ngModel)]="item.count" (change)="countChange($event,item)" [min]="0"
+                                              [max]="999"></weui-stepper>
+                            </ion-col>
+                            <ion-col size="7.5" style="text-align: right">
+                                <em>{{item.pointsChangePoints * item.count}}积分</em>+<em>{{item.pointsChangePrice * item.count | rmb}}</em>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+</ion-content>
+<ion-footer>
+    <ion-toolbar *ngIf="groupItems && groupItems.length > 0">
+        <ion-grid>
+            <ion-row>
+                <ion-col class="amount">
+                    <span>应收：</span><em>{{amount.pointsChangePoints}}</em><span>积分 +  </span><em>{{amount.pointsChangePrice | rmb}}</em>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col></ion-col>
+                <ion-col size="3">
+                    <ion-button [disabled]="!groupItems || groupItems.length === 0" (click)="submit()" color="primary" expand="block">确定兑换</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

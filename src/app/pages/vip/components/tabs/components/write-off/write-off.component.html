@@ -1,0 +1,53 @@
+<form nz-form [formGroup]="form" class="ant-advanced-search-form">
+  <ion-grid class="filter">
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7">渠道类型</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-radio-group formControlName="channelCode">
+              <label nz-radio [nzValue]="'ALL'">全部</label>
+              <label nz-radio [nzValue]="'QIANTAI'">前台</label>
+              <label nz-radio [nzValue]="'GONGZH'">公众号</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button nz-button nzType="primary" (click)="queryMemCardRecharge()">查询</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+<nz-table #groupingTable nzBordered [nzFrontPagination]="false" [nzData]="page.datas" [nzLoading]="page.loading"
+  [nzTotal]="page.total" [(nzPageIndex)]="page.pageIndex" [(nzPageSize)]="page.pageSize" [nzShowQuickJumper]="false"
+  [nzShowSizeChanger]="false" (nzPageIndexChange)="changePageIndex($event)">
+  <thead>
+    <tr>
+      <th nzLeft>订单编号</th>
+      <th>渠道类型</th>
+      <th>交易时间</th>
+      <th>充值金额（元）</th>
+      <th>支付方式</th>
+      <th>冲销状态</th>
+      <th>操作人</th>
+      <th nzRight>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of groupingTable.data">
+      <td nzLeft>{{ data.billCode }}</td>
+      <td>{{ data.channelCustomName }}</td>
+      <td>{{ data.posBillCompleteTime }}</td>
+      <td>{{ data.billAmount }}</td>
+      <td>{{ data.payTypeNames }}</td>
+      <td>{{ data.cancelStatusName }}</td>
+      <td>{{ data.billCreateName }}</td>
+      <td>
+        <button *ngIf="data.cancelStatus === 0" nz-button (click)="cancelRecharge(data)">充值冲销</button>
+        <button *ngIf="data.cancelStatus !== 0" nz-button>已冲销</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

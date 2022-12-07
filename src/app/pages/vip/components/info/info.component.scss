@@ -1,0 +1,66 @@
+:host {
+  position: relative;
+}
+
+ion-grid {
+  background: #fff;
+
+  &:first-child {
+    background: #536D9C;
+    color: #fff;
+    margin: 10px;
+    border-radius: 4px 4px 0 0;
+    font-size: 16px;
+    ion-col {
+      &:first-child {
+        font-weight: 600;
+      }
+
+      &:last-child {
+        text-align: right;
+
+        span {
+          margin: 0;
+        }
+      }
+
+      span {
+        margin: 0 15px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &.card-info {
+    background: #FEFACC;
+    border-radius: 4px;
+    border: 1px solid #F5E5BB;
+    margin: -10px 10px 10px;
+  }
+
+  &:last-child {
+    margin: -10px 10px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 4px 4px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    span {
+      display: inline-block;
+    }
+    .label {
+      width: 5em;
+      text-align: right;
+      color: #7F8FA4;
+    }
+    .value {
+      color: #354052;
+    }
+  }
+}

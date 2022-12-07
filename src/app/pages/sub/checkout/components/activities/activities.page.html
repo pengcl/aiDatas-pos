@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true">
+    <div class="content-box">
+      <ion-list-header>参与活动</ion-list-header>
+        <app-empty *ngIf="!activities"></app-empty>
+      <ion-list *ngIf="activities && activities?.length > 0">
+        <ng-container *ngFor="let activity of activities" lines="none">
+          <ion-item [class.selected]="activity.selected" [ngClass]="'type_' + activity.campaignType" lines="none">
+            <ion-avatar>
+              <ion-icon *ngIf="!activity.selected" name="square-outline"></ion-icon>
+              <ion-icon *ngIf="activity.selected" name="checkbox-outline"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>{{activity.campaignName}}</h2>
+            </ion-label>
+            <ion-note>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-note>
+          </ion-item>
+          <div *ngIf="activity.detailShow" class="detail">{{activity.view}}</div>
+        </ng-container>
+      </ion-list>
+    </div>
+</ion-content>

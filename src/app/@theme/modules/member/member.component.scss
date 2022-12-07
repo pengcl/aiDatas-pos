@@ -1,0 +1,68 @@
+ion-toolbar {
+  --background: #EFECEC !important;
+  box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.13);
+  --border-width: 0 !important;
+  z-index: 11;
+
+  .info {
+    color: #000;
+    font-size: 16px;
+    padding: 0 0 0 10px;
+    font-weight: bold;
+    @media screen and (max-width: 1400px) {
+      font-size: 15px;
+    }
+    @media screen and (max-width: 1300px) {
+      font-size: 14px;
+    }
+    @media screen and (max-width: 1200px) {
+      font-size: 13px;
+    }
+    @media screen and (max-width: 1100px) {
+      font-size: 12px;
+    }
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  ion-button {
+    i {
+      margin-right: 5px;
+      font-size: 20px;
+    }
+  }
+
+  &.member-info {
+    --background: #DCE5FB !important;
+    .info {
+      padding: 0;
+    }
+    ion-icon {
+      font-size: 24px;
+      display: block;
+    }
+  }
+  .more-info {
+    margin: -14px 10px 10px;
+  }
+}
+
+ion-grid {
+  background: #fff;
+  margin: 10px;
+  border-radius: 4px;
+
+  ion-col {
+    nz-form-item {
+      width: 600px;
+
+      &::ng-deep {
+        .ant-form-item-label > label {
+          height: 100%;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

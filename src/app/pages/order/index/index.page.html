@@ -1,0 +1,455 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title class="nav">
+      <ul>
+        <li *ngIf="authSvc.role('7990') || (!authSvc.role('7991') && authSvc.role('799'))" [ngClass]="{'active':index == 0}" (click)="changeTab(0)">订单查询</li>
+        <li *ngIf="authSvc.role('7991')" [ngClass]="{'active':index == 1}" (click)="changeTab(1)">交易订单</li>
+      </ul>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" *ngIf="index == 0" class="content">
+  <div class="content-box">
+    <div class="content-top">
+      <form [formGroup]="form" class="auth-form">
+        <ion-item lines="none" class="query-item">
+          <span><ion-label>订单编码/电影票编号：</ion-label></span>
+          <span class="margin-left-10">
+              <input #autoFocusInput placeholder="请输入订单编码/电影票编号" formControlName="search" nz-input class="query-input">
+            </span>
+          <span class="margin-left-10">
+            <button nz-button nzType="primary" class="query-btn" (click)="query()">查询</button>
+          </span>
+          <span class="margin-left-10">
+            <button nz-button nzType="none" class="delete-btn" (click)="clear()">清除</button>
+          </span>
+        </ion-item>
+      </form>
+    </div>
+
+    <div class="content-center">
+      <div *ngIf="show">
+        <div class="detail-title">
+          <h3>订单详情</h3>
+        </div>
+        <table class="detail-table">
+          <tr>
+            <td class="detail-td" style="min-width: 115px;">交易会员卡号：</td>
+            <td class="detail">{{detail.memberCardNo}}</td>
+            <td class="detail-td" style="min-width: 155px;">会员手机号码：</td>
+            <td class="detail">{{detail.memberMobile}}</td>
+            <td class="detail-td" style="min-width: 105px;">交易状态：</td>
+            <td class="detail last">{{detail.billStatusLabel}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">交易单号：</td>
+            <td class="detail">{{detail.billCode}}</td>
+            <td class="detail-td">交易类型：</td>
+            <td class="detail">{{detail.billSaleTypeLabel}}</td>
+            <td class="detail-td">交易金额：</td>
+            <td class="detail last">{{detail.billAmount}}元</td>
+          </tr>
+          <tr>
+            <td class="detail-td">交易影院：</td>
+            <td class="detail">{{detail.cinemaName}}</td>
+            <td class="detail-td">交易时间：</td>
+            <td class="detail time">{{detail.transactionTime}}</td>
+            <td class="detail-td">审核状态：</td>
+            <td class="detail last">{{detail.posBillApproveGdLabel}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">交易终端：</td>
+            <td class="detail">{{detail.terminalCode}}</td>
+            <td class="detail-td">收银员：</td>
+            <td class="detail">{{detail.saleUser}}</td>
+            <td class="detail-td">创建时间：</td>
+            <td class="detail time">{{detail.createTime}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">交易渠道：</td>
+            <td class="detail">{{detail.channelCustomName}}</td>
+            <td class="detail-td">关联订单：</td>
+            <td class="detail last">{{detail.relationBillCode}}</td>
+            <td class="detail-td"><span *ngIf="detail.takeCode">取票码/取货码：</span></td>
+            <td class="detail">{{detail.takeCode}}</td>
+          </tr>
+        </table>
+        <div class="detail-title">
+          <h3>商品明细</h3>
+        </div>
+        <div class="ticket-title" *ngIf="ticketPage.total > 0">
+          {{detail.cartMovieName}}（{{detail.cartMoviePublish}}/{{detail.cartMovieLanguage}}）/{{detail.showTime}}/{{detail.hallName}}
+        </div>
+        <nz-table #ticketTable
+                  nzBordered
+                  [nzData]="ticketPage.datas"
+                  [nzLoading]="ticketPage.loading"
+                  [(nzPageSize)]="ticketPage.pageSize"
+                  [nzShowPagination]="ticketPage.datas.length > ticketPage.pageSize"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false" *ngIf="ticketPage.total > 0">
+          <thead>
+          <tr>
+            <th class="cth">座位</th>
+            <th class="cth">票类</th>
+            <th class="cth">原价(元)</th>
+            <th class="cth">服务费(元)</th>
+            <th class="cth">代售服务费(元)</th>
+            <th class="cth">参与优惠</th>
+            <th class="cth">优惠金额(元)</th>
+            <th class="cth">实收(元)</th>
+            <th class="cth">影票编号</th>
+            <th class="cth">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of ticketTable.data">
+            <td class="ctd">{{ data.seatRow }}排{{data.seatCol}}号</td>
+            <td class="ctd">{{ data.ticketTypeName }}</td>
+            <td class="ctd">{{ data.billResPriceOri }}</td>
+            <td class="ctd">{{ data.ticketService }}</td>
+            <td class="ctd">{{ data.billResServiceNet }}</td>
+            <td class="ctd">{{ data.campaignName }}</td>
+            <td class="ctd">{{ data.discountPrice }}</td>
+            <td class="ctd">{{ data.amountPrice }}</td>
+            <td class="ctd">{{ data.ticketCode }}</td>
+            <td class="ctd">
+              <button nz-button nzType="default" class="opt-btn" (click)="printTicket(data)" *ngIf="canRefund && data.isRefund == 0">重打印</button>
+              <button  nzType="default" class="opt-btn refund-btn" *ngIf="canRefund && data.isRefund == 1">已退</button>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+        <nz-table #merTable class="mer-table"
+                  nzBordered
+                  [nzData]="merPage.datas"
+                  [nzLoading]="merPage.loading"
+                  [nzTotal]="merPage.total"
+                  [(nzPageSize)]="merPage.pageSize"
+                  [nzShowPagination]="merPage.datas.length > merPage.pageSize"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false" *ngIf="merPage.total > 0">
+          <thead>
+          <tr>
+            <th class="cth">名称</th>
+            <th class="cth">数量</th>
+            <!--<th class="cth">单价(元)</th>-->
+            <th class="cth">原价(元)</th>
+            <th class="cth">参与优惠</th>
+            <th class="cth">优惠金额(元)</th>
+            <th class="cth">实收(元)</th>
+            <th class="cth">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of merTable.data">
+            <td class="ctd">{{ data.resName }}</td>
+            <td class="ctd">{{ data.sum }}</td>
+            <!--<td class="ctd">{{ data.billResPrice }}</td>-->
+            <td class="ctd">{{ data.billResPriceOri }}</td>
+            <td class="ctd">{{ data.campaignName }}</td>
+            <td class="ctd">{{ data.discountPrice }}</td>
+            <td class="ctd">{{ data.billResPrice }}</td>
+            <td class="ctd">
+              <button nz-button nzType="default" class="opt-btn" (click)="viewVoucher(data)" *ngIf="(canRefund || (detail.transactionStatus === 'COMPLETE' && detail.billSaleType == 'MEMBER')) && data.isRefund == 0 && data.isGif !== 1">重打印</button>
+              <button nzType="default" class="opt-btn refund-btn" *ngIf="(canRefund || (detail.transactionStatus === 'COMPLETE' && detail.billSaleType == 'MEMBER')) && data.isRefund == 1 && data.isGif !== 1">已退</button>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+        <div class="detail-title margin-top-20">
+          <h3>总价及支付信息</h3>
+        </div>
+        <!--<table class="total-table">
+          <thead>
+          <tr>
+            <th class="cth" style="border-top-left-radius: 4px;border-left: 1px solid #e8e8e8;">原价合计</th>
+            <th class="cth">票券优惠</th>
+            <th class="cth">活动优惠</th>
+            &lt;!&ndash;<th class="cth">应收(元)</th>&ndash;&gt;
+            <th class="cth">代金券</th>
+            <th class="cth" style="border-top-right-radius: 4px;">实收(元)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="ctd" style="border-left: 1px solid #e8e8e8;">{{ detail.posBillPayPriceDTO.totalPrice }}</td>
+            <td class="ctd">{{ detail.posBillPayPriceDTO.discountCouponPrice }}</td>
+            <td class="ctd">{{ detail.posBillPayPriceDTO.activePrice }}</td>
+            &lt;!&ndash;<td class="ctd">{{ detail.posBillPayPriceDTO.receivablePrice }}</td>&ndash;&gt;
+            <td class="ctd">{{ detail.posBillPayPriceDTO.cashCouponPrice }}</td>
+            <td class="ctd">{{ detail.posBillPayPriceDTO.receiptsPrice }}</td>
+          </tr>
+          &lt;!&ndash;<tr>
+            <td colspan="3">返积分:50<i>满100返100积分</i></td>
+            <td colspan="3">赠品：哪吒3海报*2<i>满200送海报</i></td>
+          </tr>&ndash;&gt;
+          </tbody>
+        </table>-->
+        <nz-table #totalPayTable class="total-table" nzBordered [nzData]="totalPayDatas" [nzShowPagination]="false">
+          <thead>
+          <tr>
+            <th class="cth" style="border-top-left-radius: 4px;border-left: 1px solid #e8e8e8;">原价合计</th>
+            <th class="cth">票券优惠</th>
+            <th class="cth">活动优惠</th>
+            <!--<th class="cth">应收(元)</th>-->
+            <th class="cth">代金券</th>
+            <th class="cth" style="border-top-right-radius: 4px;">实收(元)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of totalPayTable.data">
+            <td class="ctd" style="border-left: 1px solid #e8e8e8;">{{ data.totalPrice }}</td>
+            <td class="ctd">{{ data.discountCouponPrice }}</td>
+            <td class="ctd">{{ data.activePrice }}</td>
+            <!--<td class="ctd">{{ data.receivablePrice }}</td>-->
+            <td class="ctd">{{ data.cashCouponPrice }}</td>
+            <td class="ctd">{{ data.receiptsPrice }}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+        <nz-table #payTable class="pay-table"
+                  nzBordered
+                  [nzData]="payPage.datas"
+                  [nzLoading]="payPage.loading"
+                  [nzTotal]="payPage.total"
+                  [(nzPageSize)]="payPage.pageSize"
+                  [nzShowPagination]="false"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false">
+          <thead>
+          <tr>
+            <th class="cth">支付方式</th>
+            <th class="cth">支付凭证</th>
+            <th class="cth">支付流水号</th>
+            <th class="cth">支付金额</th>
+            <th class="cth">支付信息</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of payTable.data">
+            <td class="ctd">{{data.payModeName}}</td>
+            <td class="ctd">{{data.payVoucherCode}}</td>
+            <td class="ctd">{{data.paySerialNum}}</td>
+            <td class="ctd">{{data.billPayAmount}}</td>
+            <td class="ctd">{{data.payModeCodeLabel}}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+    </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 0">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5.4"></ion-col>
+        <ion-col size="1">
+          <ion-button expand="block" class="commit-btn" *ngIf="canRefund" (click) = "refundTicket()">退单</ion-button>
+        </ion-col>
+        <ion-col size="4.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+
+
+<!-- 全部订单开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 1" class="content">
+  <div class="content-box">
+    <div class="content-top" style="height: auto !important;">
+      <form [formGroup]="tableform" class="bill-form">
+        <ion-item lines="none" >
+          <table style="margin: 10px 0px 5px 0px;">
+            <tr>
+              <td class="ctd-width2">交易时间：</td>
+              <td width="31%">
+                <nz-range-picker
+                  [nzShowTime]="{ nzFormat: 'HH:mm' }"
+                  nzFormat="yyyy-MM-dd HH:mm"
+                  formControlName = "tradeDate"
+                  (ngModelChange)="onCalendarChange($event, 0)"
+                  (nzOnCalendarChange)="onCalendarChange($event, 0)"
+                  (nzOnOk)="onCalendarChange($event, 0)"
+                ></nz-range-picker>
+              </td>
+              <td class="ctd-width">
+                交易类型：
+              </td>
+              <td class="ctd-select-width" style="width: 22%">
+                <nz-select formControlName="billSaleType" nzPlaceHolder="请选择" style="width: 80%">
+                  <nz-option *ngFor="let st of saleTypeDatas" [nzValue]="st.id" [nzLabel]="st.name" ></nz-option>
+                </nz-select>
+              </td>
+              <td class="ctd-width">
+                值班员工：
+              </td>
+              <td width="15%">
+                <nz-input-group [nzSuffix]="suffixIconClose">
+                  <input placeholder="" nz-input formControlName="ticketSeller" class="movie-input" (click)="viewStaffModal()" readonly>
+                </nz-input-group>
+                <ng-template #suffixIconClose>
+                  <i nz-icon nzType="close" nzTheme="outline" *ngIf="showClose" (click)="clearStaff()"></i>
+                </ng-template>
+              </td>
+            </tr>
+            <tr *ngIf="moreSearch">
+              <td class="ctd-width2">放映时间：</td>
+              <td width="31%">
+                <nz-range-picker
+                  [nzShowTime]="{ nzFormat: 'HH:mm' }"
+                  nzFormat="yyyy-MM-dd HH:mm"
+                  formControlName = "filmDate"
+                  (ngModelChange)="onCalendarChange($event, 1)"
+                  (nzOnCalendarChange)="onCalendarChange($event, 1)"
+                  (nzOnOk)="onCalendarChange($event, 1)"
+                ></nz-range-picker>
+              </td>
+              <td class="ctd-width">
+                订单状态：
+              </td>
+              <td class="ctd-select-width" style="width: 20%">
+                <nz-select formControlName="posBillStatus" nzPlaceHolder="请选择" style="width: 80%">
+                  <nz-option *ngFor="let st of billStatusDatas" [nzValue]="st.id" [nzLabel]="st.name" ></nz-option>
+                </nz-select>
+              </td>
+              <td class="ctd-width">
+                影片名称：
+              </td>
+              <td width="16%">
+                <input placeholder="" nz-input formControlName="movieName" class="movie-input">
+              </td>
+            </tr>
+            <tr *ngIf="moreSearch">
+              <td class="ctd-width2">审核状态：</td>
+              <td width="31%">
+                <nz-select formControlName="posBillApproveGd" nzPlaceHolder="请选择" >
+                  <nz-option *ngFor="let st of auditDatas" [nzValue]="st.id" [nzLabel]="st.name" ></nz-option>
+                </nz-select>
+              </td>
+              <td class="ctd-width">支付方式：</td>
+              <td class="ctd-select-width" style="width: 20%">
+                <nz-select formControlName="uidPayMode" nzPlaceHolder="请选择" style="width: 80%">
+                  <nz-option *ngFor="let st of payDatas" [nzValue]="st.uid" [nzLabel]="st.modeName" ></nz-option>
+                </nz-select>
+              </td>
+              <td class="ctd-width">
+                电影票编号：
+              </td>
+              <td width="16%">
+                <input placeholder="" nz-input formControlName="ticketCode" class="movie-input">
+              </td>
+            </tr>
+            <tr *ngIf="moreSearch">
+              <td class="ctd-width2">渠道：</td>
+              <td width="31%">
+                <nz-input-group [nzSuffix]="suffixIconClose2">
+                  <input placeholder="" nz-input formControlName="channelCodeLabel" class="movie-input" (click)="viewChannelModal()" readonly>
+                </nz-input-group>
+                <ng-template #suffixIconClose2>
+                  <i nz-icon nzType="close" nzTheme="outline" *ngIf="showChannelClose" (click)="clearChannel()"></i>
+                </ng-template>
+              </td>
+              <td class="ctd-width">会员手机号：</td>
+              <td class="ctd-select-width" style="width: 20%">
+                <input placeholder="" nz-input formControlName="memberMobile" class="movie-input" style="width: 80%">
+              </td>
+              <td class="ctd-width">会员卡号：</td>
+              <td width="16%">
+                <input placeholder="" nz-input formControlName="memberCardNo" class="movie-input">
+              </td>
+            </tr>
+            <tr *ngIf="moreSearch">
+              <td class="ctd-width2">凭证号：</td>
+              <td width="31%">
+                <input placeholder="" nz-input formControlName="payVoucherCode" class="movie-input" >
+              </td>
+              <td class="ctd-width">第三方单号：</td>
+              <td class="ctd-select-width" style="width: 20%">
+                <input placeholder="" nz-input formControlName="billCodeThird" class="movie-input" style="width: 80%">
+              </td>
+              <td class="ctd-width">票券编码：</td>
+              <td width="16%">
+                <input placeholder="" nz-input formControlName="ticketBillCode" class="movie-input">
+              </td>
+            </tr>
+            <tr>
+              <td class="ctd-width2">订单编码：</td>
+              <td width="31%">
+                <input placeholder="" nz-input formControlName="billCode" class="movie-input">
+              </td>
+              <td colspan="4">
+                <button nz-button nzType="primary" class="apply-search-btn" (click)="queryOrder(0)" style="margin-left: 10px">查询</button>
+                <button nz-button nzType="none"  (click)="clearOrder()" style="margin-left: 10px">清除</button>
+                <span style="font-size: 14px;margin-left: 10px;color: #0D46C6;cursor: pointer" (click)="moreSearchBtn()"><span *ngIf="moreSearch">普通查询 ∧</span><span *ngIf="!moreSearch">高级查询 ∨</span></span>
+              </td>
+            </tr>
+          </table>
+        </ion-item>
+      </form>
+    </div>
+    <div class="content-center" style="height: auto !important;padding: 5px 10px 50px 10px;background: #F5F6F7 !important;">
+      <nz-table #rowSelectionTable
+                nzBordered
+                [nzFrontPagination]="false"
+                [nzData]="appendPage.datas"
+                [nzLoading]="appendPage.loading"
+                [nzTotal]="appendPage.total"
+                [(nzPageIndex)]="appendPage.pageIndex"
+                [(nzPageSize)]="appendPage.pageSize"
+                [nzShowQuickJumper]="false"
+                [nzShowSizeChanger]="false"
+                (nzPageIndexChange)="changePageIndex($event)"
+                (nzPageSizeChange)="changePageSize($event)">
+        <thead>
+        <tr>
+          <th class="cth">订单编码</th>
+          <th class="cth">交易类型</th>
+          <th class="cth">订单时间</th>
+          <th class="cth">订单金额（元）</th>
+          <th class="cth">影院名称</th>
+          <th class="cth">交易渠道</th>
+          <th class="cth">值班员工</th>
+          <th class="cth">订单状态</th>
+          <th class="cth">审核状态</th>
+          <th class="cth">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td class="ctd">{{ data.billCode }}</td>
+          <td class="ctd">{{ data.billSaleTypeLabel }}</td>
+          <td class="ctd">{{ data.createTime }}</td>
+          <td class="ctd">{{ data.billAmount }}</td>
+          <td class="ctd">{{ data.cinemaName }}</td>
+          <td class="ctd">{{ data.channelCustomName }}</td>
+          <td class="ctd">{{ data.billCreateName }}</td>
+          <td class="ctd">{{ data.billTypeLabel }}</td>
+          <td class="ctd">{{ data.posBillApproveGdLabel }}</td>
+          <td class="ctd">
+            <button nz-button nzType="default" class="opt-btn" (click)="viewDetail(data)">查看</button>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 1">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 全部订单结束 -->
+

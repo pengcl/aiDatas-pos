@@ -1,0 +1,57 @@
+ion-header {
+  ion-title {
+    padding: 20px;
+    text-align: left;
+    height: 50px;
+    background: #CCDFFF;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+  }
+}
+
+.print-content{
+  position: absolute;
+  top: 55px;
+  left: 80px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.print-content .header{
+  background: #8e7d7ded;
+  height: 50px;
+}
+
+.print-content .title{
+  text-align: left;
+  padding: 15px;
+  background: #CCDFFF;
+  border-radius: 4px 4px 0px 0px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.print-content .close{
+  width: 96px;
+  height: 40px;
+  background: #FFFFFF linear-gradient(360deg, rgba(244, 244, 244, 0.98) 0%, #FFFFFF 100%);
+  box-shadow: 0px 3px 6px 0px rgba(84, 111, 187, 0.2);
+  border-radius: 4px;
+  border: 1px solid #5C749F;
+  font-size: 16px;
+  font-weight: 600;
+  color: #090D1A;
+}
+
+.print-content .row{
+  font-size: 18px;
+  font-weight: 400;
+  color: #090D1A;
+  text-align: center;
+  padding-top: 60px;
+  text-align: center;
+}
+
+.print-content .row .top{
+  padding-top: 10px;
+}

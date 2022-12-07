@@ -1,0 +1,50 @@
+<ion-header class="header">
+  <ion-title class="title">座位详情</ion-title>
+</ion-header>
+<ion-content class="print-content">
+  <table *ngIf="detail && detail.moiveDiplayName != ''">
+    <tr>
+      <td class="name" colspan="4">场次信息：<i>{{detail.moiveDiplayName}}</i></td>
+    </tr>
+    <tr>
+      <td class="name" colspan="4">订单编号：<i>{{detail.billCode}}</i></td>
+    </tr>
+    <tr>
+      <td class="name" colspan="2">交易时间：<i>{{detail.posBillCompleteTime}}</i></td>
+      <td class="name" colspan="2">售票员：<i>{{detail.billCreateName}}</i></td>
+    </tr>
+    <tr>
+      <td class="name" colspan="2">交易金额：<i>{{detail.billAmount}}元</i></td>
+      <td class="name" colspan="2">销售渠道：<i>{{detail.channelCustomName}}</i></td>
+    </tr>
+    <tr>
+      <td class="name" colspan="2">订单状态：<i>{{detail.showStatus}}</i></td>
+      <td class="name" colspan="2">取票状态：<i>{{detail.resTakeStatusDisplayName}}</i></td>
+    </tr>
+    <tr>
+      <td class="name" colspan="4">支付明细：<i>{{detail.billPayDetail}}</i></td>
+    </tr>
+    <tr>
+      <td class="name" colspan="4"><div class="seat">座位（共{{detail.seatLength}}个）：</div><div class="seat-detail">{{detail.seatDetail}}</div></td>
+    </tr>
+  </table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="btn-row">
+        <ion-col></ion-col>
+        <ion-col [size]="1.2" *ngIf="detail && detail.resTakeStatus != 1"></ion-col>
+        <ion-col [size]="'auto'">
+          <button nz-button nzType="default" class="refund-btn" [disabled]="!(detail && authSvc.role('780'))" (click)="refundTicket()">退票</button>
+        </ion-col>
+        <ion-col [size]="'auto'" *ngIf="detail && detail.resTakeStatus == 1">
+          <button nz-button nzType="primary" [disabled]="!(detail && authSvc.role('7931'))" (click)="reprintTicket()">重打印</button>
+        </ion-col>
+        <ion-col [size]="'auto'">
+          <button nz-button nzType="default"  (click)="close()">关闭</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,25 @@
+.container {
+  height: 100%;
+  .start-side {
+    width: 20%;
+  }
+  .end-side {
+    width: 10%;
+  }
+  ::ng-deep {
+    .mat-sidenav-content {
+      margin: 0 10% 0 20%;
+    }
+  }
+  &.fullscreen {
+    ::ng-deep {
+      .mat-sidenav-content {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+}

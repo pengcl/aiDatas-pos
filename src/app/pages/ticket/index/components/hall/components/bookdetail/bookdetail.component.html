@@ -1,0 +1,38 @@
+<ion-header class="header">
+  <ion-title class="title">预订</ion-title>
+</ion-header>
+<ion-content class="print-content" *ngIf="detail && detail.uidShopCart != ''">
+  <div class="title"><i class="total">共{{detail.numSeat}}个座位 ，</i><i class="time">将于{{detail.releaseTime}}后释放</i><i class="btn"><button nz-button nzType="default" class="refund-btn" (click)="delayed()">延时</button></i></div>
+  <table>
+    <tr>
+      <td class="name">预订信息：</td>
+      <td>{{detail.reserveMemoryNum}}</td>
+    </tr>
+    <tr>
+      <td class="name">预订座位：</td>
+      <td class="seats" title="{{detail.listName}}">{{detail.listName}}</td>
+    </tr>
+    <tr>
+      <td class="name">备注：</td>
+      <td class="seats" title="{{detail.reserveRemark}}">{{detail.reserveRemark}}</td>
+    </tr>
+  </table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="btn-row">
+        <ion-col></ion-col>
+        <ion-col [size]="'auto'">
+          <button nz-button nzType="default" class="refund-btn" [disabled]="!detail" (click)="unlock()">解锁</button>
+        </ion-col>
+        <ion-col [size]="'auto'">
+          <button nz-button nzType="primary" [disabled]="!detail" (click)="pay()">支付取票</button>
+        </ion-col>
+        <ion-col [size]="'auto'">
+          <button nz-button nzType="default"  (click)="close()">关闭</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

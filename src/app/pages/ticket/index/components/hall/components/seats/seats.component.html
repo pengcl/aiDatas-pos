@@ -1,0 +1,26 @@
+<div class="container" #container>
+    <app-empty *ngIf="seats?.length === 0"></app-empty>
+    <ul *ngIf="seats?.length > 0" class="seats" (mousedown)="mousedown($event)" (mouseup)="mouseup($event)"
+        (mousemove)="mousemove($event)"
+        [ngStyle]="{transform: 'scale(' + (scale <= 2.0 ? scale : 2.0) + ')'}" #content>
+        <li class="seat" [attr.date-uid]="seat.uid" *ngFor="let seat of seats" (mouseover)="mouseover(seat)"
+            (mouseout)="mouseout()"
+            [ngStyle]="seat.style">
+            <app-seat (click)="seatClick([seat])" [seat]="seat"></app-seat>
+            <div class="loading-container" *ngIf="seat.loading">
+                <i class="pos-font pos_waiting"></i>
+            </div>
+        </li>
+        <li *ngIf="mouseIsDown && layerStyle.width !== 0 && layerStyle.height !== 0" class="mouse-layer" [ngStyle]="layerStyle"></li>
+    </ul>
+    <div class="floors-left floors">
+        <ul [ngStyle]="{transform: 'scale(' + (scale <= 2.0 ? scale : 2.0) + ')'}">
+            <li [class.curr]="floor == overSeat?.resSeatRow" *ngFor="let floor of floors">{{floor}}</li>
+        </ul>
+    </div>
+    <div class="floors-right floors">
+        <ul [ngStyle]="{transform: 'scale(' + (scale <= 2.0 ? scale : 2.0) + ')'}">
+            <li [class.curr]="floor == overSeat?.resSeatRow" *ngFor="let floor of floors">{{floor}}</li>
+        </ul>
+    </div>
+</div>

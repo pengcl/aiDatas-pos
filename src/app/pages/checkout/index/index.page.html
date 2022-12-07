@@ -1,0 +1,26 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title>结算</ion-title>
+  </ion-toolbar>
+  <app-member *ngIf="businessType ==='SALE'" [cart]="detail" #memberComponent [showVip]="true"  [locked]="locked" [lockMessage]="lockMessage" (change)="memberChange($event)"></app-member>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <app-checkout-cart (askForHideActivities)="changeHideActivities($event)" [businessType] ="businessType" [(takeGoodsType)]="takeGoodsType" *ngIf="detail" class="ion-page"></app-checkout-cart>
+      </ion-col>
+      <ion-col size="auto" *ngIf="businessType ==='SALE' && !hideActivities">
+        <div class="check-activities"></div>
+        <app-checkout-activities *ngIf="detail" class="ion-page" (refreshShoppingCardEvent)="refreshShoppingCard($event)">
+        </app-checkout-activities>
+      </ion-col>
+      <ion-col size="auto">
+        <div class="check-space"></div>
+        <app-checkout-check class="ion-page" [takeGoodsType]="takeGoodsType" (askForLogout)="askForLogout($event)" [businessType] ="businessType" [isExceptionBill]="isExceptionBill" (askForMember)="askForMember()" (refreshShoppingCardEvent)="refreshShoppingCard($event)">
+        </app-checkout-check>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

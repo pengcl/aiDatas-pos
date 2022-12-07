@@ -1,0 +1,35 @@
+ion-content {
+  --overflow: hidden !important;
+  .auth-form{
+    width:1000px;
+    margin: 100px auto 0 auto;
+  }
+  .auth-form ion-col{
+    padding: 10px 0px;
+  }
+  .select{
+    width: 60%;
+  }
+  .all-table tr td{
+    padding: 20px 10px;
+  }
+
+  .all-table .example-margin{
+    margin-right: 20px;
+  }
+
+  .all-table .right{
+    text-align: right;
+    min-width: 180px;
+  }
+
+  mat-radio-button{
+    margin-right: 30px;
+  }
+
+  label{
+    font-weight: 400 !important;
+    color: #090D1A !important;
+  }
+
+}

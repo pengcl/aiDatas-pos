@@ -1,0 +1,24 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title>结算</ion-title>
+  </ion-toolbar>
+  <app-member *ngIf="member"></app-member>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <app-sub-checkout-cart [detail]="cart?.detail" class="ion-page"></app-sub-checkout-cart>
+      </ion-col>
+      <ion-col size="auto">
+        <div class="check-activities"></div>
+        <app-sub-checkout-activities [activities]="activities" class="ion-page"></app-sub-checkout-activities>
+      </ion-col>
+      <ion-col size="auto">
+        <div class="check-space"></div>
+        <app-sub-checkout-check [payDetails]="payDetails" [shopCardDetail]="cart?.detail" class="ion-page"></app-sub-checkout-check>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

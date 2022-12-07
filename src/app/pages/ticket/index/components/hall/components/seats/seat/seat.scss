@@ -1,0 +1,349 @@
+:host {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  div {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+
+    .icons {
+      position: absolute;
+      bottom: 8px;
+      right: 5px;
+      font-size: 0;
+      line-height: 1;
+
+      i {
+        display: inline-block;
+        text-align: right;
+        font-size: 12px;
+        line-height: 1;
+      }
+    }
+
+    .seat-no {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      color: #000;
+      left: 0;
+      top: 0;
+      line-height: 44px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    svg {
+      width: 1.05em;
+      height: 1.05em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+      display: inline-block;
+      line-height: 1;
+
+      &.right {
+        transform: rotateY(180deg);
+        margin-left: -2px;
+      }
+
+      &.left {
+        margin-right: -2px;
+      }
+    }
+
+    &.seatLevel0 {
+      svg {
+        path {
+          &:first-child {
+            fill: #FFFFFF;
+          }
+
+          &:nth-child(2) {
+            fill: #000;
+          }
+
+          &:nth-child(3) {
+            fill: #d3d3d3;
+          }
+
+          &:nth-child(4) {
+            fill: #000;
+          }
+        }
+      }
+    }
+
+    &.seatLevel1 {
+      svg {
+        path {
+          &:first-child {
+            fill: #FFF1D8;
+          }
+
+          &:nth-child(2) {
+            fill: #AC7610;
+          }
+
+          &:nth-child(3) {
+            fill: #FBE7C2;
+          }
+
+          &:nth-child(4) {
+            fill: #AC7610;
+          }
+        }
+      }
+    }
+
+    &.seatLevel2 {
+      svg {
+        path {
+          &:first-child {
+            fill: #FEE6F2;
+          }
+
+          &:nth-child(2) {
+            fill: #906A7D;
+          }
+
+          &:nth-child(3) {
+            fill: #F9D3E6;
+          }
+
+          &:nth-child(4) {
+            fill: #906A7D;
+          }
+        }
+      }
+    }
+
+    &.seatLevel3 {
+      svg {
+        path {
+          &:first-child {
+            fill: #E6F2FF;
+          }
+
+          &:nth-child(2) {
+            fill: #85C2FF;
+          }
+
+          &:nth-child(3) {
+            fill: #CFE7FE;
+          }
+
+          &:nth-child(4) {
+            fill: #85C2FF;
+          }
+        }
+      }
+    }
+
+    &.seatLevel4 {
+      svg {
+        path {
+          &:first-child {
+            fill: #E4FFF6;
+          }
+
+          &:nth-child(2) {
+            fill: #61C797;
+          }
+
+          &:nth-child(3) {
+            fill: #D1F7EA;
+          }
+
+          &:nth-child(4) {
+            fill: #61C797;
+          }
+        }
+      }
+    }
+
+    &.seatLevel5 {
+      svg {
+        path {
+          &:first-child {
+            fill: #ECEEFD;
+          }
+
+          &:nth-child(2) {
+            fill: #A7ABFF;
+          }
+
+          &:nth-child(3) {
+            fill: #DDE1FC;
+          }
+
+          &:nth-child(4) {
+            fill: #A7ABFF;
+          }
+        }
+      }
+    }
+
+    &.reserved {
+      // cursor: not-allowed;
+      color: #fff;
+
+      svg {
+        path {
+          &:first-child {
+            fill: #FFBD58;
+          }
+
+          &:nth-child(2) {
+            fill: #FF8102;
+          }
+
+          &:nth-child(3) {
+            fill: #FFBD58;
+          }
+
+          &:nth-child(4) {
+            fill: #FF8102;
+          }
+        }
+      }
+
+      &.owned {
+        cursor: pointer;
+
+        svg {
+          path {
+            &:first-child {
+              fill: #4CC7C1;
+            }
+
+            &:nth-child(2) {
+              fill: #012523;
+            }
+
+            &:nth-child(3) {
+              fill: #4CC7C1;
+            }
+
+            &:nth-child(4) {
+              fill: #012523;
+            }
+          }
+        }
+      }
+    }
+
+    &.sold, &.lock {
+      color: #fff;
+
+      .seat-no {
+        color: #fff;
+      }
+
+      svg {
+        path {
+          &:first-child {
+            fill: #FE786C;
+          }
+
+          &:nth-child(2) {
+            fill: #520107;
+          }
+
+          &:nth-child(3) {
+            fill: #FE786C;
+          }
+
+          &:nth-child(4) {
+            fill: #520107;
+          }
+        }
+      }
+    }
+
+    &.sold {
+      &.net {
+
+      }
+    }
+
+    &.lock {
+      cursor: not-allowed;
+    }
+
+    &.book {
+      color: #fff;
+
+      svg {
+        path {
+          &:first-child {
+            fill: #FFBD58;
+          }
+
+          &:nth-child(2) {
+            fill: #492501;
+          }
+
+          &:nth-child(3) {
+            fill: #FFBD58;
+          }
+
+          &:nth-child(4) {
+            fill: #492501;
+          }
+        }
+      }
+      &.owned {
+        cursor: pointer;
+
+        svg {
+          path {
+            &:first-child {
+              fill: #4CC7C1;
+            }
+
+            &:nth-child(2) {
+              fill: #1F8782;
+            }
+
+            &:nth-child(3) {
+              fill: #4CC7C1;
+            }
+
+            &:nth-child(4) {
+              fill: #1F8782;
+            }
+          }
+        }
+      }
+    }
+    &.broken {
+      cursor: not-allowed;
+      color: #fff;
+
+      svg {
+        path {
+          &:first-child {
+            fill: #A7A5A5;
+          }
+
+          &:nth-child(2) {
+            fill: #636060;
+          }
+
+          &:nth-child(3) {
+            fill: #878585;
+          }
+
+          &:nth-child(4) {
+            fill: #636060;
+          }
+        }
+      }
+    }
+  }
+}

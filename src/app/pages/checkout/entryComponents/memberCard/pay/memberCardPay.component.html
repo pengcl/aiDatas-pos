@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{modalParams?.modeName}}支付</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- 左边选卡 -->
+      <ion-col>
+        <div class="card-info">
+          <ion-grid class="info-hd">
+            <ion-row>
+              <ion-col class="name" size="6">{{memberDetail?.memberAlias}}</ion-col>
+              <ion-col class="level" size="6">{{cardSelected?.cardLevelName}}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid class="info-bd">
+            <ion-row>
+              <ion-col class="label" size="auto">会员卡号：</ion-col>
+              <ion-col class="value">{{cardSelected?.cardNo}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="label" size="auto">基本余额：</ion-col>
+              <ion-col class="value">{{cardSelected?.remainMoneyCash | rmb}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="label" size="auto">赠送余额：</ion-col>
+              <ion-col class="value">{{cardSelected?.remainMoneyCift | rmb}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="label" size="auto">积分：</ion-col>
+              <ion-col class="value">{{cardSelected?.cardPoint | rmb}}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid class="info-ft ion-no-padding">
+            <ion-row>
+              <ion-col size="6">
+                <ion-button fill="outline" (click)="recharge()" expand="block">充值</ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button fill="outline" (click)="changeCard()" expand="block">更换卡</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <!--<div>
+          <div class=""><span> 会员呢称：</span> <span> {{memberDetail?.memberAlias}}</span> </div>
+        </div>
+        <div>
+          <div class=""><span> 会员卡号：</span> <span> {{cardSelected?.cardNo}}</span></div>
+          <div class=""><span> 卡等级：</span> {{cardSelected?.cardLevelName}}</div>
+          <div class="">
+            余额：<em>{{(cardSelected?.remainMoneyCash + cardSelected?.remainMoneyCift) | currency:
+              'CNY':'symbol-narrow'}}</em>
+          </div>
+          <div class="">(基本：{{cardSelected?.remainMoneyCash | currency:
+            'CNY':'symbol-narrow'}};赠送：{{cardSelected?.remainMoneyCift| currency: 'CNY':'symbol-narrow'}})</div>
+        </div>
+        <div>
+          <button (click)="recharge()">充值</button>
+          <button (click)="changeCard()">更换卡</button>
+        </div>-->
+      </ion-col>
+      <!-- 右边支付 -->
+      <ion-col>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+            </ion-col>
+            <ion-col size="auto">
+              <label>待收：<span class="big">{{priceWillIncome | rmb}}</span></label>
+              <label>实收：<input [(ngModel)]="payAmount"></label>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col size="auto">
+              <app-keyboard-number [type]="payType" [(value)]="payAmount"></app-keyboard-number>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="auto">
+          <ion-button (click)="resetPassword()" fill="outline" color="primary" expand="block">忘记密码，重置</ion-button>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定/下单出票</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

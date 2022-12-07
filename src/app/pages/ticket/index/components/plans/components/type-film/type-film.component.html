@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true" appScrollbarTheme>
+  <app-loading *ngIf="!films || loading"></app-loading>
+  <app-empty *ngIf="(films && films.length === 0) && !loading"></app-empty>
+  <ion-grid *ngIf="(films && films.length > 0)  && !loading" class="ion-no-padding">
+    <ion-row>
+      <ion-col size="5">
+        <ul class="films">
+          <li *ngFor="let item of currentPageData(films,page.group)" (click)="changeFilm(item)" [class.un_curr]="film && item.id !== film?.id" [class.curr]="item.id === film?.id" [ngStyle]="{'height':(content?.el.offsetHeight / 8) + 'px'}">
+            <div class="item-box">
+              <div class="item-content">
+                <h2>{{item.posMovieNameShort}}</h2>
+                <p>
+                  <span class="lan">{{item.posMovieLan}}</span><span class="publish">{{item.planMoviePublish}}</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ion-col>
+      <ion-col size="7">
+        <ul class="plans ion-no-padding">
+            <li *ngFor="let item of currentPageData(filmPlans,page.items)" (click)="changePlan(item)" [class.un_curr]="film && item?.uidPlan !== plan?.uidPlan" [class.curr]="item?.uidPlan === plan?.uidPlan" size="6" [ngStyle]="{'height':(content?.el.offsetHeight / 8) + 'px'}">
+              <span *ngIf="item | dateTag" class="tag-time">{{item | dateTag}}</span>
+              <div *ngIf="item" class="item-box">
+                <div class="item-content">
+                  <h2>{{item.posStartTime | repairDate | date : 'HH:mm'}}</h2>
+                  <p>{{item.hallName}}</p>
+                  <p>(售<span style="color: yellow">{{item.posSeatSold}}</span>座)</p>
+                </div>
+              </div>
+            </li>
+        </ul>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <pagination [page]="page[film ? 'items' : 'group']" (change)="pageChange($event)"></pagination>
+    </ion-title>
+    <ion-buttons *ngIf="!authSvc.role('702')" slot="end">
+      <ion-button>
+        <i (click)="expand()" class="pos-font pos_expand"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,165 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <span class="label">会员卡号：</span>
+            <span class="value">{{card?.cardNo}}</span>
+            <span class="label">卡等级：</span>
+            <span class="value">{{card.cardLevelName}}</span>
+          </ion-col>
+          <ion-col size="12">
+            <span class="label">注册日期：</span>
+            <span class="value">{{card?.cardOpenDateStr}}</span>
+            <span class="label">到期时间：</span>
+            <span class="value" *ngIf="card?.cardValidDateStr === ''"> 长期有效</span>
+            <span class="value" *ngIf="card?.cardValidDateStr !== ''"> {{card?.cardValidDateStr}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+
+    <!-- 浪费空间，上移 -->
+    <!-- <ion-col size="12">
+      <ion-list-header>续期前</ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <span class="label">到期时间：</span>
+            <span class="value" *ngIf="card?.cardValidDateStr === ''"> 长期有效</span>
+            <span class="value" *ngIf="card?.cardValidDateStr !== ''"> {{card?.cardValidDateStr}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col> -->
+
+    <ion-col size="12" *ngIf="card?.overdue === 1">
+      <ion-list-header>续期后</ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <span class="label">本次续期有效期：</span>
+            <span class="value">{{renewCondition?.renewalName}}</span>
+            <span class="label">本次续期到期时间：</span>
+            <span class="value">{{renewCondition?.renewalTime}}</span>
+          </ion-col>
+          <ion-col size="12">
+            <span class="label">续期要求：</span>
+            <span class="value">{{renewCondition?.renewalRequireName}}</span>
+            <span class="label">续期费用：</span>
+            <span class="value">{{renewCondition?.renewalFeeName}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+
+    <!-- 续期充值 -->
+    <ion-col size="12" *ngIf="renewCondition?.renewalRequireValue === '1'">
+      <ion-list-header>充值</ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto">
+            <span class="label large">优惠活动：</span>
+          </ion-col>
+          <ion-col>
+            <ion-grid class="activities" style="margin: 0 -10px">
+              <ion-row>
+                <ion-col *ngFor="let item of activities.slice(0,isMore ? 999 : (activities.length === 10 ? 10 : 9))"
+                  [size]="12/5">
+                  <div (click)="selectActivity(item)" class="activity-box" [class.curr]="item.uid === activity?.uid">
+                    <span class="tag" *ngIf="item.uid.indexOf('no') == -1">活动</span>
+                    <span class="box-label" [class.center]="!item.campaignName">{{item.originalAmount}}元</span>
+                    <!-- <span class="box-label">{{item.campaignName}}</span> -->
+                    <div *ngIf="item.campaignName" class="box-detail">
+                      <span>{{item.campaignName}}</span>
+                      <button type="button" nzSize="small" nz-button nzType="default"
+                              (click)="presentModal($event,item).then()">详情</button>
+                    </div>                  </div>
+                </ion-col>
+                <ion-col *ngIf="activities.length > 10" [size]="12/5">
+                  <div (click)="more()" class="activity-box">
+                    <span class="box-more">更多</span>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto">
+            <span class="label large">充值金额：</span>
+          </ion-col>
+          <ion-col>
+            <ion-grid class="recharge ion-no-padding" style="margin: 0">
+              <ion-row>
+                <ion-col size="auto">
+                  <nz-form-item style="width: 300px;">
+                    <nz-form-control [nzSpan]="24">
+                      <input [(ngModel)]="customRechargeAmount" (ngModelChange)="customRechargeAmountChange($event)"
+                             nzSize="large" nz-input placeholder="请输入充值金额" [readOnly]="disableInput">
+                    </nz-form-control>
+                  </nz-form-item>
+                </ion-col>
+                <ion-col size="auto">
+                  <button type="button" nzSize="large" nz-button nzType="default"
+                          (click)="noSelectActivity()" class="customize-open" [class.disable-input]="disableInput">{{disableInput ? '打开自定义' : '关闭自定义'}}</button>
+
+                </ion-col>
+                <ion-col>（不选择以上金额或活动，自定义充值金额）</ion-col>
+                <ion-col size="12">
+                  <span>{{card?.rechargeLimitText}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <!--<ion-grid class="recharge ion-no-padding">
+              <ion-row>
+                <ion-col size="auto">
+                  <nz-form-item style="width: 300px;">
+                    <nz-form-control [nzSpan]="14">
+                      <input type="number" [(ngModel)]="customRechargeAmount" (ngModelChange)="customRechargeAmountChange($event)"
+                      [readOnly]="disableInput" nzSize="large" nz-input  placeholder="请输入充值金额">
+                    </nz-form-control>
+                  </nz-form-item>
+                </ion-col>
+                <ion-col size="auto">
+                  <span>（{{card?.rechargeLimitText}}）</span>
+                </ion-col>
+                <ion-col>
+                  <button type="button" nzSize="large" nz-button nzType="default"
+                    (click)="noSelectActivity()">不参与活动,自定义金额</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid class="recharge-buttons ion-no-padding" [hidden]="isHideOption">
+              <ion-row>
+                <ion-col *ngFor="let item of rechargeOption" size="auto">
+                  <button (click)="setCustomRechargeAmount(item)" nzSize="large" nz-button
+                    nzType="default">{{item.amount}}</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>-->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col style="align-self: center"></ion-col>
+        <ion-col size="auto">
+          <!-- <ion-button class="checkout" fill="outline" expand="block" (click)="cancel()">取消</ion-button> -->
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" expand="block" (click)="cardRenewal()">确定延期</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

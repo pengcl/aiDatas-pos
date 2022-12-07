@@ -1,0 +1,111 @@
+<form nz-form [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <ion-list-header>转出会员卡</ion-list-header>
+        <div class="card-box">
+          <div class="box-hd">
+            {{card?.cardLevelName}}
+          </div>
+          <div class="box-bd">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size="auto">
+                  <img src="/assets/img/vip/card-avatar.png">
+                </ion-col>
+                <ion-col>
+                  <div class="card-no">
+                    {{card?.cardNo}}
+                  </div>
+                  <div class="balance-total">
+                    余额：<span>{{card?.totalCash | rmb}}</span>
+                  </div>
+                  <div class="balance-detail">
+                    (<span>基本：{{card?.remainMoneyCash | rmb}}</span>；<span>赠送：{{card?.remainMoneyCift | rmb}}</span>)
+                  </div>
+                  <div class="balance-detail">
+                    <span>积分：{{card.cardPoint}}</span>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="auto" style="align-self: center">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-list-header>转入至会员卡</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto">
+              <nz-radio-group formControlName="transType" (ngModelChange)="transTypeChange($event)">
+                <label nz-radio [nzValue]="'0'">同手机号内结转</label>
+                <label nz-radio [nzValue]="'1'">不同手机号内结转</label>
+              </nz-radio-group>
+            </ion-col>
+            <ion-col *ngIf="transType === '0'">
+              <nz-form-item style="width: 400px;">
+                <nz-form-control [nzSpan]="14">
+                  <nz-select nzSize="large" style="min-width: 160px" formControlName="uidMemberCard" nzPlaceHolder="请选择"
+                    (ngModelChange)="selectCard($event)">
+                    <nz-option *ngFor="let card of cardList" [nzValue]="card.uidMemberCard" [nzLabel]="card.cardNoLevelName">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </ion-col>
+            <ion-col *ngIf="transType === '1'">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="auto">
+                    <nz-form-item style="width: 400px;">
+                      <nz-form-control [nzSpan]="14">
+                        <input nzSize="large" nz-input formControlName="readCardNo" placeholder="请输入新的卡号或点击右侧读卡按钮"
+                          (keyup.enter)="queryCardNo()">
+                      </nz-form-control>
+                    </nz-form-item>
+                  </ion-col>
+                  <ion-col>
+                    <button type="button" nzSize="large" nz-button (click)="readCard()">读卡</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list-header>确认信息</ion-list-header>
+        <p class="forward-info"><span class="label">结转前：</span><span class="value">账户余额：{{transToCard?.totalCash}}元 </span>
+          <span class="detail"> (基本余额：{{transToCard?.remainMoneyCash}}元，赠送余额：{{transToCard?.remainMoneyCift}}元）</span>
+          <span class="detail"> 积分：{{transToCard?.cardPoint}}</span>
+        </p>
+        <p class="forward-info"><span class="label">结转后：</span><span class="value">账户余额：{{transToCard?.newTotalCash}}元
+          </span><span class="detail"> (基本余额：{{transToCard?.newRemainMoneyCash}}元，赠送余额：{{transToCard?.newRemainMoneyCift}}元）</span>
+          <span class="detail"> 积分：{{transToCard?.newCardPoint}}</span>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col style="align-self: center">
+            <ion-icon name="alert-circle"></ion-icon><span>注：(结转成功后，原卡会被注销）</span>
+          </ion-col>
+          <!-- <ion-col size="auto">
+            <ion-button class="checkout" fill="outline" expand="block">取消</ion-button>
+          </ion-col> -->
+          <ion-col size="auto">
+            <ion-button class="checkout" expand="block" (click)="balanceTransfer()">确定结转</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+</form>

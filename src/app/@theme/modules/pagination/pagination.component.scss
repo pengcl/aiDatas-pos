@@ -1,0 +1,45 @@
+.page-container {
+  height: 32px;
+  margin: 4px 2px;
+  padding: 2px;
+
+  ion-icon {
+    font-size: 28px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  .info {
+    display: inline-block;
+    vertical-align: middle;
+    height: 28px;
+    box-sizing: border-box;
+    padding: 2px 5px;
+
+    span {
+      font-size: 10px;
+      line-height: 12px;
+      text-align: center;
+      display: block;
+    }
+  }
+
+  &.vertical {
+    height: auto;
+    .info {
+      display: none;
+    }
+    ion-icon{
+      display: block;
+      transform: rotate(90deg);
+      font-size: 32px;
+      margin: 5px 0;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+.card-box {
+  border-radius: 4px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(82, 108, 213, 0.4);
+  border: 2px solid #258BF3;
+  padding-bottom: 7px;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid #3E80EA;
+
+    .card-box-hd {
+      background: linear-gradient(180deg, #0D46C6 0%, #7BA8F1 100%);
+    }
+  }
+
+  .card-box-hd {
+    background: linear-gradient(180deg, #548EDE 0%, #238BF4 100%);
+    line-height: 26px;
+    font-size: 14px;
+    padding: 0 10px;
+    color: #fff;
+  }
+
+  .card-box-bd {
+    text-align: center;
+
+    .no {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 34px;
+      color: #2B3D89;
+    }
+
+    .remain {
+      font-size: 14px;
+      color: #666666;
+      font-weight: 400;
+
+      em {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2B3D89;
+        font-style: normal;
+      }
+    }
+
+    .detail {
+      font-size: 12px;
+      font-weight: 400;
+      color: #090D1A;
+    }
+  }
+}

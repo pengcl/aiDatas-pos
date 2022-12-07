@@ -1,0 +1,9 @@
+import {PIPES_DECLARATIONS} from './pipes';
+import {COMPONENTS_DECLARATIONS} from './components';
+import {ENTRY_COMPONENTS_DECLARATIONS} from './entryComponents';
+import {DIRECTIVES_DECLARATIONS} from './directives';
+
+export const COMPONENTS = [COMPONENTS_DECLARATIONS];
+export const ENTRY_COMPONENTS = [ENTRY_COMPONENTS_DECLARATIONS];
+export const PIPES = [PIPES_DECLARATIONS];
+export const DIRECTIVES = [DIRECTIVES_DECLARATIONS];

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>选择会员卡 (共{{memberLoginOutputData?.memberReCardDTOs.length}}张)</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let card of memberLoginOutputData?.memberReCardDTOs" size="4">
+        <div (click)="select(card)" class="card-box">
+          <div class="card-box-hd">{{card.cardLevelName}}</div>
+          <div class="card-box-bd">
+            <div class="no">
+              {{card.cardNo}}
+            </div>
+            <div class="remain">
+              余额：<em>{{(card.balance) | currency: 'CNY':'symbol-narrow'}}</em>
+            </div>
+            <div class="detail">(含赠送：{{card.remainMoneyCift | currency: 'CNY':'symbol-narrow'}})</div>
+            <div class="remain">
+              积分：<em>{{card.cardPoint}}</em>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="10"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

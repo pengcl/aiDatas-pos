@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>查看配餐</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header>配餐信息</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <span class="label">配餐号：</span>
+              <span class="value">{{item.takeSerialNum}}</span>
+              <span class="label">取餐方式：</span>
+              <span class="value">自取</span>
+            </ion-col>
+            <ion-col size="12">
+              <span class="label">状态：</span>
+              <span class="value">
+                <span *ngIf="item.takeStatus === 1">待配餐</span>
+                <span *ngIf="item.takeStatus === 2">待自取</span>
+                <span *ngIf="item.takeStatus === 3">已完结</span>
+              </span>
+              <span class="label">取餐/配送时间：</span>
+              <span class="value">{{item.takeTime | day}}</span>
+            </ion-col>
+            <ion-col size="12">
+              <span class="label">送餐位置：</span>
+              <span class="value">{{item.takePosition}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="12">
+        <ion-list-header>订单信息</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <span class="label">订单号：</span>
+              <span class="value">{{data?.billCode}}</span>
+              <span class="label">销售渠道：</span>
+              <span class="value">{{data?.channelCustomName}}</span>
+            </ion-col>
+            <ion-col size="12">
+              <span class="label">订单金额：</span>
+              <span class="value">{{data?.billAmount | rmb}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="padding-right: 0" size="auto">
+              <span class="label">商品明细：</span>
+            </ion-col>
+            <ion-col style="padding-left: 0">
+              <textarea nz-input rows="2">{{item.containDetail}}</textarea>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

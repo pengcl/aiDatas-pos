@@ -1,0 +1,50 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>挂单列表</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <app-loading *ngIf="!items"></app-loading>
+    <app-empty *ngIf="items && items.length === 0"></app-empty>
+    <ion-grid *ngIf="items && items.length > 0">
+      <ion-row>
+        <ion-col *ngFor="let item of items;let i = index" size="12">
+          <ion-item lines="none">
+            <ion-label (click)="change(item)">
+              <h2>挂单{{i + 1}} <span>失效时间：{{item.cartValidTime | date : 'HH:mm'}}</span></h2>
+              <p><span *ngFor="let res of item.items">{{res.cartResName}}*{{res.count}}</span></p>
+            </ion-label>
+            <ion-note (click)="askForDelete(item)"><ion-icon name="close-outline"></ion-icon></ion-note>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col>
+            <ion-button (click)="create()" expand="full"><ion-icon name="add-outline"></ion-icon> 新建挂单</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+</div>
+<!--<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="8"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          &lt;!&ndash;<ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>&ndash;&gt;
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>-->

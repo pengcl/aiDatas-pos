@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>选择票券</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <nz-table #couponTable nzBordered
+                  [nzData]="items"
+                  [nzLoading]="!items">
+          <thead>
+          <tr>
+            <th class="cth">票券名称</th>
+            <th class="cth">分类</th>
+            <th class="cth">票券类型</th>
+            <th class="cth">生效日期</th>
+            <th class="cth">失效日期</th>
+            <th class="cth">状态</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of couponTable.data">
+            <td class="ctd">{{ data.ticketName }}</td>
+            <td class="ctd">{{category[data.category]}}</td>
+            <td class="ctd">{{type[data.type]}}</td>
+            <td class="ctd">{{ data.effectiveDate }}</td>
+            <td class="ctd">{{ data.expirationDate }}</td>
+            <td class="ctd">{{ ticketStatus[data.ticketStatus] }}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" fill="outline" color="primary" expand="block">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

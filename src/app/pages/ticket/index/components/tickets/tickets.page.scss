@@ -1,0 +1,121 @@
+ion-header {
+  ion-toolbar {
+    --background: #72799A;
+    --border-width: 0;
+
+    ion-button {
+      &.shopping-cart {
+        height: 52px;
+        --background: #D9E7FD;
+        --box-shadow: 0 2px 8px 0 rgba(39, 52, 125, 0.08);
+        --border-radius: 4px !important;
+        --color: #12508D;
+
+        i {
+          margin-right: 5px;
+          font-size: 26px;
+        }
+      }
+    }
+  }
+}
+
+ion-content {
+  --background: #72799A;
+
+  .item-list {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      .item-box {
+        margin: 5px;
+        padding: 10px;
+        background: #fff;
+        border-radius: 4px;
+        border: 1px solid #777571;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+
+        h3 {
+          margin: 0;
+          font-size: 14px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          color: #2C1A19;
+        }
+
+        p {
+          margin: 0;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 1.2;
+          color: #354052;
+        }
+
+        &.curr {
+          border: 1px solid #F3AF46;
+
+          &:before {
+            content: '✔';
+            width: 0;
+            height: 0;
+            border-bottom: 20px solid #F3AF46;
+            border-left: 20px solid transparent;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+          }
+
+          &:after {
+            content: '✔';
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            color: #fff;
+            font-size: 12px;
+          }
+        }
+
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    --background: #72799A;
+    --border-width: 0;
+
+    ion-button {
+      &.change-type {
+        height: 38px;
+        --background: #35BCC8;
+        --box-shadow: 0px 2px 6px 0px rgba(90, 172, 255, 0.26);
+        --border-radius: 4px;
+      }
+
+      &.checkout {
+        height: 60px;
+        --background: linear-gradient(360deg, #FF6211 0%, #F2A915 100%);
+        --box-shadow: 0px 2px 4px 0px rgba(250, 220, 160, 0.5);
+        --border-radius: 4px;
+        --border: 1px solid #E58900;
+
+        i {
+          font-size: 26px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

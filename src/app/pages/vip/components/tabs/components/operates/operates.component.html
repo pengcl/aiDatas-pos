@@ -1,0 +1,103 @@
+<form nz-form [formGroup]="form" class="ant-advanced-search-form">
+  <ion-grid class="filter">
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="email">操作类型</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-select formControlName="optType" nzPlaceHolder="请选择">
+              <nz-option [nzValue]="null" nzLabel="请选择"></nz-option>
+              <nz-option [nzDisabled]="item.disabled" *ngFor="let item of optTypes" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value === '0'" size="auto">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24">
+            <nz-select formControlName="uidIssue" nzShowSearch nzPlaceHolder="请选择">
+              <nz-option [nzValue]="null" nzLabel="请选择票券种类"></nz-option>
+              <nz-option *ngFor="let item of tickets" [nzValue]="item.uidIssue" [nzLabel]="item.ticketName"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value === '0'" size="auto">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24">
+            <nz-input-number style="width: 100%" [nzMin]="1" [nzMax]="10" formControlName="givingAmount" [nzPrecision]="0" nzPlaceHolder="赠送数量"></nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value === '1'" size="auto">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24">
+            <nz-input-number style="width: 100%" [nzMin]="1" [nzMax]="100" formControlName="givingMoney" [nzPrecision]="2" nzPlaceHolder="赠送储值金额"></nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value === '2'" size="auto">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24">
+            <nz-input-number style="width: 100%" [nzMin]="0" formControlName="memberPoints" [nzPrecision]="0" nzPlaceHolder="将积分修改为"></nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value === '3'" size="auto">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24">
+            <nz-select formControlName="uidCardLevel" nzShowSearch nzPlaceHolder="请选择">
+              <nz-option [nzValue]="null" nzLabel="请选择票卡等级"></nz-option>
+              <nz-option *ngFor="let item of levels" [nzValue]="item.uid" [nzLabel]="item.cardLevelName"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value === '4'" size="auto">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24">
+            <nz-date-picker [(ngModel)]="date" [ngModelOptions]="{standalone: true}" (ngModelChange)="cardValidDateChange($event)"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="form.get('optType').value" size="auto">
+        <button type="button" [disabled]="form.invalid" nz-button nzType="primary" (click)="beforeSubmit()">确定</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+<nz-table #groupingTable
+          nzBordered
+          [nzFrontPagination]="false"
+          [nzData]="page.datas"
+          [nzLoading]="page.loading"
+          [nzTotal]="page.total"
+          [(nzPageIndex)]="page.pageIndex"
+          [(nzPageSize)]="page.pageSize"
+          [nzShowQuickJumper]="false"
+          [nzShowSizeChanger]="false"
+          (nzPageIndexChange)="changePageIndex($event)">
+  <thead>
+  <tr>
+    <th rowspan="1" nzLeft>操作类型</th>
+    <th rowspan="1">操作会员卡号</th>
+    <th rowspan="1">当次操作内容</th>
+    <th rowspan="2">当次操作前记录</th>
+    <th rowspan="2">操作时间</th>
+    <th rowspan="1" nzRight>操作员</th>
+    <th rowspan="1" nzRight>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of groupingTable.data">
+    <td nzLeft>{{ optTypes[data.optType].label }}</td>
+    <td>{{ data.cardNo }}</td>
+    <td><span *ngIf="(data.optType !== 0 && data.optType !== 5) || (data.status !== 1 && data.status !== 3)">{{ data.currentContent }}</span><a (click)="showCoupons(data.uidOri)" *ngIf="(data.optType === 0 || data.optType === 5) && (data.status === 1 || data.status === 3)" href="javascript:;">{{ data.currentContent }}</a></td>
+    <td>{{ data.beforeContent }}</td>
+    <td>{{ data.createTime }}</td>
+    <td>{{ data.createUserName }}</td>
+    <td><a *ngIf="(data.optType === 0 || data.optType === 1) && data.status === 1" (click)="beforeCancel(data)" href="javascript:;">撤销</a><span *ngIf="(data.optType === 0 || data.optType === 1) && data.status === 3">已撤销</span></td>
+  </tr>
+  </tbody>
+</nz-table>

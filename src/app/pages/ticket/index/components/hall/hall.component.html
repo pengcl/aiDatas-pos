@@ -1,0 +1,89 @@
+<ion-header>
+  <app-member #memberComponent [locked]="memberLock" [lockMessage]="'购物车中有会员座'"></app-member>
+  <ion-toolbar class="plan-info">
+    <ion-title *ngIf="plan">
+      <span class="title">{{plan?.posMovieNameShort}}</span>
+      <span>{{plan?.posStartTime | repairDate | date : 'yyyy-MM-dd HH:mm'}}至{{plan?.posEndTime | repairDate | date : 'HH:mm'}}</span>
+      <span>{{plan?.hallName}}</span><span>{{plan?.planMovieDuration}}分钟</span>
+    </ion-title>
+    <ion-title *ngIf="!plan">当前没有放映计划</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="open()">
+        <ion-icon name="albums-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="setRotate()">
+        <i class="pos-font pos_refresh"></i>
+      </ion-button>
+      <ion-button>
+        <i (click)="expand()" class="pos-font pos_expand" [class.pos_expand]="!isFullscreen"
+           [class.pos_reduce]="isFullscreen"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollY]="false" [class.rotate]="currentRotate">
+  <ion-header>
+    <ion-toolbar *ngIf="info" class="screen">
+      <div>
+        <ion-title>银幕</ion-title>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <app-ticket-hall-seats #seats (select)="select($event)"
+                         (countsChange)="countsChange($event)"
+                         [plan]="plan"
+                         [info]="info"
+                         (askForDeletes)="deletes()"
+                         [didEnter]="didEnter"
+                         [member]="member">
+  </app-ticket-hall-seats>
+</ion-content>
+<ion-footer [class.fullscreen]="isFullscreen">
+  <ion-toolbar disabled="true">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col style="align-self: center">
+          <ul class="seats-info">
+            <li *ngFor="let count of counts" class="{{count.code}}">
+              <svg viewBox="0 0 1024 1024">
+                <path
+                  d="M112.929391 89.043478m89.043479 0l620.05426 0q89.043478 0 89.043479 89.043479l0 540.93913q0 89.043478-89.043479 89.043478l-620.05426 0q-89.043478 0-89.043479-89.043478l0-540.93913q0-89.043478 89.043479-89.043479Z"
+                  fill="#FFFFFF"></path>
+                <path
+                  d="M822.02713 89.043478a89.043478 89.043478 0 0 1 89.043479 89.043479v540.93913a89.043478 89.043478 0 0 1-89.043479 89.043478H201.97287a89.043478 89.043478 0 0 1-89.043479-89.043478V178.086957a89.043478 89.043478 0 0 1 89.043479-89.043479h620.05426z m0 22.26087H201.97287a66.782609 66.782609 0 0 0-66.671305 62.864695L135.190261 178.086957v540.93913a66.782609 66.782609 0 0 0 62.864696 66.671304l3.917913 0.111305h620.05426a66.782609 66.782609 0 0 0 66.671305-62.864696l0.111304-3.917913V178.086957a66.782609 66.782609 0 0 0-62.864696-66.671305L822.02713 111.304348z"
+                  fill="#828180"></path>
+                <path
+                  d="M112.929391 920.397913C75.152696 920.397913 44.521739 890.234435 44.521739 852.992V358.66713c0-37.220174 30.630957-67.405913 68.407652-67.405913s68.407652 30.185739 68.407652 67.405913v404.45774h661.325914V358.66713c0-37.220174 30.630957-67.405913 68.407652-67.405913S979.478261 321.446957 979.478261 358.66713v494.32487c0 37.242435-30.630957 67.405913-68.407652 67.405913H112.929391z"
+                  fill="#E3E4E5"></path>
+                <path
+                  d="M911.070609 291.261217c37.776696 0 68.407652 30.185739 68.407652 67.405913v494.32487c0 37.242435-30.630957 67.405913-68.407652 67.405913H112.929391C75.152696 920.397913 44.521739 890.234435 44.521739 852.992V358.66713c0-37.220174 30.630957-67.405913 68.407652-67.405913s68.407652 30.185739 68.407652 67.405913v404.45774h661.325914V358.66713c0-37.220174 30.630957-67.405913 68.407652-67.405913z m0 22.26087c-24.397913 0-44.27687 18.476522-46.035479 41.783652l-0.111304 3.361391v426.718609H159.076174V358.66713c0-24.84313-20.591304-45.145043-46.146783-45.145043-24.397913 0-44.254609 18.476522-46.013217 41.783652L66.782609 358.66713v494.32487c0 23.730087 18.765913 43.297391 42.696348 45.033739l3.450434 0.111304h798.141218c24.397913 0 44.254609-18.476522 46.013217-41.783652l0.133565-3.33913V358.64487c0-24.84313-20.591304-45.145043-46.146782-45.145044z"
+                  fill="#828180"></path>
+              </svg>
+              <p>{{count.label}}({{count.value}})</p>
+              <span class="icons">
+                <i class="pos-font selected">✔</i>
+                <i class="pos-font pos_lock"></i>
+                <i class="pos-font pos_repair"></i>
+                <i class="pos-font pos_e"></i>
+              </span>
+            </li>
+          </ul>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col>
+                <ion-button (click)="deletes()" [disabled]="!info || selectedLength === 0" fill="outline" color="danger"
+                            expand="block">清空座位
+                </ion-button>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button *ngIf="authSvc.role('700')" (click)="submit()" [disabled]="!info || selectedLength === 0" expand="block">预订</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

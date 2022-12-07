@@ -1,0 +1,202 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "~animate.css";
+
+/*
+ * App CSS
+ * ----------------------------------------------------------------------------
+ * Imports a file that can contain Sass/CSS that should be used throughout
+ * the entire app.
+ */
+
+@import "./app/app.scss";
+@import "theme/ion-button";
+@import "theme/ion-header";
+@import "theme/mat-table";
+@import "theme/mat-paginator";
+@import "theme/form.scss";
+@import "theme/tabs.scss";
+@import "theme/nz-message.scss";
+@import "theme/mat-checkbox.scss";
+@import "theme/nz-table.scss";
+@import "theme/nz-button";
+@import "theme/mat-radio";
+@import "theme/mat-overlay";
+@import "theme/utils";
+
+.price {
+  color: #E1343A;
+}
+
+.member-login-modal {
+  --height: 450px;
+  --width: 750px;
+  --border-radius: 4px;
+}
+
+.posauth-login-modal {
+  --height: 450px;
+  --width: 600px;
+  --border-radius: 4px;
+}
+
+.alert-msg-modal {
+  --height: 250px;
+  --width: 600px;
+  --border-radius: 4px;
+}
+
+.full-modal {
+  --height: 100%;
+  --width: 100%;
+  --border-radius: 0;
+}
+
+.delayed-modal {
+  --height: 324px;
+  --width: 736px;
+  --border-radius: 4px;
+}
+
+.timer-modal {
+  --height: 260px;
+  --width: 750px;
+}
+
+.checkout-modal, .default-modal {
+  --height: 550px;
+  --width: 750px;
+  --border-radius: 4px;
+}
+
+.sub-modal {
+  ion-footer {
+    display: none;
+  }
+}
+
+.activity-modal {
+  ion-backdrop {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+  }
+}
+
+.member-card-modal.sub-modal {
+  .card-box {
+    pointer-events: none;
+  }
+}
+
+.supplement-modal {
+  --height: 80%;
+  --width: 80%;
+  --border-radius: 4px;
+}
+
+/*.mat-form-field-wrapper {
+  padding-bottom: 0.5em;
+}*/
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.75em 0 0.75em 0;
+}
+
+.ant-select-selector {
+  // height: 40px !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #E0E1E2 100%);
+  box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.13);
+  border-radius: 4px !important;
+  border: 1px solid #BCC4D4 !important;
+}
+
+.ant-select-single .ant-select-selector .ant-select-selection-item, .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+  // line-height: 40px !important;
+}
+
+.ant-select-arrow {
+}
+
+.ant-select-selection-placeholder, .ant-select-selection-item {
+  color: #354052 !important;
+}
+
+.ant-select-arrow svg {
+  // color: #656161;
+}
+
+.ant-modal {
+  font-size: 16px;
+  top: 300px;
+}
+
+.ant-modal-confirm .ant-modal-body {
+  padding: 32px 33px 9px;
+  line-height: 4.5715;
+}
+
+/*.weui-mask_transparent {
+  background: rgba(0, 0, 0, 0.05) !important;
+}*/
+
+/*.weui-toast {
+  background-color: rgb(0 0 0 / 3%) !important;
+}*/
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #1890ff !important;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0.74375em !important;
+}
+
+.mat-hint {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.bill-form .ant-input {
+  border: 1px solid #d9d9d9;
+}
+
+.bill-form .ant-calendar-picker {
+  width: 100% !important;
+}
+
+.bill-form .ant-input-affix-wrapper .ant-input-suffix{
+  cursor: pointer;
+}
+
+.ant-advanced-search-form {
+  .filter {
+    ion-col {
+      align-self: center;
+    }
+  }
+}

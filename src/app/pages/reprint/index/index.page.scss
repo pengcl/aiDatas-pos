@@ -1,0 +1,209 @@
+ion-header.page-header ion-toolbar {
+  box-shadow: none;
+}
+
+ion-content {
+
+  ion-toolbar {
+    --background: #3D5277;
+    --color: #fff;
+    --font-family: PingFangSC-Medium, PingFang SC;
+    ion-buttons {
+      ion-button {
+        --color: #fff;
+        i {
+          font-size: 1.7vh;
+        }
+      }
+    }
+
+    ion-title {
+      font-size: 1.6vh;
+      line-height: 1;
+      padding-inline-start: 0px;
+      padding-inline-end: 0px;
+      font-weight: 500;
+      font-family: PingFangSC-Medium, PingFang SC;
+      span {
+        display: block;
+        line-height: 1.5;
+      }
+    }
+
+  }
+
+  .content-box {
+    background: #F5F6F7 !important;
+    height: 100%;
+    padding-top: 10px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    h2 {
+      font-size: 1.7vh;
+      margin: 0;
+    }
+    h3{
+      margin: 0;
+      padding: 0;
+      margin-left: 2px;
+      font-size: 1.7vh;
+      font-weight: 600;
+      color: #090D1A;
+      line-height: 22px;
+    }
+
+    h3:before {
+      content: "";
+      display: inline-block;
+      height: 1.7vh;
+      width: 3px;
+      background: #44569F;
+      margin-top: 2px;
+      margin-right: 6px;
+      vertical-align: top;
+    }
+  }
+
+  .query-item input{
+    height: 40px;
+  }
+
+  .margin-left-10{
+    margin-left: 10px;
+  }
+
+  mat-radio-button{
+    margin-right: 10px;
+  }
+
+  .width18{
+    width: 18%;
+  }
+
+  .query-btn{
+    width: 68px;
+    height: 40px;
+    box-shadow: 3px 3px 4px 0px rgba(71, 120, 199, 0.4);
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .delete-btn{
+    width: 68px;
+    height: 40px;
+    box-shadow: 0px 3px 6px 0px rgba(84, 111, 187, 0.2);
+    border-radius: 4px;
+    color: #000;
+    border: 1px solid #5C749F;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .opt-btn{
+    width: 68px;
+    height: 32px;
+    font-size: 16px;
+    padding: 0px;
+  }
+}
+
+ion-header{
+  .nav ul {
+    list-style: none;
+    height: 45px;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .nav li {
+    display: inline;
+    line-height: 50px;
+    float: left;
+    padding: 0px 10px;
+    font-size: 17px;
+    width: 120px;
+    text-align: center;
+    margin-top: 2px;
+    cursor: pointer;
+    background: #1B4589;
+    font-family: PingFangSC-Medium, PingFang SC;
+    user-select: none;
+  }
+  .nav li.active{
+    line-height: 48px !important;
+    background: #F5F6F7;
+    border-radius: 4px 4px 0px 0px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #090D1A;
+    margin-top: 3px;
+    font-family: PingFangSC-Medium, PingFang SC;
+  }
+  .nav li.bd{
+    border-right: 1px solid #627FB2;
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    &.actions {
+      box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .total {
+      text-align: right;
+
+      sub {
+        bottom: 0;
+      }
+
+      span {
+        margin: 0 5px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #910A0A;
+        font-family: PingFangSC-Medium, PingFang SC;
+      }
+    }
+  }
+}
+
+.ant-select-selector {
+  height: 45px !important;
+  line-height: 45px !important;
+  padding-top: 5px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+not supported by any browser */
+}
+
+.auth-form{
+  height: 60px;
+  line-height: 60px;
+  font-size: 1.7vh;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #090D1A;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+}
+
+.content-top{
+  padding: 0px 10px 5px 10px;
+  border-radius: 4px;
+  height: 10%;
+  min-height: 75px;
+}
+
+.content-center{
+  padding: 0px 10px 10px 10px;
+  height: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

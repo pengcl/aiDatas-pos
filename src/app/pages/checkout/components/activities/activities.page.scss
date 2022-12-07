@@ -1,0 +1,146 @@
+:host {
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 1px;
+    border-left: 1px solid #ededed;
+    z-index: 1;
+  }
+}
+
+ion-list {
+  ion-item {
+    --background: linear-gradient(360deg, rgba(255, 255, 255, 0.98) 0%, #E7F1F9 100%);
+    border-radius: 4px;
+    border: 1px solid #A4ADBC;
+    margin: 10px 20px;
+    cursor: pointer;
+    @media screen and (max-width: 1200px) {
+      margin: 10px 10px;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      font-size: 12px;
+      z-index: 111;
+      width: 16px;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-self: center;
+      text-align: center;
+      line-height: 16px;
+      padding: 6px 0;
+      color: #fff;
+    }
+
+    &.type_2 {
+      &:before {
+        content: '卖品';
+        background: #FF8C13;
+      }
+    }
+
+    &.type_3 {
+      &:before {
+        content: '影票';
+        background: #482220;
+      }
+    }
+
+    &.type_4 {
+      &:before {
+        content: '满送';
+        background: #1C3499;
+      }
+    }
+
+    &.type_5 {
+      &:before {
+        content: '满返';
+        background: #09A2F7;
+      }
+    }
+
+    ion-avatar {
+      width: 17px;
+      height: 17px;
+      margin-right: 5px;
+
+      ion-icon {
+        display: block;
+      }
+    }
+
+    ion-label {
+      h2 {
+        font-size: 14px;
+        @media screen and (max-width: 1200px) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    ion-note {
+      ion-icon {
+        display: block;
+      }
+    }
+
+    &.selected {
+      --background: #4CC7C1;
+      border-radius: 4px;
+      border: 1px solid #1F8782;
+      --detail-icon-color: #fff;
+      --detail-icon-opacity: 1;
+
+      ion-label {
+        h2 {
+          color: #fff;
+        }
+      }
+
+      ion-note {
+        color: #fff;
+
+        ion-icon {
+          display: block;
+        }
+      }
+
+      ion-icon {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.detail {
+  margin: -10px 20px 10px;
+  border: 1px solid #ededed;
+  padding: 10px;
+  box-shadow: 0 0 3px 0 rgb(0, 0, 0, 0.2);
+  font-size: 14px;
+  color: #666;
+  @media screen and (max-width: 1200px) {
+    margin: -10px 10px 10px;
+    font-size: 13px;
+  }
+}
+
+/*.item-list {
+  margin: 0;
+  padding: 0;
+  .item-box {
+    background-color: white;
+    color: black;
+    &.selected{
+      background-color: green;
+      color: white;
+    }
+  }
+}*/

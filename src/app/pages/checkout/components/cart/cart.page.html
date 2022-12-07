@@ -1,0 +1,239 @@
+<ion-content #ionContent>
+    <div class="content-box">
+        <app-empty *ngIf="!detail"></app-empty>
+        <ng-container *ngIf="detail?.posShopCartPlanSeatDTOList.length > 0">
+            <ion-grid style="margin: 20px 0 0 10px;">
+                <ion-row>
+                    <ion-col size="12"><h2>{{detail.cartMovieName}}（{{detail.cartMoviePublish}}
+                        /{{detail.cartMovieLanguage}}）/
+                        {{detail.showTimeStart | date : 'yyyy-MM-dd'}} / {{detail.showTimeStart |date : 'HH:mm'}}
+                        -{{detail.showTimeEnd |date : 'HH:mm'}} /
+                        {{detail.cartHallName}}</h2></ion-col>
+                    <!--<ion-col size="4" class="amount"><sub>小计：</sub><span class="price">{{cart.priceSubtotalTicket | rmb}}</span></ion-col>-->
+                </ion-row>
+            </ion-grid>
+            <ion-grid style="margin-top: 0">
+                <ion-row>
+                    <ion-col *ngFor="let item of detail.posShopCartPlanSeatDTOList" [size]="size">
+                        <div class="ticket-box">
+                            <ion-grid class="ion-no-padding" style="margin-top: 0">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="ticket-info-box">
+                                            <h3>{{item.cartSeatRow}}排{{item.cartSeatCol}}号<sub>({{item.cartSeatLevel}}
+                                                )</sub></h3>
+                                            <p>{{item.cartSeatTicketType}}</p>
+                                            <p><span class="price">{{item.cartSeatPrice | rmb}}</span>+<span
+                                                    class="price">{{item.cartSeatPriceService | rmb}}</span>(服务费)</p>
+                                            <span *ngIf="item.campaignDesc"
+                                                  class="activity-tag" [class.green]="item.campaignDesc === '券'" [class.orange]="item.campaignDesc === '惠'" [class.blue]="item.campaignDesc === '返'" [class.dark-blue]="item.campaignDesc === '送'" [class.brown]="item.campaignDesc === '促'">{{item.campaignDesc === "送" ? "满" : item.campaignDesc}}</span>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-list class="total">
+                <ion-item lines="full">
+                    <ion-label></ion-label>
+                    <ion-note>电影票原总价 <em>{{count.ticket.total | rmb}}</em> - 优惠金额
+                        <em>{{count.ticket.discount | rmb}}</em> = 应收 <em>{{count.ticket.amount | rmb}}</em></ion-note>
+                </ion-item>
+            </ion-list>
+        </ng-container>
+
+        <ng-container *ngIf="products.length > 0">
+            <!--<ion-list-header>卖品</ion-list-header>-->
+            <ion-grid class="products">
+                <ion-row>
+                    <ion-col *ngFor="let item of products" [size]="size">
+                        <div class="product-box">
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="product-info-box">
+                                            <h3>{{item.cartResName}} <span>x{{item.count}}</span></h3>
+                                            <ion-grid class="ion-no-padding">
+                                                <ion-row>
+                                                    <ion-col size="auto">
+                                                        <p>原价</p>
+                                                        <p class="price">{{item.cartResPriceOri * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                    <ion-col></ion-col>
+                                                    <ion-col size="auto">
+                                                        <p>优惠后</p>
+                                                        <p class="price">{{item.cartResPrice * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                            <span *ngIf="item.campaignDesc"
+                                                  class="activity-tag" [class.green]="item.campaignDesc === '券'" [class.orange]="item.campaignDesc === '惠'" [class.blue]="item.campaignDesc === '返'" [class.dark-blue]="item.campaignDesc === '送'" [class.brown]="item.campaignDesc === '促'">{{item.campaignDesc === "送" ? "满" : item.campaignDesc}}</span>
+                                            <!--<span class="activity-tag" *ngIf="item.ticketDesc">{{item.ticketDesc}}</span>-->
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ng-container *ngIf="businessType ==='SALE'">
+                <ion-list class="total">
+                    <ion-item lines="full">
+                        <ion-label>{{authSvc.role('792') ? '添加到配餐队列' : ''}}</ion-label>
+                        <ion-checkbox *ngIf="authSvc.role('792')" slot="start" (ionChange)="change($event)"></ion-checkbox>
+                        <ion-note>卖品原总价 <em>{{count.product.total | rmb}}</em> - 优惠金额
+                            <em>{{count.product.discount | rmb}}</em> = 应收 <em>{{count.product.amount | rmb}}</em>
+                        </ion-note>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="coupons.length > 0">
+            <!--<ion-list-header>票券</ion-list-header>-->
+            <ion-grid class="products">
+                <ion-row>
+                    <ion-col *ngFor="let item of coupons" [size]="size">
+                        <div class="product-box">
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="product-info-box">
+                                            <h3>{{item.cartResName}} <span>x{{item.count}}</span></h3>
+                                            <ion-grid class="ion-no-padding">
+                                                <ion-row>
+                                                    <ion-col size="auto">
+                                                        <p>原价</p>
+                                                        <p class="price">{{item.cartResPriceOri * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                    <ion-col></ion-col>
+                                                    <ion-col size="auto">
+                                                        <p>优惠后</p>
+                                                        <p class="price">{{item.cartResPrice * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                            <span *ngIf="item.campaignDesc"
+                                                  class="activity-tag" [class.green]="item.campaignDesc === '券'" [class.orange]="item.campaignDesc === '惠'" [class.blue]="item.campaignDesc === '返'" [class.dark-blue]="item.campaignDesc === '送'" [class.brown]="item.campaignDesc === '促'">{{item.campaignDesc === "送" ? "满" : item.campaignDesc}}</span>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ng-container>
+                <ion-list class="total">
+                    <ion-item lines="full">
+                        <ion-label></ion-label>
+                        <ion-note>原总价 <em>{{count.coupon.total | rmb}}</em> - 优惠金额
+                            <em>{{count.coupon.discount | rmb}}</em> = 应收 <em>{{count.coupon.amount | rmb}}</em>
+                        </ion-note>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="points.length > 0">
+            <!--<ion-list-header>积分</ion-list-header>-->
+            <ion-grid class="products">
+                <ion-row>
+                    <ion-col *ngFor="let item of points" [size]="size">
+                        <div class="product-box">
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="product-info-box">
+                                            <h3>{{item.cartResName}} <span>x{{item.count}}</span></h3>
+                                            <ion-grid class="ion-no-padding">
+                                                <ion-row>
+                                                    <ion-col></ion-col>
+                                                    <ion-col size="auto">
+                                                        <p class="price">{{item.pointsChangePoints}}积分
+                                                            + {{item.pointsChangePrice * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                            <span *ngIf="item.campaignDesc"
+                                                  class="activity-tag" [class.green]="item.campaignDesc === '券'" [class.orange]="item.campaignDesc === '惠'" [class.blue]="item.campaignDesc === '返'" [class.dark-blue]="item.campaignDesc === '送'" [class.brown]="item.campaignDesc === '促'">{{item.campaignDesc === "送" ? "满" : item.campaignDesc}}</span>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ng-container>
+                <ion-list class="total">
+                    <ion-item lines="full">
+                        <ion-label></ion-label>
+                        <ion-note>原总价 <em>{{count.point.total | rmb}}</em> - 优惠金额
+                            <em>{{count.point.discount | rmb}}</em> = 应收 <em>{{count.point.amount | rmb}}</em>
+                        </ion-note>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="cards.length > 0">
+            <!--<ion-list-header>卡充值</ion-list-header>-->
+            <ion-grid class="products">
+                <ion-row>
+                    <ion-col *ngFor="let item of cards" [size]="size">
+                        <div class="product-box">
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col>
+                                        <div class="product-info-box">
+                                            <h3>{{item.cartResName}} <span>x{{item.count}}</span></h3>
+                                            <ion-grid class="ion-no-padding">
+                                                <ion-row>
+                                                    <ion-col size="auto">
+                                                        <p>原价</p>
+                                                        <p class="price">{{item.cartResPriceOri * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                    <ion-col></ion-col>
+                                                    <ion-col size="auto">
+                                                        <p>优惠后</p>
+                                                        <p class="price">{{item.cartResPrice * item.count | rmb}}</p>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                            <span *ngIf="item.campaignDesc"
+                                                  class="activity-tag" [class.green]="item.campaignDesc === '券'" [class.orange]="item.campaignDesc === '惠'" [class.blue]="item.campaignDesc === '返'" [class.dark-blue]="item.campaignDesc === '送'" [class.brown]="item.campaignDesc === '促'">{{item.campaignDesc === "送" ? "满" : item.campaignDesc}}</span>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ng-container>
+                <ion-list class="total">
+                    <ion-item lines="full">
+                        <ion-label></ion-label>
+                        <ion-note>原总价 <em>{{count.card.total | rmb}}</em> - 优惠金额 <em>{{count.card.discount | rmb}}</em>
+                            = 应收 <em>{{count.card.amount | rmb}}</em></ion-note>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
+        </ng-container>
+    </div>
+</ion-content>
+<ion-footer *ngIf="detail">
+    <ion-toolbar>
+        <ion-grid>
+            <ion-row>
+                <ion-col></ion-col>
+                <ion-col size="auto">合计 原总价 <em>{{detail.priceOriginal | rmb}}</em> - 优惠金额
+                    <em>{{detail.priceReduce | rmb}}</em> = 应收 <em>{{detail.priceShouldIncome | rmb}}</em></ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

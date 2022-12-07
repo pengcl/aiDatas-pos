@@ -1,0 +1,131 @@
+ion-content {
+  ion-grid {
+    ion-col {
+      overflow: hidden;
+    }
+  }
+  .content-box {
+    background: #F5F6F7 !important;
+    height: 100%;
+    h2 {
+      font-size: 18px;
+      margin: 0;
+    }
+    h3{
+      margin: 0;
+      padding: 0;
+      margin-left: 2px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #090D1A;
+      line-height: 22px;
+    }
+
+    h3:before {
+      content: "";
+      display: inline-block;
+      height: 16px;
+      width: 3px;
+      background: #44569F;
+      margin-top: 2px;
+      margin-right: 6px;
+      vertical-align: top;
+    }
+    .auth-form{
+      box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+    }
+    .content-top{
+      padding: 10px 10px;
+      background: #F5F6F7 !important;
+    }
+    .content-center{
+      padding: 3px 51px;
+    }
+    .detail-title{
+      margin-top: 5px;
+    }
+    .detail-table{
+      margin: 10px 0px;
+      width: 88%;
+    }
+    .detail-table tr{
+      line-height: 40px;
+      height: 40px;
+    }
+    .detail-table .detail-td{
+      font-size: 18px;
+      font-weight: 400;
+      color: #656161;
+      width: 155px;
+      text-align: right;
+    }
+    .detail-table .detail{
+      font-size: 18px;
+      font-weight: 400;
+      color: #090D1A;
+      padding-left: 10px;
+    }
+    .query-item{
+      height: 67px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 10px 22px;
+    }
+    .query-input{
+      width: 337px;
+      height: 40px;
+    }
+    .content{
+      background: #F5F6F7;
+    }
+    .query-btn{
+      width: 68px;
+      height: 40px;
+      box-shadow: 3px 3px 4px 0px rgba(71, 120, 199, 0.4);
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .delete-btn{
+      width: 68px;
+      height: 40px;
+      box-shadow: 0px 3px 6px 0px rgba(84, 111, 187, 0.2);
+      border-radius: 4px;
+      color: #000;
+      border: 1px solid #5C749F;
+      font-size: 16px;
+    }
+    .margin-left-10{
+      margin-left: 10px;
+    }
+    .button-native {
+      border-color: #5C749F;
+      background: transparent;
+      color: #000;
+    }
+    .close-btn{
+      font-size: 16px;
+    }
+  }
+}
+ion-footer {
+  ion-toolbar {
+    &.actions {
+      box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .total {
+      text-align: right;
+
+      sub {
+        bottom: 0;
+      }
+
+      span {
+        margin: 0 5px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #910A0A;
+      }
+    }
+  }
+}

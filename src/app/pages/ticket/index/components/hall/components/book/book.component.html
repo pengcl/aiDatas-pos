@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>预订</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list [formGroup]="form">
+    <ion-item lines="none">
+      <ion-label>影片</ion-label>
+      <ion-note>{{bookData.plan.posMovieName}} （{{bookData.plan.posMovieLan}}/{{bookData.plan.planMoviePublish}}）</ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>放映时间</ion-label>
+      <ion-note>{{bookData.plan.posStartTime | date : 'yyyy-MM-dd HH:mm'}}</ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>座位(共{{bookData.seats.length}}个)</ion-label>
+      <ion-note>
+        <span *ngFor="let seat of bookData.seats">{{seat.resSeatRow}}排{{seat.resSeatCol}}座 <em>({{seat.resSeatType}})</em>；</span>
+        <span *ngIf="bookData.seats.length > 9"></span>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>自动解锁座位时间</ion-label>
+      <ion-note>
+        <mat-radio-group formControlName="isReleaseLockMm" aria-label="Select an option">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <mat-radio-button [value]="''">不解锁</mat-radio-button>
+              </ion-col>
+              <ion-col size="3">
+                <mat-radio-button [value]="120">开映前2小时</mat-radio-button>
+              </ion-col>
+              <ion-col size="3">
+                <mat-radio-button [value]="60">开映前1小时</mat-radio-button>
+              </ion-col>
+              <ion-col size="3">
+                <mat-radio-button [value]="30">开映前30分钟</mat-radio-button>
+              </ion-col>
+              <ion-col size="3">
+                <mat-radio-button [value]="20">开映前20分钟</mat-radio-button>
+              </ion-col>
+              <ion-col size="3">
+                <mat-radio-button [value]="10">开映前10分钟</mat-radio-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </mat-radio-group>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none" required>
+      <ion-label>*预订凭证</ion-label>
+      <ion-note>
+        <ion-input [class.invalid]="form.get('reserveMemoryNum').invalid" [color]="form.get('reserveMemoryNum').invalid ? 'danger' : 'primary'" formControlName="reserveMemoryNum" placeholder="请输入方便记忆的编号、手机号或身份证号" required></ion-input>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>备注</ion-label>
+      <ion-note>
+        <ion-textarea formControlName="reserveRemark" placeholder="请输入票据备注"></ion-textarea>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="dismiss()" color="primary" fill="outline" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button [disabled]="this.form.invalid" (click)="pay()" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

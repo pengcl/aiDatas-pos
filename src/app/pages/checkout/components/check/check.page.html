@@ -1,0 +1,93 @@
+<ion-content [fullscreen]="true">
+    <div class="content-box">
+        <!--已收款记录-->
+        <ng-container>
+            <ion-list-header>已收款明细</ion-list-header>
+            <ion-list *ngIf="payDetails && payDetails?.length > 0">
+                <ion-item *ngFor="let item of payDetails" lines="none">
+                    <ion-label>
+                        {{item.payModeName}}
+                    </ion-label>
+                    <ion-note>
+                        {{item.billPayAmount | rmb}}
+                    </ion-note>
+                    <ion-icon *ngIf="item.payModeCode !== 'MemberPoints'"slot="end" name="remove-circle-outline" (click)="deletePay(item)"></ion-icon>
+                </ion-item>
+            </ion-list>
+            <ion-item class="amount" style="margin-top: 50px" lines="full">
+                <ion-label></ion-label>
+                <ion-note>已收：<span>{{shopCardDetail?.priceAlreadyIncome | rmb}}</span></ion-note>
+            </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="businessType ==='SALE'">
+            <ion-grid class="coupons">
+                <ion-row>
+                    <ion-col>
+                        <div class="coupon-box" (click)="userCoupon('coupon')">
+                            有码券
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="coupon-box" (click)="userCoupon('groupCoupon')">
+                            无码券
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="coupon-box" (click)="userCoupon('memberCoupon')">
+                            会员电子券
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ng-container>
+        <!--订单支付金额-->
+        <ng-container>
+            <ion-list class="status" *ngIf="shopCardDetail">
+                <ion-item lines="none">
+                    <ion-label>原价</ion-label>
+                    <ion-note>{{shopCardDetail?.priceOriginal | rmb}}</ion-note>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>优惠</ion-label>
+                    <ion-note>{{shopCardDetail?.priceReduce | rmb}}</ion-note>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>应收</ion-label>
+                    <ion-note>{{shopCardDetail?.priceShouldIncome | rmb}}</ion-note>
+                </ion-item>
+                <ion-item lines="full">
+                    <ion-label>已收</ion-label>
+                    <ion-note>{{shopCardDetail?.priceAlreadyIncome | rmb}}</ion-note>
+                </ion-item>
+                <ion-item class="total" lines="none">
+                    <ion-label>待收</ion-label>
+                    <ion-note>{{shopCardDetail?.priceWillIncome | rmb}}</ion-note>
+                </ion-item>
+            </ion-list>
+        </ng-container>
+
+    </div>
+</ion-content>
+<ion-footer *ngIf="types && types?.length > 0">
+    <ion-toolbar>
+        <!--支付方式-->
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col *ngFor="let item of types.slice(0,isMore ? 999 : 6); let last = last;" [size]="last ? types.slice(0,isMore ? 999 : 6).length%3 === 0 ? 4 : types.slice(0,isMore ? 999 : 6).length%3 === 1 ? 12 : 8 : 4">
+                    <div (click)="paySelect(item)" class="pay-type">{{item.modeName}}</div>
+                </ion-col>
+                <ion-col *ngIf="types.length > 6">
+                    <div class="more" (click)="more()">更多</div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col>
+                    <div class="cancelBtn" (click)="cancelAndGoBack()">取消</div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

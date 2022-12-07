@@ -1,0 +1,63 @@
+<ion-header class="header">
+  <ion-title class="auth-title">重打印</ion-title>
+</ion-header>
+<ion-content class="auth-content">
+  <table>
+    <tr>
+      <td class="name">订单号：</td>
+      <td><i>{{params.billCode}}</i></td>
+      <td class="name">交易时间：</td>
+      <td><i>{{params.createTime}}</i></td>
+    </tr>
+    <tr>
+      <td class="name">交易类型：</td>
+      <td><i>{{params.billSaleTypeLabel}}</i></td>
+      <td class="name">金额：</td>
+      <td><i>{{params.billAmount}} 元</i></td>
+    </tr>
+    <tr>
+      <td class="name">销售员：</td>
+      <td><i>{{params.billCreateName}}</i></td>
+      <td class="name">终端号：</td>
+      <td><i>{{params.terminalCode}}</i></td>
+    </tr>
+    <tr>
+      <td class="name">
+        支付明细：
+      </td>
+      <td colspan="3"><i>{{params.payLabel}}</i></td>
+    </tr>
+    <tr>
+      <td class="name">
+        商品明细：
+      </td>
+      <td colspan="3">
+        <i>{{params.detailLabel}}</i>
+      </td>
+    </tr>
+    <tr>
+      <td class="name">
+        重打凭证：
+      </td>
+      <td colspan="3">
+        <mat-checkbox class="example-margin" *ngFor="let d of saleTypes" (change)="select(d,$event)">{{d.name}}</mat-checkbox>
+      </td>
+    </tr>
+  </table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5.4"></ion-col>
+        <ion-col size="1">
+          <ion-button expand="block" class="commit-btn" [disabled]="selectSaleType.length == 0 && memberType.length == 0" (click)="askForReprint()">重打印</ion-button>
+        </ion-col>
+        <ion-col size="4.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="cancel()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

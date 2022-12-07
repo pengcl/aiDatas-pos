@@ -1,0 +1,10 @@
+mat-checkbox{
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+      background-color: #5AACFF !important;
+  }
+  .mat-checkbox-label{
+    font-size: 16px;
+    font-weight: 400;
+    color: #090D1A;
+  }
+}

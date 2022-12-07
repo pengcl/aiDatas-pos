@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>会员登录</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="7">
+        <form [formGroup]="form" class="form-box">
+          <div class="form-control">
+            <label>
+              会员卡号/手机号：
+              <input #input (keyup.enter)="confirm()" formControlName="conditions"/>
+            </label>
+          </div>
+          <div class="number-box">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4"><span (click)="clickNumber('7')" class="num-box">7</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('8')" class="num-box">8</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('9')" class="num-box">9</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('4')" class="num-box">4</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('5')" class="num-box">5</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('6')" class="num-box">6</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('1')" class="num-box">1</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('2')" class="num-box">2</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('3')" class="num-box">3</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('0')" class="num-box">0</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('.')" class="num-box">.</span></ion-col>
+                <ion-col size="4"><span (click)="clickNumber('del')" class="num-box">删除</span></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </form>
+      </ion-col>
+      <ion-col size="5">
+        <div class="img-box">
+          <img src="/assets/img/card.png">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="2">
+          <ion-button (click)="readCard()" fill="outline" color="primary" expand="block">
+            <ion-icon slot="start" name="barcode-outline"></ion-icon>
+            点击读卡
+          </ion-button>
+        </ion-col>
+        <ion-col size="6"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

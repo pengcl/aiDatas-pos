@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true" appScrollbarTheme>
+    <app-empty *ngIf="plans && plans.length === 0"></app-empty>
+    <app-loading *ngIf="!plans"></app-loading>
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col size="auto" style="align-self: start;text-align: center">
+                <ul class="times">
+                    <li (click)="groupChange(groupPlan)" *ngFor="let groupPlan of groupPlans" [class.curr]="groupPlan.label === group?.label"  [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 4) + 'px'}">
+                        <div class="time-box">
+                            <span class="time">{{groupPlan.label}}<span *ngIf="groupPlan.label === '22:00-05:59'" class="time-tag">次日</span></span>
+                        </div>
+                    </li>
+                </ul>
+            </ion-col>
+            <ion-col class="plans">
+                <ion-grid class="ion-no-padding">
+                  <ion-row>
+                    <ion-col *ngFor="let item of currentPageData(currentPlans,page)" (click)="changePlan(item)" [class.expired]="item?.expired" [class.curr]="item?.uidPlan === plan?.uidPlan" [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 8) + 'px'}" size="3">
+                      <div class="item-box">
+                        <div *ngIf="item" class="item-content">
+                          <span class="plan-time">{{item.posStartTime | repairDate | date : 'HH:mm'}}<span class="time-tag" *ngIf="item.tag">{{item.tag}}</span></span>
+                          <h2>{{item.posMovieNameShort}}</h2>
+                          <p>
+                            <span class="lan">{{item.posMovieLan}}</span><span class="publish">{{item.planMoviePublish}}</span>
+                            {{item.hallName}} (余<span style="color: yellow">{{item.posSeatLeft}}</span>座)
+                          </p>
+                          <p class="count" *ngIf="showCounts"><span *ngIf="item.views || item.views === 0"><em>{{item.views}}</em>人/</span><span
+                            *ngIf="item.total || item.total === 0"><em>{{item.total}}</em>元</span></p>
+                        </div>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-title>
+            <pagination [page]="page" (change)="pageChange($event)"></pagination>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="expand()">
+                关闭
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

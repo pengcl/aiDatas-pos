@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>预订</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list [formGroup]="form">
+    <ion-item class="tip" lines="none">
+      <ion-label>共{{bookData.seats.length}}个座位，<span>将于{{formatTime(bookData.data.cartReleaseTime)}}后释放</span></ion-label>
+      <ion-note>
+        <ion-button color="primary" size="normal" fill="outline">延时</ion-button>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>预订信息</ion-label>
+      <ion-note></ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>预订座位</ion-label>
+      <ion-note>
+        <span *ngFor="let seat of bookData.seats">{{seat.resSeatRow}}排{{seat.resSeatCol}}座 <em>({{seat.resSeatType}})</em>；</span>
+        <span *ngIf="bookData.seats.length > 9"></span>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none" required>
+      <ion-label>*预订凭证</ion-label>
+      <ion-note>
+        <ion-input [class.invalid]="form.get('reserveMemoryNum').invalid" [color]="form.get('reserveMemoryNum').invalid ? 'danger' : 'primary'" formControlName="reserveMemoryNum" placeholder="请输入方便记忆的编号、手机号或身份证号" required></ion-input>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>备注</ion-label>
+      <ion-note>
+        <ion-textarea formControlName="reserveRemark" placeholder="请输入票据备注"></ion-textarea>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="6"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss('null')" color="primary" fill="outline" expand="block">关闭</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss('unlock')" color="danger" fill="outline" expand="block">解锁</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button [disabled]="this.form.invalid" (click)="dismiss('pay')" color="primary" expand="block">支付取票</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

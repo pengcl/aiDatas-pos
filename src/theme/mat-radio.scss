@@ -1,0 +1,16 @@
+mat-radio-group{
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #1890ff;
+  }
+  .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #1890ff;
+  }
+  .mat-radio-label-content{
+    font-size: 16px;
+  }
+  mat-radio-button{
+    label{
+      font-weight: 400;
+    }
+  }
+}

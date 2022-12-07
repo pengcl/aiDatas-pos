@@ -1,0 +1,370 @@
+// color
+@weuiColorPrimary: #07C160;
+@weuiColorWarn: #FA5151;
+
+// active mask
+@weuiActiveMaskWhite: rgba(0, 0, 0, .05);
+@weuiActiveMaskColored: rgba(0, 0, 0, .1);
+@weuiActiveMaskBlack: rgba(0, 0, 0, .15);
+
+// link
+@weuiLinkColorDefault: #576B95;
+
+// background
+@weuiBgColorDefault: #EDEDED;
+@weuiBgColorPrimary: #F7F7F7;
+@weuiBgColorActive: #ECECEC;
+
+// line
+@weuiLineColorLight: rgba(0, 0, 0, .1);
+@weuiLineColorDark: rgba(0, 0, 0, .3);
+
+// text
+@weuiTextColorTitle: rgba(0, 0, 0, .9);
+@weuiTextColorDesc: rgba(0, 0, 0, .5);
+@weuiTextColorTips: rgba(0, 0, 0, .3);
+@weuiTextColorWarn: @weuiColorWarn;
+@weuiDialogBackgroundColor: #FFFFFF;
+@weuiDialogLineColor: rgba(0, 0, 0, .1);
+@weuiDialogLinkColor: @weuiLinkColorDefault;
+@weuiDialogLinkActiveBc: @weuiBgColorActive;
+@weuiDialogGapWidth: 24px;
+.setTapColor(@c:rgba(0,0,0,0)) {
+  -webkit-tap-highlight-color: @c;
+}
+
+.ellipsis(@w:auto) {
+  width: @w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.ellipsisLn(@line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+}
+
+.text_wrap() {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.hyphens() {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.setTopLine(@c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid @c;
+  color: @c;
+  transform-origin: 0 0;
+  transform: scaleY(0.5);
+}
+
+.setBottomLine(@c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid @c;
+  color: @c;
+  transform-origin: 0 100%;
+  transform: scaleY(0.5);
+}
+
+.setLeftLine(@c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  bottom: 0;
+  border-left: 1px solid @c;
+  color: @c;
+  transform-origin: 0 0;
+  transform: scaleX(0.5);
+}
+
+.setRightLine(@c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1px;
+  bottom: 0;
+  border-right: 1px solid @c;
+  color: @c;
+  transform-origin: 100% 0;
+  transform: scaleX(0.5);
+}
+.weui-dialog {
+  position: fixed;
+  z-index: 5000;
+  top: 50%;
+  left: 16px;
+  right: 16px;
+  transform: translate(0, -50%);
+
+  background-color: @weuiDialogBackgroundColor;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  max-height: 90%;
+
+  .weui-mask {
+    opacity: 0;
+    visibility: hidden;
+    transition-duration: 0.3s;
+
+    &__visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &__content {
+      position: fixed;
+      z-index: 1001;
+      height: 100%;
+      width: 100%;
+      display: flex;
+
+      .weui-loading {
+        margin: 0;
+      }
+    }
+
+    &__top {
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    &__bottom {
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    &__vertical-left {
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    &__vertical {
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__vertical-right {
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+}
+
+.weui-dialog__hd {
+  padding: 32px @weuiDialogGapWidth 16px;
+}
+
+.weui-dialog__title {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.weui-dialog__bd {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  padding: 0 @weuiDialogGapWidth;
+  margin-bottom: 32px;
+  font-size: 17px;
+  line-height: 1.4;
+  .hyphens;
+  color: @weuiTextColorDesc;
+
+  &:first-child {
+    min-height: 40px;
+    padding: 32px @weuiDialogGapWidth 0;
+    font-weight: 700;
+    color: @weuiTextColorTitle;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+}
+
+.weui-dialog__ft {
+  position: relative;
+  line-height: 56px;
+  min-height: 56px;
+  font-size: 17px;
+  display: flex;
+
+  &:after {
+    content: " ";
+    .setTopLine(@weuiDialogLineColor);
+  }
+}
+
+.weui-dialog__btn {
+  display: block;
+  flex: 1;
+  color: @weuiDialogLinkColor;
+  font-weight: 700;
+  text-decoration: none;
+  .setTapColor();
+
+  &:active {
+    background-color: @weuiDialogLinkActiveBc;
+  }
+
+  position: relative;
+
+  &:after {
+    content: " ";
+    .setLeftLine(@weuiDialogLineColor);
+  }
+
+  &:first-child {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.weui-dialog__btn_default {
+  color: @weuiTextColorTitle;
+}
+
+.weui-skin_android {
+  .weui-dialog {
+    text-align: left;
+    box-shadow: 0 6px 30px 0 rgba(0, 0, 0, .1);
+  }
+
+  .weui-dialog__title {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .weui-dialog__hd {
+    text-align: left;
+  }
+
+  .weui-dialog__bd {
+    color: @weuiTextColorDesc;
+    text-align: left;
+
+    &:first-child {
+      color: @weuiTextColorTitle;
+    }
+  }
+
+  .weui-dialog__ft {
+    display: block;
+    text-align: right;
+    line-height: 40px;
+    min-height: 40px;
+    padding: 0 @weuiDialogGapWidth 16px;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .weui-dialog__btn {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 .8em;
+
+    &:after {
+      display: none;
+    }
+
+    &:last-child {
+      margin-right: -.8em;
+    }
+  }
+
+  .weui-dialog__btn_default {
+    color: @weuiTextColorTitle;
+  }
+}
+
+@media screen and (min-width: 352px) {
+  .weui-dialog {
+    width: 380px;
+    margin: 0 auto;
+  }
+}
+
+weui-dialog {
+  .weui-mask {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .6);
+  }
+
+  .weui-mask_transparent {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  .weui-mask,
+  .weui-dialog {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .weui-mask__in,
+  .weui-dialog__in {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .weui-mask {
+    transition-duration: 0.3s;
+  }
+
+  .weui-dialog {
+    transform-origin: 0 0;
+    transition-duration: 0.2s;
+  }
+
+  .weui-dialog__error {
+    /*color: @dialog-error-color;
+    font-size: @dialog-error-font-size;*/
+  }
+}

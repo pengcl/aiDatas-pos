@@ -1,0 +1,127 @@
+:host {
+  &:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 1px;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+}
+
+ion-header {
+  ion-toolbar {
+    ion-button {
+      font-size: 14px;
+      height: 2.4em;
+    }
+  }
+}
+
+ion-content {
+  --background: #F8FBFF;
+
+  ion-list-header {
+    padding-inline-start: calc(var(--ion-safe-area-left, 0px) + 10px);
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  ion-list {
+    ion-item {
+      --padding-start: 10px;
+      --inner-padding-end: 10px;
+      --background: linear-gradient(360deg, rgba(223, 231, 243, 0.98) 0%, #FFFFFF 100%);
+
+      ion-label {
+        margin-inline: 0;
+        margin: 5px 0;
+
+        h2 {
+          padding-right: 40px;
+          position: relative;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          font-size: 14px;
+          line-height: 20px;
+
+          i {
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+            font-size: 20px;
+            color: #858585;
+          }
+        }
+
+        p {
+          font-size: 12px;
+          font-weight: 400;
+          color: #666666;
+          line-height: 14px;
+          height: 28px;
+        }
+
+        ion-grid {
+          ion-col {
+            span {
+              font-size: 14px;
+              line-height: 30px;
+              color: #666666;
+              display: inline-block;
+              vertical-align: middle;
+            }
+
+            em {
+              font-weight: bold;
+              color: #354052;
+              line-height: 30px;
+              font-style: normal;
+              font-size: 16px;
+              display: inline-block;
+              vertical-align: middle;
+            }
+
+            &:not(:first-child) {
+              text-align: right;
+              letter-spacing: -1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    --border-width: 0;
+    &:last-of-type {
+      --border-width: 0.55px 0 0;
+    }
+
+    .amount {
+      text-align: right;
+    }
+
+    span,em {
+      display: inline-block;
+      vertical-align: -webkit-baseline-middle;
+    }
+
+    span {
+      font-size: 16px;
+      color: #444;
+    }
+
+    em {
+      color: #ED1C24;
+      font-weight: bold;
+      font-size: 24px;
+      font-style: normal;
+    }
+  }
+}

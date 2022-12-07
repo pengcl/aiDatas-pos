@@ -1,0 +1,142 @@
+.coupons-all {
+  .coupon-box {
+    line-height: 48px;
+    background: linear-gradient(360deg, rgba(255, 255, 255, 0.98) 0%, #E8EFFF 100%);
+    border-radius: 4px;
+    border: 1px solid #A4ADBC;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    .float-type {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      color: #fff;
+      font-size: 0;
+      white-space: normal;
+      span {
+        display: inline-block;
+        height: 100%;
+        width: 12px;
+        font-size: 12px;
+        box-sizing: border-box;
+        line-height: 16px;
+        padding: 8px 0;
+      }
+    }
+    .type_0 {
+      background: #482220;
+    }
+    .type_1 {
+      background: #FF8C13;
+    }
+
+    &.curr {
+      background: #fff;
+      border: 2px solid #468FF3;
+
+      &:before {
+        content: '';
+        width: 0;
+        height: 0;
+        border-bottom: 20px solid #468FF3;
+        border-left: 20px solid transparent;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+      }
+
+      &:after {
+        content: '✔';
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        color: #fff;
+        font-size: 10px;
+      }
+
+    }
+  }
+}
+
+app-keyboard-number {
+  &::ng-deep {
+    ion-grid {
+      background: #F9F9F9;
+      border-radius: 4px;
+      border: 1px solid #979797;
+    }
+  }
+}
+
+ion-list-header {
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  line-height: 18px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: #44569F;
+    height: 18px;
+    margin-right: 6px;
+  }
+}
+
+nz-table {
+  margin: 10px 30px;
+  th {
+    font-size: 14px;
+    line-height: 32px !important;
+    padding: 5px 8px !important;
+  }
+  td {
+    padding: 5px 8px !important;
+  }
+  .actions {
+    white-space: nowrap;
+    button {
+      margin: 0 5px;
+    }
+  }
+}
+
+nz-pagination {
+  margin: 0 30px 10px;
+  text-align: right;
+  &::ng-deep {
+    .ant-pagination-total-text {
+      float: left;
+    }
+  }
+}
+
+.cart-price{
+  ion-label{
+    font-size: 14px;
+  }
+  ion-note {
+    font-size: 16px;
+    padding: 0px 6px 0px 3px;
+    color:  #000;
+  }
+  .label-ds{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .amount {
+    color: #E1343A;
+  }
+  .total {
+    font-size: 16px;
+    color: #E1343A;
+  }
+}

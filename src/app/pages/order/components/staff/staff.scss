@@ -1,0 +1,35 @@
+ion-header {
+  ion-title {
+    padding: 20px;
+    text-align: left;
+    height: 50px;
+    background: #CCDFFF;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+  }
+}
+
+.auth-content{
+  position: absolute;
+  top: 70px;
+  left: 2%;
+  width: 96%;
+  height: 80%;
+  z-index: 88;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.table{
+  width: 100%;
+}
+
+.cth {
+  background: #CBCDD0 !important;
+}
+
+.opt{
+  width: 150px;
+}
+
+

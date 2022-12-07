@@ -1,0 +1,162 @@
+ion-content {
+  p.tips {
+    padding-inline: 20px;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 0;
+  }
+
+  ion-item {
+    --padding-start: 10px;
+  }
+
+  .seats {
+    ion-col {
+      overflow: hidden;
+    }
+
+    .seat-box {
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .seat {
+      background: #FFFFFF linear-gradient(360deg, rgba(203, 234, 255, 0.98) 0%, #FFFFFF 100%);
+      box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.2);
+      border: 1px solid #A7B3C9;
+      text-align: center;
+      line-height: 1.2;
+      padding: 6px 0 5px;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        margin-top: -10px;
+        border: 1px solid #A7B3C9;
+        margin-left: -10px;
+        left: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        margin-top: -10px;
+        border: 1px solid #A7B3C9;
+        margin-right: -10px;
+        right: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .position {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .type, .price {
+        font-size: 12px;
+      }
+
+      &.selected {
+        background: #FFFFFF linear-gradient(360deg, rgba(141, 204, 248, 0.98) 0%, #FFFFFF 100%);
+        &:after {
+          content: '✔';
+          width: 0;
+          height: 0;
+          border-top: 0;
+          border-right: 0;
+          border-bottom: 20px solid #468FF3;
+          border-left: 20px solid transparent;
+          right: 0;
+          bottom: 0;
+          position: absolute;
+          border-radius: 0 0 0 0;
+          background: transparent;
+          margin-top: 0;
+          top: auto;
+          color: #fff;
+          text-indent: -12px;
+          text-align: center;
+          line-height: 25px;
+          font-size: 12px;
+          margin-right: 0;
+          overflow: visible;
+        }
+      }
+      &.changing {
+        border: 1px solid #ff0000;
+        transition: all 100ms ease-in-out;
+        .type, .price {
+          font-size: 12px;
+          transition: all 100ms ease-in-out;
+          color: #ff0000;
+        }
+      }
+    }
+  }
+
+  .types {
+    .type {
+      text-align: center;
+      background: #DFF2FE;
+      box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.2);
+      border-radius: 4px;
+      border: 1px solid #A7B3C9;
+      padding: 6px 0 5px;
+      cursor: pointer;
+
+      &.selected {
+        border: 1px solid #F3AF46;
+        position: relative;
+
+        &:before {
+          content: "✔";
+          width: 0;
+          height: 0;
+          border-bottom: 20px solid #F3AF46;
+          border-left: 20px solid transparent;
+          right: 0;
+          bottom: 0;
+          position: absolute;
+          text-indent: -12px;
+          text-align: center;
+          line-height: 25px;
+          font-size: 12px;
+          color: #fff;
+        }
+      }
+      &.disabled {
+        border: 1px solid #ccc;
+        opacity: 0.5;
+      }
+
+      .name {
+        font-size: 16px;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .price {
+        font-size: 12px;
+        color: #910A0A;
+      }
+    }
+  }
+}

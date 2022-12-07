@@ -1,0 +1,48 @@
+<ion-header class="header">
+  <ion-title class="auth-title">查看退款申请明细</ion-title>
+</ion-header>
+<ion-content class="auth-content">
+  <nz-table #addTable
+            nzBordered
+            class="table"
+            [nzData]="viewPage.datas"
+            [nzLoading]="viewPage.loading"
+            [nzTotal]="viewPage.total"
+            [(nzPageIndex)]="viewPage.pageIndex"
+            [(nzPageSize)]="viewPage.pageSize"
+            [nzShowQuickJumper]="false"
+            [nzShowSizeChanger]="false"
+            (nzPageIndexChange)="changePageIndex($event)"
+            (nzPageSizeChange)="changePageSize($event)">
+    <thead>
+    <tr>
+      <th class="cth">票号</th>
+      <th class="cth">楼层</th>
+      <th class="cth">座位等级</th>
+      <th class="cth">座位</th>
+      <th class="cth">票价（元）</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of addTable.data">
+      <td class="ctd">{{ data.ticketCode }}</td>
+      <td class="ctd">{{ data.floorName }}</td>
+      <td class="ctd">{{ data.seatLevel }}</td>
+      <td class="ctd">{{ data.seatLabel }}</td>
+      <td class="ctd">{{ data.seatPrice }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="cancel()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

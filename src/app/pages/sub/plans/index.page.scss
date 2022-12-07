@@ -1,0 +1,53 @@
+ion-header {
+  ion-toolbar {
+    --background: #142343;
+    --color: #fff;
+
+    ion-buttons {
+      ion-button {
+        --color: #fff;
+        i {
+          font-size: 1.4em;
+        }
+      }
+    }
+
+    .date-picker {
+      font-size: 12px;
+      line-height: 1;
+      min-width: 140px;
+      text-align: center;
+      span {
+        display: block;
+        line-height: 1.5;
+      }
+    }
+
+    ion-segment {
+      --background: #2E4472;
+
+      ion-segment-button {
+        --color: #fff;
+        --indicator-color: linear-gradient(310deg, #4A7AD0 0%, #1C499E 100%);
+      }
+    }
+    .check-item {
+      cursor: pointer;
+      ion-icon,span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      ion-icon {
+        font-size: 22px;
+        margin-right: 3px;
+      }
+      span {
+        line-height: 22px;
+      }
+    }
+  }
+}
+
+ion-content {
+  --background: #142343;
+}

@@ -1,0 +1,44 @@
+
+.form-control {
+  text-align: center;
+  margin-top: 5px;
+  label {
+    font-size: 14px;
+  }
+  input {
+    height: 44px;
+    width: 200px;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+}
+
+.number-box {
+  width: 210px;
+  margin: 5px auto;
+  ion-col {
+    align-self: center;
+    text-align: center;
+    .num-box {
+      width: 60px;
+      height: 50px;
+      display: block;
+      background: #FFFFFF linear-gradient(360deg, rgba(235, 231, 231, 0.98) 0%, #FFFFFF 100%);
+      box-shadow: 0px 3px 6px 0px rgba(104, 137, 234, 0.2);
+      border-radius: 4px;
+      border: 1px solid #BCC4D4;
+      box-sizing: border-box;
+      line-height: 48px;
+      font-weight: 600;
+    }
+  }
+}
+
+.img-box {
+  border-left: 1px solid #ededed;
+  img {
+    display: block;
+    width: 290px;
+    margin: 10px auto;
+  }
+}

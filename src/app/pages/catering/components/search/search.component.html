@@ -1,0 +1,59 @@
+<form nz-form class="ant-advanced-search-form" [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="type === '2'" size="auto">
+        <nz-form-item style="width: 130px">
+          <nz-form-control [nzSpan]="24">
+            <nz-date-picker [nzFormat]="dateFormat" [(ngModel)]="queryDate" [ngModelOptions]="{standalone: true}" (ngModelChange)="dateChange($event)"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="type === '2'" size="auto">
+        <nz-form-item style="width: 160px">
+          <nz-form-label [nzSpan]="11">取餐方式</nz-form-label>
+          <nz-form-control [nzSpan]="13">
+            <nz-select formControlName="takeType" placeholder="请选择取餐方式">
+              <nz-option [nzValue]="''" nzLabel="全部"></nz-option>
+              <nz-option [nzValue]="'1'" nzLabel="自取"></nz-option>
+              <nz-option [nzValue]="'2'" nzLabel="配送"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col *ngIf="type === '2'" size="auto">
+        <nz-form-item style="width: 140px">
+          <nz-form-label [nzSpan]="9">状态</nz-form-label>
+          <nz-form-control [nzSpan]="15">
+            <nz-select formControlName="takeStatus" placeholder="请选择取餐状态">
+              <nz-option [nzValue]="''" nzLabel="全部"></nz-option>
+              <nz-option [nzValue]="'1'" nzLabel="待配餐"></nz-option>
+              <nz-option [nzValue]="'2'" nzLabel="待完成"></nz-option>
+              <nz-option [nzValue]="'3'" nzLabel="已完成"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item style="width: 200px">
+          <nz-form-control [nzSpan]="24">
+            <input nz-input formControlName="takeNum" placeholder="请输入取餐码/取货码">
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button nz-button nzType="primary" (click)="query()">查询</button>
+      </ion-col>
+      <ion-col size="auto">
+        <button nz-button nzType="default" (click)="clear()">清除</button>
+      </ion-col>
+      <ion-col></ion-col>
+      <ion-col size="auto">
+        <button *ngIf="type === '1'" nz-button nzType="primary" (click)="setType('2')"><i nz-icon nzType="unordered-list" nzTheme="outline"></i>列表模式</button>
+        <button *ngIf="type === '2'" nz-button nzType="primary" (click)="setType('1')"><i nz-icon nzType="appstore" nzTheme="outline"></i>卡片模式</button>
+      </ion-col>
+      <ion-col size="auto" *ngIf="type === 'card'">
+        <button nz-button nzType="default" (click)="reload()"><i nz-icon nzType="sync" nzTheme="outline"></i>刷新</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

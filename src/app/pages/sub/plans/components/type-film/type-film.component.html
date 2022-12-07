@@ -1,0 +1,43 @@
+<ion-content #container [fullscreen]="true" appScrollbarTheme>
+  <app-empty *ngIf="sub?.components.film.films && sub?.components.film.films.length === 0"></app-empty>
+  <app-loading *ngIf="!sub?.components.film.films"></app-loading>
+  <ion-grid *ngIf="sub?.components.film.films && sub?.components.film.films.length > 0" class="ion-no-padding">
+    <ion-row>
+      <ion-col size="auto">
+        <ul class="films">
+          <li *ngFor="let item of sub?.components?.film?.films" [class.curr]="item.id === sub?.components.film.film?.id" [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 4) + 'px'}">
+            <div class="item-box">
+              <div class="item-content">
+                <h2>{{item.posMovieNameShort}}</h2>
+                <p>
+                  <span class="lan">{{item.posMovieLan}}</span><span class="publish">{{item.planMoviePublish}}</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ion-col>
+      <ion-col>
+        <ion-grid class="plans ion-no-padding">
+          <ion-row>
+            <ion-col [class.expired]="item?.expired" *ngFor="let item of sub?.components?.film?.plans" size="12/5" [ngStyle]="{'height':((content?.el.offsetHeight - 58) / 8) + 'px'}">
+              <div *ngIf="item" class="item-box">
+                <div class="item-content">
+                  <h2>{{item.posStartTime | repairDate | date : 'HH:mm'}}</h2>
+                  <p>{{item.hallName}} (余<span style="color: yellow">{{item.posSeatLeft}}</span>座)</p>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <pagination *ngIf="sub" [page]="sub?.components.film.page[type]"></pagination>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

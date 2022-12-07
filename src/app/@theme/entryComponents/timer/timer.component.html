@@ -1,0 +1,30 @@
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col>
+                <div class="timer-content">
+                    <p>
+                        <ion-icon color="warning" name="alert-circle"></ion-icon>
+                        <span>已选座位将于{{scheduler}}秒后释放</span>
+                    </p>
+                    <p>释放座位后，须重新选座。</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col></ion-col>
+                <ion-col size="auto">
+                    <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">立即释放</ion-button>
+                </ion-col>
+                <ion-col size="auto">
+                    <ion-button (click)="confirm()" color="primary" expand="block">延时</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,57 @@
+<form [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header>需补办的会员卡</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3.5">会员卡号：{{card?.cardNo}}</ion-col>
+            <ion-col size="3.5">卡等级：{{card?.cardLevelName}}</ion-col>
+            <ion-col>
+              <span>账户余额：{{card?.totalCash}}元 </span>
+              <span>(基本：{{card?.remainMoneyCash}}元</span>；<span>赠送：{{card?.remainMoneyCift}}元)</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="12">
+        <ion-list-header>新的会员卡</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto">
+              <nz-form-item style="width: 400px;">
+                <nz-form-control [nzSpan]="14">
+                  <input nzSize="large" nz-input formControlName="readCardNo" placeholder="请输入新的卡号或点击右侧读卡按钮" (keyup.enter)="readCardByCardNo()">
+                </nz-form-control>
+              </nz-form-item>
+            </ion-col>
+            <ion-col>
+              <button type="button" nzSize="large" nz-button (click)="readCard()">读卡</button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>会员卡等级：{{newCard?.cardLevelName}}</ion-col>
+            <ion-col>补卡工本费：{{newCard?.expense}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col style="align-self: center">
+          <ion-icon name="alert-circle"></ion-icon><span>注：(补卡成功后，原卡会被注销）</span>
+        </ion-col>
+        <ion-col size="auto">
+          <!-- <ion-button class="checkout" fill="outline" expand="block" (click)="cancel()"> 取消</ion-button> -->
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" expand="block" (click)="reissueCard()">确定补卡</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

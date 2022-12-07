@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto">
+          <ion-segment [(ngModel)]="type">
+            <ion-segment-button value="film" layout="icon-bottom">
+              <ion-label>影片显示</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="hall" layout="icon-bottom">
+              <ion-label>影厅显示</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="time" layout="icon-bottom">
+              <ion-label>时间显示</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-buttons>
+            <ion-button>
+              <ion-icon name="chevron-back-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+          <div class="date-picker">
+            <span>{{form.get('date').value | day : true}}</span>
+            {{this.form.get('date').value | date : 'yyyy-MM-dd'}} {{this.form.get('date').value | week}}
+          </div>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-buttons>
+            <ion-button>
+              <ion-icon name="chevron-forward-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="reload"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" [scrollY]="false">
+  <app-sub-plans-film class="ion-page animate__animated" *ngIf="plans && type === 'film'"></app-sub-plans-film>
+  <app-sub-plans-hall class="ion-page animate__animated" *ngIf="plans && type === 'hall'"></app-sub-plans-hall>
+  <app-sub-plans-time class="ion-page animate__animated" *ngIf="plans && type === 'time'"></app-sub-plans-time>
+</ion-content>

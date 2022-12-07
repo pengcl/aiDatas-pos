@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      购物车
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="view()" fill="outline"><ion-icon name="cart-outline"></ion-icon>查看购物车</ion-button>
+      <ion-button (click)="empty()" fill="outline" color="danger">清空购物车</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-empty
+    *ngIf="groupProducts?.length === 0 && (!cart || cart && cart.posShopCartPlanSeatDTOList.length === 0)"></app-empty>
+  <ng-container *ngIf="cart && cart.posShopCartPlanSeatDTOList.length !== 0">
+    <ion-item [class.open]="open" (click)="toggleOpen()" class="ticket" detail>
+      <ion-label>
+        <h2>{{cart.cartMovieName}}</h2>
+        <p>{{cart.cartMovieLanguage}}/{{cart.cartMoviePublish}}</p>
+        <p>{{cart.showTimeStart}} | {{cart.cartHallName}}</p>
+      </ion-label>
+      <ion-note>
+        <span>x{{cart.posShopCartPlanSeatDTOList.length}} {{cart.priceSubtotalTicket | rmb}}</span>
+        <i (click)="deletes()" class="pos-font pos_delete"></i>
+      </ion-note>
+    </ion-item>
+    <ion-list *ngIf="open">
+      <ion-item *ngFor="let item of cart.posShopCartPlanSeatDTOList">
+        <ion-label>
+          <h2>{{item.cartSeatRow}}排{{item.cartSeatCol}}座 {{item.cartSeatTicketType}}</h2>
+        </ion-label>
+        <ion-note>
+          <ion-button (click)="presentChangeModal(item)" class="change-type" size="small">换票类</ion-button>
+          <span>{{item.cartSeatPriceActual | rmb}}</span>
+          <i (click)="del(item,'seat')" class="pos-font pos_delete"></i>
+        </ion-note>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <ng-container *ngIf="groupProducts.length > 0">
+    <ion-list-header>卖品</ion-list-header>
+    <ion-list>
+      <ion-item *ngFor="let item of groupProducts;let i = index" lines="full">
+        <ion-label>
+          <h2>{{item.cartResName}} <i (click)="del(i,'product')" class="pos-font pos_delete"></i></h2>
+          <p>{{item.nameResStr}}</p>
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col size="4.5">
+                <weui-stepper [(ngModel)]="item.count" (change)="countChange()" [min]="0" [max]="999"></weui-stepper>
+              </ion-col>
+              <ion-col size="3.75">
+                <span>单价：</span><em>{{item.cartResPrice | rmb}}</em>
+              </ion-col>
+              <ion-col size="3.75">
+                <em>{{item.cartResPrice * item.count | rmb}}</em>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col *ngIf="authSvc.role('710')">
+          <ion-badge color="danger">{{list?.length}}</ion-badge>
+          <ion-button [appHangUp]="hangUp" (deleted)="deleted($event)" cdkOverlayOrigin #hangUp="cdkOverlayOrigin"
+                      [disabled]="groupProducts.length === 0 && list?.length === 0" (changeCart)="changeCart($event)"
+                      (created)="created($event)" fill="outline" color="primary" expand="block">挂单
+          </ion-button>
+        </ion-col>
+        <ion-col *ngIf="authSvc.role('712')">
+          <ion-button (click)="submit()" color="primary" expand="block">
+            <ion-icon name="wallet-outline"></ion-icon>
+            结算
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

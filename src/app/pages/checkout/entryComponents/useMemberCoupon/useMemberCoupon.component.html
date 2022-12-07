@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>添加会员电子券</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <nz-table #rowSelectionTable [nzData]="currentPageData(couponList,page)" nzBordered [nzShowPagination]="false"
+            nzSize="small"
+            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+    <tr>
+      <!-- <th style="width: 48px;min-width: 48px"  [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)" nzLeft></th> -->
+      <th>票券名称</th>
+      <th>票券编码</th>
+      <th>类型</th>
+      <th>有效期</th>
+      <th>适用影片/商品</th>
+      <th>优惠/抵扣金额</th>
+      <th style="width: 120px;min-width: 120px" nzRight>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of rowSelectionTable.data">
+      <!-- <td
+        [nzChecked]="!!selected[data.ticketCode]"
+        [nzDisabled]="data.disabled"
+        (nzCheckedChange)="onItemChecked(data, $event)"
+        nzLeft
+      ></td> -->
+      <td>{{ data.ticketName }}</td>
+      <td>{{ data.ticketCode }}</td>
+      <td>{{ data.typeName }}</td>
+      <td>{{ data.effectDate }}</td>
+      <td>{{ data.useCondition }}</td>
+      <td>{{ data.ticketMoney }}</td>
+      <td class="actions" nzRight>
+        <button nz-button *ngIf="data.used === 0" [class.used]="data.used === 1" (click)="addCoupon(data)">使用票券</button>
+        <button nz-button *ngIf="data.used === 1" [class.used]="data.used === 1" (click)="delCoupon(data)">取消票券</button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination (nzPageIndexChange)="pageIndexChange($event)" [nzPageIndex]="page.currentPage"
+                 [nzTotal]="page.totalSize" [nzPageSize]="page.pageSize" [nzShowTotal]="rangeTemplate"></nz-pagination>
+  <ng-template #rangeTemplate let-range="range" let-total> 当前显示{{ range[0] }}-{{ range[1] }}条，共{{ total }}条
+  </ng-template>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <!-- 订单金额信息 -->
+        <ion-col class="cart-price" style="align-self: center">
+          <div class="info">
+            <ion-label>原价</ion-label>
+            <ion-note>{{shopCardDetail?.priceOriginal | rmb}}</ion-note>
+            <ion-label>优惠金额</ion-label>
+            <ion-note>{{shopCardDetail?.priceReduce | rmb}}</ion-note>
+            <ion-label>应收</ion-label>
+            <ion-note>{{shopCardDetail?.priceShouldIncome | rmb}}</ion-note>
+            <ion-label>已收</ion-label>
+            <ion-note class="amount">{{shopCardDetail?.priceAlreadyIncome | rmb}}</ion-note>
+            <ion-label class="label-ds">待收</ion-label>
+            <ion-note class="total">{{shopCardDetail?.priceWillIncome | rmb}}</ion-note>
+          </div>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定/下单出票</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

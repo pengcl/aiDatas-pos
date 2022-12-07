@@ -1,0 +1,48 @@
+<form nz-form class="ant-advanced-search-form" [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label nzSize="large" [nzSpan]="6" nzFor="mobile">手机号</nz-form-label>
+          <nz-form-control [nzSpan]="18">
+            <input (focus)="mobileFocus(disabled)" (keyup.enter)="mobileEnter()" [nzSize]="nzSize" nz-input formControlName="mobile" placeholder="输入手机号按回车键">
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label nzSize="large" [nzSpan]="6" nzFor="cardNo">卡号</nz-form-label>
+          <nz-form-control [nzSpan]="18">
+            <nz-input-group [nzSize]="nzSize" nzSearch [nzAddOnAfter]="suffixButton">
+              <input (focus)="cardNoFocus(disabled)" (keyup.enter)="cardNoEnter()" [nzSize]="nzSize" type="text" formControlName="cardNo" nz-input placeholder="输入卡号按回车键或读卡" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button [disabled]="disabled" type="button" nz-button nzType="default" [nzSize]="nzSize" nzSearch (click)="readCard()">读卡</button>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item style="margin-left: 20px;">
+          <nz-form-control [nzSpan]="24">
+            <nz-select formControlName="selectType" [nzSize]="nzSize" style="min-width: 120px" nzPlaceHolder="请选择">
+              <nz-option nzValue="1" nzLabel="身份证"></nz-option>
+              <nz-option nzValue="2" nzLabel="姓名"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-control>
+            <input (focus)="otherFocus(disabled)" (keyup.enter)="otherEnter()" [nzSize]="nzSize" nz-input formControlName="other" placeholder="输入身份证号/姓名按回车键">
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button [disabled]="disabled" type="button" [nzSize]="nzSize" nz-button nzType="primary" (click)="query()">查询</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

@@ -1,0 +1,7 @@
+nz-table {
+  &::ng-deep {
+    th .ant-table-header-column {
+      display: block !important;
+    }
+  }
+}

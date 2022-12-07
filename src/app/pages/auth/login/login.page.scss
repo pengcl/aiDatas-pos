@@ -1,0 +1,90 @@
+ion-content {
+  --background: transparent;
+  --overflow: hidden;
+
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #090D1A;
+    margin-bottom: 15px;
+  }
+
+  .app-background {
+    position: absolute;
+    width: 600px;
+    top: 20%;
+    right: 50%;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .auth-form {
+    position: absolute;
+    width: 400px;
+    top: 25%;
+    left: 50%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    .page-logo {
+      width: 145px;
+      margin: 0 auto;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .page-title {
+      text-align: center;
+
+      h1 {
+        font-size: 28px;
+        margin: 10px 0 15px;
+        color: #66410E;
+        font-weight: bold;
+      }
+    }
+
+    mat-form-field {
+      display: block;
+
+      &::ng-deep {
+        .mat-form-field-suffix {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .app-logout {
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
+    width: 82px;
+    height: 35px;
+    border-radius: 2px;
+    opacity: 0.8;
+    border: 1px solid #FFFFFF;
+    text-align: center;
+    padding-top: 2px;
+  }
+
+  .logout {
+    margin-left: 3px;
+  }
+}
+
+.remember {
+  color: #656161;
+  margin-left: 3px;
+  font-size: 14px;
+}

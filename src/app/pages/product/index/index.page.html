@@ -1,0 +1,17 @@
+<app-menu></app-menu>
+<ion-content [fullscreen]="true">
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col size="1">
+                <app-product-catalogs [(catalog)]="catalog" class="ion-page"></app-product-catalogs>
+            </ion-col>
+            <ion-col>
+                <app-product-goods [(catalog)]="catalog" class="ion-page"></app-product-goods>
+            </ion-col>
+            <ion-col size="auto">
+              <div style="width: 300px"></div>
+                <app-product-preview [didEnter]="didEnter" class="ion-page"></app-product-preview>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

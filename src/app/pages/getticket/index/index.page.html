@@ -1,0 +1,307 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title class="nav">
+      <ul>
+        <li *ngIf="authSvc.role('750')" [ngClass]="{'active':index == 0}" (click)="changeTab(0)">网售取票</li>
+        <li *ngIf="authSvc.role('751')" [ngClass]="{'active':index == 1}" (click)="changeTab(1)">预订取票</li>
+        <li *ngIf="authSvc.role('750')" [ngClass]="{'active':index == 2}" (click)="changeTab(2)">包场确认</li>
+      </ul>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="number-box" *ngIf="showNum">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4"><span (click)="clickNumber('7')" class="num-box">7</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('8')" class="num-box">8</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('9')" class="num-box">9</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('4')" class="num-box">4</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('5')" class="num-box">5</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('6')" class="num-box">6</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('1')" class="num-box">1</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('2')" class="num-box">2</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('3')" class="num-box">3</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('0')" class="num-box">0</span></ion-col>
+      <ion-col size="4"><span class="num-box disabled">.</span></ion-col>
+      <ion-col size="4"><span (click)="clickNumber('del')" class="num-box del">删除</span></ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+<!-- 网售取票开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 0" class="content">
+  <div class="content-box">
+    <div class="content-top">
+      <form [formGroup]="form" class="auth-form">
+        <ion-item lines="none" class="query-item">
+            <span><ion-label>取票码：</ion-label></span>
+            <span class="margin-left-10 width20">
+             <input #billTakeCode placeholder="请输入取票码及验证码" formControlName="billTakeCode" nz-input class="query-input" (keypress)="pressTake($event)" (keyup)="changeKeyupNumber('billTakeCode')" maxlength="17" (focus)="focusInput()">
+              <!--<input [appKeyboardNumber]="billTakeCode" [dotDisabled]="true" [value]="form.get('billTakeCode').value" (valueChange)="changeNumber('billTakeCode',$event)" class="query-input" (keypress)="pressTake($event)"
+                     cdkOverlayOrigin #billTakeCode="cdkOverlayOrigin" formControlName="billTakeCode" nzSize="large" nz-input placeholder="请输入取票码">-->
+            </span>
+            <!--<span class="margin-left-40"><ion-label>取票验证码：</ion-label></span>
+            <span class="margin-left-10 width20">
+              <input [appKeyboardNumber]="billVerifyCode" [dotDisabled]="true" [value]="form.get('billVerifyCode').value" (valueChange)="changeNumber('billVerifyCode',$event)" class="query-input" (keypress)="pressTake($event)"
+                     cdkOverlayOrigin #billVerifyCode="cdkOverlayOrigin" formControlName="billVerifyCode" nzSize="large" nz-input placeholder="请输入取票验证码">
+            </span>-->
+            <span class="margin-left-10"><ion-button (click)="query()" class="query-btn">查询</ion-button></span>
+            <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clearTake()">清除</ion-button></span>
+        </ion-item>
+      </form>
+    </div>
+
+    <div class="content-center" (click)="hideNum()">
+      <div *ngIf="detail && detail.uid != ''">
+        <div class="title">
+          {{detail.planMovieName}}（{{detail.planMoviePublish}}/{{detail.planLanguageName}}）/{{detail.showTimeStart}}/{{detail.fieldName}}
+        </div>
+        <div class="detail-title">
+          <h3>订单详情</h3>
+        </div>
+        <table class="detail-table">
+          <tr>
+            <td class="detail-td">订单号：</td>
+            <td class="detail">{{detail.billCode}}</td>
+            <td class="detail-td">交易时间：</td>
+            <td class="detail">{{detail.createTime}}</td>
+            <td class="detail-td">销售渠道：</td>
+            <td class="detail">{{detail.channelCustomName}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">金额：</td>
+            <td class="detail">{{detail.billAmount}}元</td>
+            <td class="detail-td">数量：</td>
+            <td class="detail">{{detail.ticketNum}}</td>
+            <td class="detail-td"></td>
+            <td class="detail"></td>
+          </tr>
+        </table>
+        <nz-table #ticketTable
+                  nzBordered
+                  class="table"
+                  [nzData]="ticketPage.datas"
+                  [nzLoading]="ticketPage.loading"
+                  [(nzPageSize)]="ticketPage.pageSize"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false">
+          <thead>
+          <tr>
+            <th class="cth">楼层</th>
+            <th class="cth">座位等级</th>
+            <th class="cth">票类</th>
+            <th class="cth">座位</th>
+            <th class="cth">状态</th>
+            <th class="cth">票价（元）</th>
+            <th class="cth">代售费（元）</th>
+            <th class="cth">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of ticketTable.data">
+            <td class="ctd">{{ data.floorName }}</td>
+            <td class="ctd">{{ data.seatLevelName }}</td>
+            <td class="ctd">{{ data.ticketTypeName }}</td>
+            <td class="ctd">{{ data.seatNum }}</td>
+            <td class="ctd">{{ data.status }}</td>
+            <td class="ctd">{{ data.seatPriceActual }}</td>
+            <td class="ctd">{{ data.seatPriceService }}</td>
+            <td class="ctd">
+              <span *ngIf="data.takeStatus != 0" class="mat-cell-left"><button class="reprint" nz-button nzType="default" (click)="reprint(data)">重打印</button></span>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 0">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5.4"></ion-col>
+        <ion-col size="1">
+          <ion-button [disabled]="!detail || (detail && detail.ticketList.length == 0)" expand="block" class="pickup-btn" (click)="pickupTicket()">取票</ion-button>
+        </ion-col>
+        <ion-col size="4.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 网售取票结束 -->
+
+<!-- 预订取票开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 1" class="content">
+  <div class="content-box">
+    <div class="content-top">
+      <form [formGroup]="bookform" class="auth-form">
+        <ion-item lines="none" class="query-item2">
+          <span><ion-label>预计凭证：</ion-label></span>
+          <span class="margin-left-10">
+              <input #ticketWithdrawal placeholder="请输入预留的编号、手机号、身份证号码或会员卡号" nz-input formControlName="ticketWithdrawal" class="query-input2" (keypress)="pressQuery($event)" (keyup)="changeKeyupNumber('ticketWithdrawal')" (focus)="focusInput()">
+              <!--<input [appKeyboardNumber]="ticketWithdrawal" [dotDisabled]="true" [value]="bookform.get('ticketWithdrawal').value" (valueChange)="changeBookNumber('ticketWithdrawal',$event)" class="query-input2" (keypress)="pressQuery($event)"
+                     cdkOverlayOrigin #ticketWithdrawal="cdkOverlayOrigin" formControlName="ticketWithdrawal" nzSize="large" nz-input placeholder="请输入预留的编号、手机号、身份证号码或会员卡号">-->
+          </span>
+          <span class="margin-left-10">
+            <ion-button fill="" color="primary" class="read-btn" (click)="readCard()">读会员卡</ion-button>
+          </span>
+          <span class="margin-left-10"><ion-button (click)="queryBook()" class="query-btn">查询</ion-button></span>
+          <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clearBook()">清除</ion-button></span>
+        </ion-item>
+      </form>
+    </div>
+    <div class="content-center" (click)="hideNum()">
+      <div *ngFor="let bd of bookDatas" class="margin-bottom-15">
+        <div class="title">
+          {{bd.cartMovieName}}/{{bd.showTimeStart}}/{{bd.cartHallName}}
+        </div>
+        <ion-grid class="content-grid">
+          <ion-row class="head">
+            <ion-col class="col left minwidth-165" >
+              <ion-label>订单编号</ion-label>
+            </ion-col>
+            <ion-col class="col left" [size]="4">
+              <ion-label>订单详情</ion-label>
+            </ion-col>
+            <ion-col class="col left minwidth-135">
+              <ion-label>解锁时间</ion-label>
+            </ion-col>
+            <ion-col class="col right minwidth-135">
+              <ion-label>订单总额（元）</ion-label>
+            </ion-col>
+            <ion-col class="left">
+              <ion-label>备注</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row" *ngFor="let bill of bd.posShopCartTakeInfomationDTOList" (click)="selectItem(bill)" [ngClass]="{'active': (bookItem && bill.index == bookItem.index)}">
+            <ion-col class="left minwidth-165">
+              <ion-label>{{bill.shopCartCode}}</ion-label>
+            </ion-col>
+            <ion-col class="left sl" [size]="4">
+              <ion-label>{{bill.content}}</ion-label>
+            </ion-col>
+            <ion-col class="left minwidth-135">
+              <ion-label>{{bill.releaseTime}}</ion-label>
+            </ion-col>
+            <ion-col class="right minwidth-135">
+              <ion-label>{{bill.sumSeatPrice}}</ion-label>
+            </ion-col>
+            <ion-col class="left">
+              <ion-label>{{bill.reserveRemark}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 1">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="4.4"></ion-col>
+        <ion-col size="1">
+          <ion-button fill="outline" color="primary" expand="block" [disabled]="!bookItem" (click)="unlock()" >解锁</ion-button>
+        </ion-col>
+        <ion-col size="1">
+          <ion-button fill="outline" color="primary" expand="block" [disabled]="!bookItem" (click)="delayed()">延时</ion-button>
+        </ion-col>
+        <ion-col size="1">
+          <ion-button expand="block" class="pickup-btn" (click)="getticket()" [disabled]="!bookItem">支付取票</ion-button>
+        </ion-col>
+        <ion-col size="3.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 预订取票结束 -->
+
+<!-- 包场确认开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 2" class="content">
+  <div class="content-box">
+    <div class="content-top">
+      <form [formGroup]="blockform" class="auth-form">
+        <ion-item lines="none" class="query-item">
+          <span><ion-label>订单号：</ion-label></span>
+          <span class="margin-left-10 width20">
+              <input #orderId placeholder="请输入订单号" formControlName="orderId" nz-input class="query-input" (keypress)="pressBlock($event)" (keyup)="changeKeyupNumber('orderId')" (focus)="focusInput()">
+            <!--<input [appKeyboardNumber]="orderId" [dotDisabled]="true" [value]="blockform.get('orderId').value" (valueChange)="changeBlockNumber('orderId',$event)" class="query-input" (keypress)="pressBlock($event)"
+                   cdkOverlayOrigin #orderId="cdkOverlayOrigin" formControlName="orderId" nzSize="large" nz-input placeholder="请输入订单号">-->
+            </span>
+          <span class="margin-left-10"><ion-button (click)="queryBlock()" class="query-btn">查询</ion-button></span>
+          <span class="margin-left-10"><ion-button fill="" color="primary"  class="delete-btn" (click)="clearBlock()">清除</ion-button></span>
+        </ion-item>
+      </form>
+    </div>
+    <div class="content-center" (click)="hideNum()">
+      <div *ngIf="blockDetail && blockDetail.omsOrderDetail.orderId !=''">
+        <div class="detail-title">
+          <h3>订单详情</h3>
+        </div>
+        <table class="detail-table">
+          <tr>
+            <td class="detail-td">订单号：</td>
+            <td class="detail">{{blockDetail.omsOrderDetail.orderId}}</td>
+            <td class="detail-td">影片：</td>
+            <td class="detail">{{blockDetail.omsOrderHallBookTime.movieName}}</td>
+            <td class="detail-td">影厅：</td>
+            <td class="detail">{{blockDetail.omsOrderHallBookTime.hallName}}</td>
+          </tr>
+          <tr>
+            <td class="detail-td">包场时间：</td>
+            <td class="detail">{{blockDetail.omsOrderHallBookTime.blocktime}}</td>
+            <td class="detail-td">金额：</td>
+            <td class="detail">{{blockDetail.omsOrderDetail.orignAmount}}元</td>
+            <td class="detail-td"></td>
+            <td class="detail"></td>
+          </tr>
+        </table>
+        <nz-table #blockTable
+                  nzBordered
+                  class="table"
+                  [nzData]="blockPage.datas"
+                  [nzLoading]="blockPage.loading"
+                  [(nzPageSize)]="blockPage.pageSize"
+                  [nzShowQuickJumper]="false"
+                  [nzShowSizeChanger]="false">
+          <thead>
+          <tr>
+            <th class="cth">卖品名称</th>
+            <th class="cth">数量</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of blockTable.data">
+            <td class="ctd">{{ data.merName }}</td>
+            <td class="ctd">{{ data.num }}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 2">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5.4"></ion-col>
+        <ion-col size="1">
+          <ion-button expand="block" class="pickup-btn" [disabled]="!blockDetail" (click)="confirmBlock()">确定出票</ion-button>
+        </ion-col>
+        <ion-col size="4.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 包场确认结束 -->

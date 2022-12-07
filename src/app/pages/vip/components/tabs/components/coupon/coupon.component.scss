@@ -1,0 +1,7 @@
+nz-form-label {
+  &::ng-deep {
+    label {
+      line-height: inherit;
+    }
+  }
+}

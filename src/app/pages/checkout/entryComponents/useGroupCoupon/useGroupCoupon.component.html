@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>添加无码券/团购券</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list-header>选择无码券/团购券</ion-list-header>
+  <ion-grid style="margin: 0 10px;" *ngIf="groupCoupons && groupCoupons?.length > 0">
+    <ion-row>
+      <ion-col>
+        <ion-grid class="coupons-all">
+          <ion-row>
+            <ion-col size="12/5" *ngFor="let item of currentPageData(groupCoupons,couponPage)">
+              <!-- 选中
+                item.issueNo === issueNo
+              -->
+              <div [ngClass]="'type_' + item.category" class="coupon-box"(click)='selectGroupCoupon(item)' [class.curr]="item.issueNo === issueNo">
+                <div class="float-type" >
+                  <span *ngIf="item.category === '1' || item.category === '3'" class="float type_0">影票</span>
+                  <span *ngIf="item.category === '2' || item.category === '3' || item.category === '4'"
+                    class="float type_1">卖品</span>
+                </div>
+                {{item.ticketName}}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="auto" style="align-self: center">
+        <pagination [vertical]="true" [page]="couponPage" (change)="pageChange($event)"></pagination>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form nz-form [formGroup]="form" class="ant-advanced-search-form">
+    <ion-grid style="margin: 0 20px;">
+      <ion-row>
+        <ion-col size="5">
+          <nz-form-item>
+            <nz-form-control>
+              <input (keyup.enter)="couponNoEnter()" nzSize="large" nz-input formControlName="couponNo"
+                placeholder="请扫描票券条码/或输入票券编码按回车键">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="auto">
+          <button nz-button nzType="primary" (click)="addCoupon()" nzSize="large">添加</button>
+        </ion-col>
+        <ion-col>
+          <div class="info">
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-list-header>已添加票券</ion-list-header>
+  <nz-table #rowSelectionTable [nzData]="couponList" nzBordered [nzShowPagination]="false" nzSize="small"
+    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+      <tr>
+        <!-- <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th> -->
+        <th nzLeft>票券名称</th>
+        <th>票券编码</th>
+        <th>类型</th>
+        <th>有效期</th>
+        <th>适用影片/商品</th>
+        <th>优惠/抵扣金额</th>
+        <th nzRight>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of rowSelectionTable.data">
+        <!-- <td
+        [nzChecked]="!!selected[data.ticketCode]"
+        [nzDisabled]="data.disabled"
+        (nzCheckedChange)="onItemChecked(data, $event)"
+        nzLeft></td> -->
+        <td>{{ data.ticketName}}</td>
+        <td>{{ data.ticketCode }}</td>
+        <td>{{ data.typeName }}</td>
+        <td>{{ data.effectDate }}</td>
+        <td>{{ data.useCondition }}</td>
+        <td>{{ data.ticketMoney }}</td>
+        <td class="actions">
+          <button nz-button (click)="delCoupon(data)">删除</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination (nzPageIndexChange)="pageIndexChange($event)" [nzPageIndex]="page.currentPage"
+    [nzTotal]="page.totalSize" [nzPageSize]="page.pageSize" [nzShowTotal]="rangeTemplate"></nz-pagination>
+  <ng-template #rangeTemplate let-range="range" let-total> 当前显示{{ range[0] }}-{{ range[1] }}条，共{{ total }}条
+  </ng-template>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+          <!-- 订单金额信息 -->
+          <ion-col class="cart-price" style="align-self: center">
+            <div class="info">
+              <ion-label>原价</ion-label>
+              <ion-note>{{shopCardDetail?.priceOriginal | rmb}}</ion-note>
+              <ion-label>优惠金额</ion-label>
+              <ion-note>{{shopCardDetail?.priceReduce | rmb}}</ion-note>
+              <ion-label>应收</ion-label>
+              <ion-note>{{shopCardDetail?.priceShouldIncome | rmb}}</ion-note>
+              <ion-label>已收</ion-label>
+              <ion-note class="amount">{{shopCardDetail?.priceAlreadyIncome | rmb}}</ion-note>
+              <ion-label class="label-ds">待收</ion-label>
+              <ion-note class="total">{{shopCardDetail?.priceWillIncome | rmb}}</ion-note>
+            </div>
+          </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定/下单出票</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

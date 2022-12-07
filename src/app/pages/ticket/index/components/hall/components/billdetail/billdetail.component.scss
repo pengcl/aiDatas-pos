@@ -1,0 +1,63 @@
+ion-header {
+  ion-title {
+    padding: 20px;
+    text-align: left;
+    height: 50px;
+    background: #CCDFFF;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+  }
+}
+
+.print-content{
+  position: absolute;
+  top: 65px;
+  left: 30px;
+}
+.print-content table{
+  width: 95%;
+}
+.print-content table .name{
+  width: 14%;
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
+}
+
+.print-content table td{
+  font-size: 16px;
+  padding: 3px;
+}
+
+.print-content table .name i{
+  font-size: 16px;
+  font-style: normal;
+  color: #090D1A;
+}
+
+.print-content table .seat{
+  width: 125px;
+  float: left;
+  height: 150px;
+}
+
+.print-content table .seat-detail{
+  width:80%;
+  color: #090D1A;
+}
+
+.refund-btn{
+  border: 1px solid #FF0000;
+  color: #FF0000;
+}
+
+.refund-btn[disabled], .refund-btn[disabled]:hover, .refund-btn[disabled]:focus, .refund-btn[disabled]:active {
+  color: rgba(0, 0, 0, 0.25);
+  background: #f5f5f5;
+  border-color: #d9d9d9;
+  text-shadow: none;
+  box-shadow: none;
+}
+

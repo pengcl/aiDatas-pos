@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>修改会员信息</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" nz-form>
+    <ion-grid>
+      <ion-row>
+        <ion-col>默认卡:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <nz-select formControlName="defualMemberCardUid" nzPlaceHolder="请选择">
+                <nz-option *ngFor="let card of cardList" [nzValue]="card.uidMemberCard" [nzLabel]="card.cardNo">
+                </nz-option>
+              </nz-select>
+
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>手机号:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <input formControlName="memberMobile" nz-input placeholder="请输入手机号">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>邮箱:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <input type="email" formControlName="memberEmail" nz-input placeholder="请输入邮箱">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>身份证:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <input (blur)="getBirthday()" formControlName="memberIdCard" nz-input placeholder="请输入证件号码">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>QQ号码:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <input formControlName="memberQQ" nz-input placeholder="请输入QQ号码">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>性别:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <nz-radio-group formControlName="memberSex">
+                <label nz-radio [nzValue]="0">男</label>
+                <label nz-radio [nzValue]="1">女</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>昵称:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <input formControlName="memberAlias" nz-input placeholder="请输入QQ号码">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>生日:</ion-col>
+        <ion-col size="3.5">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <nz-select formControlName="memberBirthMonth" nzPlaceHolder="请选择月份">
+                <nz-option *ngFor="let month of months" [nzValue]="month" [nzLabel]="month"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="0.5">月</ion-col>
+        <ion-col size="3.5">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <nz-select formControlName="memberBirthDay" nzPlaceHolder="请选择日期">
+                <nz-option *ngFor="let day of days" [nzValue]="day" [nzLabel]="day"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col size="0.5">日</ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>微信:</ion-col>
+        <ion-col size="8">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <input formControlName="memberWX" nz-input placeholder="请输入微信号码">
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col *ngIf="authSvc.role('733')" size="2">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

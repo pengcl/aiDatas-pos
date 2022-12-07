@@ -1,0 +1,316 @@
+<ion-header class="page-header">
+  <ion-toolbar>
+    <ion-title class="nav">
+      <ul>
+        <li *ngIf="authSvc.role('790')" [ngClass]="{'active':index == 0}" (click)="changeTab(0)">补登票</li>
+        <li *ngIf="authSvc.role('791')" [ngClass]="{'active':index == 1}" (click)="changeTab(1)">补登申请</li>
+      </ul>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- 补登票开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 0" class="content">
+  <div class="content-box">
+    <div class="left-nav">
+      <div class="left-content-top">
+        <ion-toolbar class="header">
+          <ion-buttons slot="start">
+            <ion-button (click)="prev()">
+              <ion-icon name="chevron-back-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="next()">
+              <ion-icon name="chevron-forward-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <form [formGroup]="form" style="display: none">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </form>
+          <ion-title (click)="picker.open()">
+            <span *ngIf="planDate.label != ''">{{planDate.label}}</span>
+            {{planDate.name}}
+          </ion-title>
+        </ion-toolbar>
+      </div>
+      <div class="left-content-center">
+        <ion-grid class="ion-no-padding grid-hall">
+          <ion-row>
+            <ion-col size="3" class="hall-lable">
+              选择影厅：
+            </ion-col>
+            <ion-col>
+              <nz-select (ngModelChange)="changeHall($event)" [(ngModel)]="hallUid" nzPlaceHolder="请选择影厅">
+                <nz-option *ngFor="let hall of hallDatas" [nzValue]="hall.uid" [nzLabel]="hall.fieldName" ></nz-option>
+              </nz-select>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid class="ion-no-padding plan-grid">
+          <ion-row class="plan noselect" [ngClass]="{'active': plan.uid == p.uid}" *ngFor="let p of page.showData" (click)="selectPlan(p)">
+            <ion-col size="7.3">
+              <div class="movie-name">{{p.planMovieName}}</div>
+            </ion-col>
+            <ion-col size="4.7" class="rt">
+              <div class="effect">
+                <i class="lh">{{p.planLanguageName}}</i>
+                <i class="ts">{{p.planMoviePublish}}</i>
+                <i class="time">{{p.showTimeStartLabel}}</i>
+                <!--<i class="dg"></i>-->
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row class="page" *ngIf="page.totalPageSize > 1">
+            <ion-col>
+              <ion-toolbar class="header">
+                <ion-buttons slot="start">
+                  <ion-button (click)="prevPage()">
+                    <ion-icon name="chevron-up-circle"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                  <ion-button (click)="nextPage()">
+                    <ion-icon name="chevron-down-circle"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+                <ion-title>
+                  <span>{{page.showPage}}/{{page.totalPageSize}}</span>
+                  共{{page.totalCount}}项
+                </ion-title>
+              </ion-toolbar>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!hideEmptyPlan" style="height: 100%">
+            <ion-col>
+              <div class="empty-plan">
+                <span class="img"></span>
+                <span class="tip">当前影厅暂无可选场次</span>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+    <div class="right-nav">
+      <div *ngIf="!hideEmptyMovie" class="empty-movie">
+        <span class="img"></span>
+        <span class="tip">请先选择放映场次</span>
+      </div>
+      <div *ngIf="planDetail.showMovieName !== ''">
+        <ion-item lines="none" class="movie">
+          <!--阿凡达（3D/数学）/2021-03-16 10：00/招商银行3D厅-->
+          {{planDetail.showMovieName}}
+        </ion-item>
+        <ion-item lines="none" class="seat">
+          可补登座位总数：<i>{{planDetail.seatTotalNum}}</i>
+        </ion-item>
+        <ion-item lines="none">
+          <h3>新增补登</h3>
+        </ion-item>
+        <ion-item lines="none">
+          <form [formGroup]="appendform" class="append-form">
+          <table class="table">
+            <tr>
+              <td class="td">票价：</td>
+              <td class="td-input"><input nz-input formControlName="ticketPrice" (keypress)="checkPrice($event)"> 元</td>
+              <td class="td2">数量：</td>
+              <td class="td-input2"><input nz-input formControlName="ticketNum" (keypress)="checkNum($event)"> 张</td>
+            </tr>
+            <tr>
+              <td class="td">合计：</td>
+              <td class="td-input">{{totalPrice}} 元</td>
+              <td class="td2">支付方式：</td>
+              <td class="td-input2">
+                <nz-select formControlName="uidPayMode" nzPlaceHolder="请选择">
+                  <nz-option *ngFor="let pay of payDatas" [nzValue]="pay.uid" [nzLabel]="pay.modeName" ></nz-option>
+                </nz-select>
+                <button nz-button nzType="primary" class="apply-search-btn" (click)="append()" style="margin-left: 10px">添加</button>
+              </td>
+            </tr>
+          </table>
+          </form>
+        </ion-item>
+        <ion-item lines="none">
+          <h3>已补登列表</h3>
+        </ion-item>
+        <ion-item lines="none">
+          <nz-table #addTable
+                    nzBordered
+                    class="add-table"
+                    [nzData]="addPage.applyDatas"
+                    [nzLoading]="addPage.loading"
+                    [(nzPageSize)]="addPage.pageSize"
+                    [nzShowQuickJumper]="false"
+                    [nzShowSizeChanger]="false">
+            <thead>
+            <tr>
+              <th >状态</th>
+              <th >支付方式</th>
+              <th >票价（元）</th>
+              <th >数量（张）</th>
+              <th >合计（元）</th>
+              <th >时限</th>
+              <th >操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of addTable.data">
+              <td class="ctd">{{ data.statusName }}</td>
+              <td class="ctd">{{ data.payModeName }}</td>
+              <td class="ctd">{{ data.ticketPrice }}</td>
+              <td class="ctd">{{ data.ticketNum }}</td>
+              <td class="ctd">{{ data.sumPriceAmount }}</td>
+              <td class="ctd">{{ data.isOverTimeName }}</td>
+              <td class="ctd">
+                <span *ngIf="data.status == 0"><button nz-button nzType="default" class="opt-btn" (click)="delete(data)">删除</button></span>
+              </td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </ion-item>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 0">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5.4"></ion-col>
+        <ion-col size="1">
+          <ion-button [disabled]="!canCommit" expand="block" class="commit-btn" (click)="commitAppend()">提交补登</ion-button>
+        </ion-col>
+        <ion-col size="4.6"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 补登票结束 -->
+
+<!-- 补登申请开始 -->
+<ion-content [fullscreen]="true" *ngIf="index == 1" class="content">
+  <div class="content-box overflow">
+    <div class="content-top">
+      <form [formGroup]="tableform" class="auth-form">
+        <ion-item lines="none" class="queryall-item">
+          <table>
+            <tr>
+              <td class="ctd-width">放映日期：</td>
+              <td width="24%">
+                <nz-date-picker
+                  class="date"
+                  nzFormat="yyyy-MM-dd"
+                  nzPlaceHolder="开始时间"
+                  formControlName="start"></nz-date-picker>
+                至
+                <nz-date-picker
+                  class="date"
+                  nzFormat="yyyy-MM-dd"
+                  nzPlaceHolder="结束时间"
+                  formControlName="end"></nz-date-picker>
+              </td>
+              <td class="ctd-width">
+                影片名称：
+              </td>
+              <td width="12%">
+                <input nz-input placeholder="请输入影片名称" formControlName="movieName" class="movie-input">
+              </td>
+              <td class="ctd-width">
+                审核状态：
+              </td>
+              <td class="ctd-select-width">
+                <nz-select formControlName="status" nzPlaceHolder="请选择">
+                  <nz-option [nzValue]="''" [nzLabel]="'全部'"></nz-option>
+                  <nz-option [nzValue]="'0'" [nzLabel]="'未接收'"></nz-option>
+                  <nz-option [nzValue]="'1'" [nzLabel]="'已接收'"></nz-option>
+                  <nz-option [nzValue]="'2'" [nzLabel]="'受理成功'"></nz-option>
+                  <nz-option [nzValue]="'3'" [nzLabel]="'受理失败'"></nz-option>
+                </nz-select>
+              </td>
+              <td class="ctd-hall-width">
+                影厅：
+              </td>
+              <td class="ctd-select-width">
+                <nz-select formControlName="hall" nzPlaceHolder="请选择">
+                  <nz-option [nzValue]="''" [nzLabel]="'全部'"></nz-option>
+                  <nz-option *ngFor="let hall of hallDatas" [nzValue]="hall.uid" [nzLabel]="hall.fieldName" ></nz-option>
+                </nz-select>
+              </td>
+              <td class="ctd-btn-width">
+                <button nz-button nzType="primary" class="apply-search-btn" (click)="queryApply()">查询</button>
+              </td>
+            </tr>
+          </table>
+        </ion-item>
+      </form>
+    </div>
+    <div class="content-center">
+      <nz-table #rowSelectionTable
+                nzBordered
+                [nzFrontPagination]="false"
+                [nzData]="appendPage.applyDatas"
+                [nzLoading]="appendPage.loading"
+                [nzTotal]="appendPage.total"
+                [(nzPageIndex)]="appendPage.pageIndex"
+                [(nzPageSize)]="appendPage.pageSize"
+                [nzShowQuickJumper]="false"
+                [nzShowSizeChanger]="false"
+                (nzPageIndexChange)="changePageIndex($event)"
+                (nzPageSizeChange)="changePageSize($event)">
+        <thead>
+        <tr>
+          <th class="cth">审核状态</th>
+          <th class="cth">影片编码</th>
+          <th class="cth">影片名称</th>
+          <th class="cth">放映时间</th>
+          <th class="cth">影厅</th>
+          <th class="cth">票数（张）</th>
+          <th class="cth">总票价（元）</th>
+          <th class="cth">申请人</th>
+          <th class="cth">申请时间</th>
+          <th class="cth">受理编码</th>
+          <th class="cth">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td class="ctd">{{ data.approveStatusName }}</td>
+          <td class="ctd">{{ data.cinemaCode }}</td>
+          <td class="ctd">{{ data.movieName }}</td>
+          <td class="ctd">{{ data.showTimeStart }}</td>
+          <td class="ctd">{{ data.hallName }}</td>
+          <td class="ctd">{{ data.ticketNum }}</td>
+          <td class="ctd">{{ data.ticketAmount }}</td>
+          <td class="ctd">{{ data.appendPerson }}</td>
+          <td class="ctd">{{ data.appendTime }}</td>
+          <td class="ctd">{{ data.appendReturnCode }}</td>
+          <td class="ctd">
+            <button nz-button nzType="default" class="opt-btn" (click)="view(data)">查看</button>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="index == 1">
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="back()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+<!-- 补登申请结束 -->

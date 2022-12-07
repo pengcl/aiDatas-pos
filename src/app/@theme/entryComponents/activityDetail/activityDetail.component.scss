@@ -1,0 +1,50 @@
+ion-content {
+  ion-grid {
+    margin: 20px;
+
+    ion-row {
+      ion-col {
+        font-size: 16px;
+
+        .label {
+          width: 7em;
+          display: block;
+          text-align: right;
+          line-height: 20px;
+          color: #777;
+        }
+        .value {
+          line-height: 20px;
+          display: block;
+        }
+      }
+    }
+  }
+
+  ion-list-header {
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    line-height: 18px;
+    &:before {
+      content: '';
+      display: inline-block;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: #44569F;
+      height: 18px;
+      margin-right: 6px;
+    }
+  }
+
+  .sub-header {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 30px 15px;
+  }
+
+  nz-table {
+    margin: 10px 20px;
+  }
+}

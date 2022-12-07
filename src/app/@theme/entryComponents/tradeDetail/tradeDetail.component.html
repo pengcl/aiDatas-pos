@@ -1,0 +1,230 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>交易明细</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <span class="label">交易会员卡号：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.memberCardNo}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">会员手机号码：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{ detail?.memberMobile }}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">交易状态：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.billStatusLabel}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto">
+        <span class="label">交易单号：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.billCode}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">交易类型：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.billSaleTypeLabel}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">交易金额：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.billAmount}}元</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto">
+        <span class="label">交易影院：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.cinemaName}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">交易时间：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.transactionTime}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">审核状态：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.posBillApproveGdLabel}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto">
+        <span class="label">交易终端：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.terminalCode}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">收银员：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.billCreateName}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">创建时间：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.createTime}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto">
+        <span class="label">交易渠道：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.channelCustomName}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label">关联订单：</span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.relationBillCode}}</span>
+      </ion-col>
+      <ion-col size="auto">
+        <span class="label" style="min-width: 120px;"><span *ngIf="detail.takeCode">取票码/取货码：</span></span>
+      </ion-col>
+      <ion-col>
+        <span class="value">{{detail?.takeCode}}</span>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-list-header>商品明细</ion-list-header>
+  <p class="sub-header" *ngIf="ticketPage.total > 0">
+    {{detail.cartMovieName}}（{{detail.cartMoviePublish}}/{{detail.cartMovieLanguage}}）/{{detail.showTime}}/{{detail.hallName}}
+  </p>
+  <nz-table #ticketTable nzBordered [nzData]="ticketPage.datas" [nzLoading]="ticketPage.loading"
+    [(nzPageSize)]="ticketPage.pageSize" [nzShowPagination]="ticketPage.datas.length > ticketPage.pageSize"
+    [nzShowQuickJumper]="false" [nzShowSizeChanger]="false" *ngIf="ticketPage.total > 0">
+    <thead>
+      <tr>
+        <th class="cth">座位</th>
+        <th class="cth">票类</th>
+        <th class="cth">原价(元)</th>
+        <th class="cth">服务费(元)</th>
+        <th class="cth">代售服务费(元)</th>
+        <th class="cth">参与优惠</th>
+        <th class="cth">优惠金额(元)</th>
+        <th class="cth">实收(元)</th>
+        <th class="cth">影票编号</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of ticketTable.data">
+        <td class="ctd">{{ data.seatRow }}排{{data.seatCol}}号</td>
+        <td class="ctd">{{ data.ticketTypeName }}</td>
+        <td class="ctd">{{ data.billResPriceOri }}</td>
+        <td class="ctd">{{ data.ticketService }}</td>
+        <td class="ctd">{{ data.billResServiceNet }}</td>
+        <td class="ctd">{{ data.campaignName }}</td>
+        <td class="ctd">{{ data.discountPrice }}</td>
+        <td class="ctd">{{ data.amountPrice }}</td>
+        <td class="ctd">{{ data.ticketCode }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-table #merTable class="mer-table" nzBordered [nzData]="merPage.datas" [nzLoading]="merPage.loading"
+    [nzTotal]="merPage.total" [(nzPageSize)]="merPage.pageSize"
+    [nzShowPagination]="merPage.datas.length > merPage.pageSize" [nzShowQuickJumper]="false" [nzShowSizeChanger]="false"
+    *ngIf="merPage.total > 0">
+    <thead>
+      <tr>
+        <th class="cth">名称</th>
+        <th class="cth">数量</th>
+        <!--<th class="cth">单价(元)</th>-->
+        <th class="cth">原价(元)</th>
+        <th class="cth">参与优惠</th>
+        <th class="cth">优惠金额(元)</th>
+        <th class="cth">实收(元)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of merTable.data">
+        <td class="ctd">{{ data.resName }}</td>
+        <td class="ctd">{{ data.sum }}</td>
+        <!--<td class="ctd">{{ data.billResPrice }}</td>-->
+        <td class="ctd">{{ data.billResPriceOri }}</td>
+        <td class="ctd">{{ data.campaignName }}</td>
+        <td class="ctd">{{ data.discountPrice }}</td>
+        <td class="ctd">{{ data.billResPrice }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ion-list-header>总价及支付信息</ion-list-header>
+  <nz-table #totalPayTable nzBordered [nzData]="totalPayDatas" [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th class="cth" style="border-top-left-radius: 4px;border-left: 1px solid #e8e8e8;">原价合计</th>
+        <th class="cth">票券优惠</th>
+        <th class="cth">活动优惠</th>
+        <!--<th class="cth">应收(元)</th>-->
+        <th class="cth">代金券</th>
+        <th class="cth" style="border-top-right-radius: 4px;">实收(元)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of totalPayTable.data">
+        <td class="ctd" style="border-left: 1px solid #e8e8e8;">{{ data.totalPrice }}</td>
+        <td class="ctd">{{ data.discountCouponPrice }}</td>
+        <td class="ctd">{{ data.activePrice }}</td>
+        <!--<td class="ctd">{{ data.receivablePrice }}</td>-->
+        <td class="ctd">{{ data.cashCouponPrice }}</td>
+        <td class="ctd">{{ data.receiptsPrice }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-table #payTable class="pay-table" nzBordered [nzData]="payPage.datas" [nzLoading]="payPage.loading"
+    [nzTotal]="payPage.total" [(nzPageSize)]="payPage.pageSize" [nzShowPagination]="false" [nzShowQuickJumper]="false"
+    [nzShowSizeChanger]="false">
+    <thead>
+      <tr>
+        <th class="cth">支付方式</th>
+        <th class="cth">支付凭证</th>
+        <th class="cth">支付流水号</th>
+        <th class="cth">支付金额</th>
+        <th class="cth">支付信息</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of payTable.data">
+        <td class="ctd">{{data.payModeName}}</td>
+        <td class="ctd">{{data.payVoucherCode}}</td>
+        <td class="ctd">{{data.paySerialNum}}</td>
+        <td class="ctd">{{data.billPayAmount}}</td>
+        <td class="ctd">{{data.payModeCodeLabel}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="10"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">返回</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

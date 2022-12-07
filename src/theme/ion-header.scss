@@ -1,0 +1,40 @@
+ion-header.page-header {
+  ion-toolbar {
+    --background: linear-gradient(180deg, #2067DA 0%, #4778C7 100%);
+    box-shadow: 0px 2px 4px 0px rgba(67, 101, 156, 0.45);
+    --min-height: 50px;
+
+    ion-title {
+      text-align: left;
+      padding: 0;
+      margin: 0 30px;
+      color: #fff;
+      width: auto;
+      background: #1B4589;;
+      &:before {
+        content: '■■■■';
+        height: 100%;
+        margin-right: 40px;
+        font-size: 12px;
+        width: 14px;
+        line-height: 12px;
+        color: #2067DA;
+        padding: 1px;
+        box-sizing: border-box;
+        display: block;
+      }
+      &:after {
+        content: '■■■■';
+        height: 100%;
+        margin-left: 40px;
+        font-size: 12px;
+        width: 14px;
+        line-height: 12px;
+        color: #2067DA;
+        padding: 1px;
+        box-sizing: border-box;
+        text-align: right;
+      }
+    }
+  }
+}

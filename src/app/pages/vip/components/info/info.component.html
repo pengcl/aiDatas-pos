@@ -1,0 +1,61 @@
+<ion-grid class="member-info">
+  <ion-row>
+    <ion-col size="auto"><span>会员信息</span></ion-col>
+    <ion-col size="auto"><span>手机号：{{memberDetail?.memberMobile}}</span></ion-col>
+    <ion-col size="auto"><span>姓名：{{memberDetail?.memberAlias}}</span></ion-col>
+    <ion-col size="auto"><span>身份证号：{{memberDetail?.memberIdCard}}</span></ion-col>
+    <!-- <ion-col size="auto"><span>会员积分：{{memberDetail?.memberPoints}}积分</span></ion-col> -->
+    <ion-col (click)="show.more = !show.more"><span>其它信息</span>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid class="card-info" [hidden]="show.more">
+  <ion-row>
+    <ion-col size="auto"><span>当前选中会员卡</span></ion-col>
+    <ion-col size="auto"><span>卡号：{{cardSeleted?.cardNo}}</span></ion-col>
+    <ion-col size="auto"><span>卡等级：{{cardSeleted?.cardLevelName}}</span></ion-col>
+    <ion-col size="auto"><span>余额：{{cardSeleted?.balance | rmb}}</span>
+        (<span>含赠送：{{cardSeleted?.remainMoneyCift | rmb}}</span>)；
+        <span>积分：{{cardSeleted?.cardPoint}}</span>
+    </ion-col>
+    <ion-col style="text-align: right"><button [disabled]="disabled" (click)="presentCardModal()" nzSize="small" nz-button
+        nzType="primary">切换卡</button></ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid class="more-info" [hidden]="!show.more">
+  <ion-row>
+    <ion-col [size]="3.2">
+      <span class="label">会员ID：</span>
+      <span class="value">{{memberDetail?.memberId}}</span>
+    </ion-col>
+    <ion-col [size]="2.2">
+      <span class="label">昵称：</span>
+      <span class="value">{{memberDetail?.memberAlias}}</span>
+    </ion-col>
+    <ion-col [size]="2.2">
+      <span class="label">性别：</span>
+      <span class="value">{{memberDetail?.sexName}}</span>
+    </ion-col>
+    <ion-col [size]="2.2">
+      <span class="label">会员状态：</span>
+      <span class="value">{{memberDetail?.statusName}}</span>
+    </ion-col>
+    <ion-col [size]="2.2">
+      <span class="label">微信：</span>
+      <span class="value">{{memberDetail?.memberWX}}</span>
+    </ion-col>
+    <ion-col [size]="3.2">
+      <span class="label">邮箱：</span>
+      <span class="value">{{memberDetail?.memberEmail}} </span>
+    </ion-col>
+    <ion-col [size]="2.2">
+      <span class="label">生日：</span>
+      <span class="value">{{memberDetail?.birthDay}}</span>
+    </ion-col>
+    <ion-col [size]="2.2">
+      <span class="label">QQ：</span>
+      <span class="value">{{memberDetail?.memberQQ}}</span>
+    </ion-col>
+  </ion-row>
+</ion-grid>

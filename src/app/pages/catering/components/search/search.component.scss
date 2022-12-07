@@ -1,0 +1,18 @@
+ion-grid {
+  background: #fff;
+  margin: 10px;
+  border-radius: 4px;
+  ion-col {
+    nz-form-item {
+      width: 400px;
+      &::ng-deep {
+        .ant-form-item-label {
+          line-height: 32px;
+        }
+        .ant-form-item-control {
+          line-height: 32px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+ion-content {
+  ion-slides {
+    height: 100%;
+  }
+  .hi {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/assets/sleep/sleep.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    .hide {
+      position: absolute;
+      z-index: 99999;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}

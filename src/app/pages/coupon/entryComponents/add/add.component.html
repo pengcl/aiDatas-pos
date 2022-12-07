@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>添加票券</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list-header>{{item ? item.ticketSetName : '单体票'}}</ion-list-header>
+  <ion-grid [formGroup]="form">
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item style="width: 300px;">
+          <nz-form-control [nzSpan]="24">
+            <input nz-input formControlName="ticketCode" placeholder="请扫描或输入票券编码按回车" nzSize="large">
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button [disabled]="form.invalid" nz-button nzType="primary" (click)="add()" nzSize="large">添加</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list-header lines="inset" style="align-items:center">已添加的票券({{items.length}}) <span *ngIf="item" class="tip"><ion-icon name="alert-circle"></ion-icon><span>请按照套券组成添加一套完整的套券</span></span></ion-list-header>
+  <app-empty *ngIf="items.length === 0" [title]="'请先添加票券'"></app-empty>
+  <ion-list class="tickets" *ngIf="items.length > 0">
+    <ion-item *ngFor="let item of items;let i = index">
+      <ion-label>
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size="4"><span class="label label_no">编号：</span><span class="value value_no">{{item.ticketCode}}</span></ion-col>
+            <ion-col size="4" *ngIf="item.ticketName"><span class="label label_name">票券名称：</span><span class="value value_name">{{item.ticketName}}</span></ion-col>
+            <ion-col size="4">
+              <ion-icon *ngIf="item.checkResult && item.isChecked" name="alert-circle"></ion-icon>
+              <ion-icon *ngIf="!item.checkResult && item.isChecked" name="checkmark-circle"></ion-icon>
+              <span class="value_result" *ngIf="item.isChecked">{{item.checkResult}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+      <ion-note (click)="remove(i)"><ion-icon name="trash-outline"></ion-icon></ion-note>
+    </ion-item>
+  </ion-list>
+  <ng-container *ngIf="item">
+    <ion-list-header>票券组成</ion-list-header>
+    <ion-grid class="setup-info-list">
+      <ion-row>
+        <ion-col *ngFor="let item of item.description | couponDescription;let i = index" size="4">
+          <div class="setup-info-item">
+            <div class="setup-info-item-box">{{i}}) {{item}}</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="8"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

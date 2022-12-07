@@ -1,0 +1,242 @@
+<app-menu></app-menu>
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-list-header>会员资料</ion-list-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="4">会员卡号</nz-form-label>
+                  <nz-form-control [nzSpan]="20">
+                    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+                      <input [appKeyboardNumber]="cardNo" [dotDisabled]="true" [value]="form.get('cardNo').value"
+                             (valueChange)="change('cardNo',$event)"
+                             (close)="blur('cardNo')" cdkOverlayOrigin #cardNo="cdkOverlayOrigin"
+                             formControlName="cardNo" nzSize="large" nz-input
+                             placeholder="输入卡号或点击右侧读卡按钮">
+                    </nz-input-group>
+                    <ng-template #suffixButton>
+                      <button type="button" (click)="readCard()" nzSize="large" nz-button>读卡</button>
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="6">
+                <span class="label">会员卡等级：</span>
+                <span class="value">{{info?.cardLevelName}}</span>
+                <!--<span class="label">会员卡有效期：</span>
+                <span class="value">半年</span>-->
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="4" nzRequired>手机号码</nz-form-label>
+                  <nz-form-control
+                    [nzValidateStatus]="form.get('memberMobile').errors && form.get('memberMobile').dirty ? 'error' : ''"
+                    [nzSpan]="20" [nzErrorTip]="'请输入正确的手机号码'">
+                    <input [appKeyboardNumber]="memberMobile"
+                           [dotDisabled]="true"
+                           [value]="form.get('memberMobile').value"
+                           (valueChange)="change('memberMobile',$event)"
+                           (close)="blur('memberMobile')"
+                           (overlays)="getOverlay($event)"
+                           (keyup.enter)="blur('memberMobile')"
+                           cdkOverlayOrigin
+                           #memberMobile="cdkOverlayOrigin"
+                           formControlName="memberMobile"
+                           nzSize="large"
+                           nz-input
+                           placeholder="请输入手机号">
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="6">性别</nz-form-label>
+                  <nz-form-control [nzSpan]="18">
+                    <nz-radio-group nzSize="large" formControlName="memberSex">
+                      <label nz-radio nzSize="large" [nzValue]="0">男</label>
+                      <label nz-radio nzSize="large" [nzValue]="1">女</label>
+                    </nz-radio-group>
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="4">电子邮箱</nz-form-label>
+                  <nz-form-control
+                    [nzValidateStatus]="form.get('memberEmail').errors && form.get('memberEmail').dirty ? 'error' : ''"
+                    [nzSpan]="20" [nzErrorTip]="'请输入正确的电子邮箱'">
+                    <input formControlName="memberEmail" nzSize="large" nz-input placeholder="请输入电子邮箱">
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="6">昵称</nz-form-label>
+                  <nz-form-control [nzSpan]="18">
+                    <input formControlName="memberAlias" nzSize="large" nz-input placeholder="请输入昵称">
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="4">身份证号</nz-form-label>
+                  <nz-form-control [nzSpan]="20">
+                    <input (blur)="blur('memberIdCard')" formControlName="memberIdCard" nzSize="large" nz-input
+                           placeholder="请输入请输入身份证号">
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="3">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="12">生日</nz-form-label>
+                  <nz-form-control [nzSpan]="12">
+                    <nz-select formControlName="memberBirthMonth" nzPlaceHolder="请选择月份" nzSize="large">
+                      <nz-option *ngFor="let month of months" [nzValue]="month" [nzLabel]="month"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="0.5">月</ion-col>
+              <ion-col size="1.5">
+                <nz-form-item>
+                  <nz-form-control [nzSpan]="24">
+                    <nz-select formControlName="memberBirthDay" nzPlaceHolder="请选择日期" nzSize="large">
+                      <nz-option *ngFor="let day of days" [nzValue]="day" [nzLabel]="day"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="0.5">日</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="4">QQ号</nz-form-label>
+                  <nz-form-control [nzSpan]="20">
+                    <input formControlName="memberQQ" nzSize="large" nz-input placeholder="请输入QQ号">
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+              <ion-col size="6">
+                <nz-form-item>
+                  <nz-form-label nzSize="large" [nzSpan]="6">微信</nz-form-label>
+                  <nz-form-control [nzSpan]="18">
+                    <input formControlName="memberWX" nzSize="large" nz-input placeholder="请输入微信">
+                  </nz-form-control>
+                </nz-form-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="12" *ngIf="info && info?.cardLevelType !== 1">
+          <ion-list-header>收费充值</ion-list-header>
+          <ion-grid>
+            <ion-row *ngIf="activities">
+              <ion-col>
+                <ion-grid class="activities" style="margin: 0 5px">
+                  <ion-row>
+                    <ion-col
+                      *ngFor="let item of activities?.slice(0,isMore ? 999 : (activities?.length === 10 ? 10 : 9))"
+                      [size]="12/5">
+                      <div (click)="setActivity(item)" class="activity-box" [class.curr]="item.uid === activity?.uid">
+                        <span class="tag" *ngIf="item.uid.indexOf('no') == -1">活动</span>
+                        <span class="box-label" [class.center]="!item.campaignName">{{item.originalAmount}}元</span>
+                        <!-- <span class="box-label">{{item.campaignName}}</span> -->
+                        <div *ngIf="item.campaignName" class="box-detail">
+                          <span>{{item.campaignName}}</span>
+                          <button type="button" nzSize="small" nz-button nzType="default"
+                                  (click)="presentModal($event,item).then()">详情</button>
+                        </div>
+                      </div>
+                    </ion-col>
+                    <ion-col *ngIf="activities.length > 10" [size]="12/5">
+                      <div (click)="more()" class="activity-box">
+                        <span class="box-more">更多</span>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="auto" style="align-self: center">
+                <span style="display: inline-block;vertical-align: middle;width: auto" class="label">充值金额：</span>
+              </ion-col>
+              <ion-col>
+                <ion-grid class="recharge ion-no-padding" style="margin: 10px 15px">
+                  <ion-row>
+                    <ion-col size="auto">
+                      <nz-form-item style="width: 300px;">
+                        <nz-form-control
+                          [nzValidateStatus]="form.get('remainMoneyCash').errors && form.get('remainMoneyCash').dirty ? 'error' : ''"
+                          [nzSpan]="24" [nzErrorTip]="'充值金额不能小于' + info?.rechargeLower" [nzErrorTip]="combineTpl" disabled>
+                          <input [appKeyboardNumber]="remainMoneyCash" [dotDisabled]="false"
+                                 [value]="form.get('remainMoneyCash').value"
+                                 (valueChange)="change('remainMoneyCash',$event)"
+                                 (close)="blur('remainMoneyCash')" cdkOverlayOrigin #remainMoneyCash="cdkOverlayOrigin"
+                                 type="number" formControlName="remainMoneyCash"
+                                 [min]="downLimited"
+                                 nzSize="large" nz-input placeholder="请输入充值金额" [readOnly]="activity">
+                          <ng-template #combineTpl let-control>
+                            <ng-container *ngIf="form.get('remainMoneyCash').hasError('min')">充值金额不能小于{{info?.rechargeLower}}</ng-container>
+                            <ng-container *ngIf="form.get('remainMoneyCash').hasError('max')">充值金额不能大于{{info?.rechargeUpper}}</ng-container>
+                            <ng-container *ngIf="form.get('remainMoneyCash').hasError('required')">请输入充值金额</ng-container>
+                          </ng-template>
+                        </nz-form-control>
+                      </nz-form-item>
+                    </ion-col>
+                    <ion-col size="auto">
+                      <button type="button" nzSize="large" nz-button nzType="default"
+                              (click)="custom()" class="customize-open" [class.disable-input]="activity">{{activity ? '打开自定义' : '关闭自定义'}}</button>
+
+                    </ion-col>
+                    <ion-col>（不选择以上金额或活动，自定义充值金额）</ion-col>
+                    <ion-col size="12">
+                      <span>{{info?.rechargeLimitText}}</span>
+                    </ion-col>
+                    <!--<ion-col>
+                      <span>（单次充值限额：{{downLimited | rmb}} - {{info.rechargeUpper | rmb}}）</span>
+                    </ion-col>-->
+                  </ion-row>
+                </ion-grid>
+                <!--<ion-grid class="recharge-buttons ion-no-padding">
+                  <ion-row>
+                    <ion-col *ngFor="let item of rechargeOptions" size="auto">
+                      <button (click)="setRemainMoneyCash(item)" nzSize="large" nz-button
+                              nzType="default">{{item.amount}}</button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>-->
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" fill="outline" expand="block" (click)="reset()">清空资料</ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button class="checkout" expand="block" (click)="confirm()">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

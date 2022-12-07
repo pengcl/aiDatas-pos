@@ -1,0 +1,7 @@
+<ion-content>
+    <ion-slides *ngIf="items" pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let item of items">
+            <div class="hi" [ngStyle]="{backgroundImage:'url(' + item + ')'}"></div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

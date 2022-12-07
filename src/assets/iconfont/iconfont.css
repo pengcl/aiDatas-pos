@@ -1,0 +1,387 @@
+@font-face {
+  font-family: "pos-font"; /* Project id 2404158 */
+  src: url('iconfont.woff2?t=1629694479924') format('woff2'),
+       url('iconfont.woff?t=1629694479924') format('woff'),
+       url('iconfont.ttf?t=1629694479924') format('truetype');
+}
+
+.pos-font {
+  font-family: "pos-font" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pos_goods:before {
+  content: "\e618";
+}
+
+.pos_card:before {
+  content: "\e6b7";
+}
+
+.pos_vip:before {
+  content: "\e600";
+}
+
+.pos_hi:before {
+  content: "\e614";
+}
+
+.pos_ico-shopping:before {
+  content: "\e66d";
+}
+
+.pos_huiyuankabunengjinhangcicaozuoshi:before {
+  content: "\e667";
+}
+
+.pos_wumaipinshi:before {
+  content: "\e668";
+}
+
+.pos_gouwucheweikongshi:before {
+  content: "\e669";
+}
+
+.pos_wupeicanxinxishi:before {
+  content: "\e66a";
+}
+
+.pos_wuzuoweitushi:before {
+  content: "\e66b";
+}
+
+.pos_jiesuan--wucanyuhuodong:before {
+  content: "\e66c";
+}
+
+.pos_wuchangcishi:before {
+  content: "\e666";
+}
+
+.pos_enter-ico-lock:before {
+  content: "\e664";
+}
+
+.pos_enter-ico-user:before {
+  content: "\e665";
+}
+
+.pos_enter-ico-keyboard:before {
+  content: "\e662";
+}
+
+.pos_enter-ico-film:before {
+  content: "\e663";
+}
+
+.pos_catering:before {
+  content: "\e65b";
+}
+
+.pos_ticket:before {
+  content: "\e65c";
+}
+
+.pos_menu-huiyuankaika:before {
+  content: "\e65d";
+}
+
+.pos_menu-maipin:before {
+  content: "\e65e";
+}
+
+.pos_pickup:before {
+  content: "\e65f";
+}
+
+.pos_getTicket:before {
+  content: "\e660";
+}
+
+.pos_menu-huiyuanfuwu:before {
+  content: "\e661";
+}
+
+.pos_checkTicket:before {
+  content: "\e658";
+}
+
+.pos_refund:before {
+  content: "\e659";
+}
+
+.pos_reprint:before {
+  content: "\e65a";
+}
+
+.pos_menu-xitongshezhi:before {
+  content: "\e657";
+}
+
+.pos_open:before {
+  content: "\e656";
+}
+
+.pos_Checkbox-unSelected:before {
+  content: "\e655";
+}
+
+.pos_Checkbox-Selected:before {
+  content: "\e654";
+}
+
+.pos_menu-xitongshezhiico:before {
+  content: "\e653";
+}
+
+.pos_points:before {
+  content: "\e652";
+}
+
+.pos_supplement:before {
+  content: "\e651";
+}
+
+.pos_hint-info:before {
+  content: "\e64f";
+}
+
+.pos_hint-warning:before {
+  content: "\e64d";
+}
+
+.pos_hint-error:before {
+  content: "\e64e";
+}
+
+.pos_hint-success:before {
+  content: "\e64c";
+}
+
+.pos_setting:before {
+  content: "\e64b";
+}
+
+.pos_exchange:before {
+  content: "\e66e";
+}
+
+.pos_member:before {
+  content: "\e603";
+}
+
+.pos_delete:before {
+  content: "\e6b4";
+}
+
+.pos_payway-ico-member:before {
+  content: "\e64a";
+}
+
+.pos_pay-alipayico:before {
+  content: "\e648";
+}
+
+.pos_pay-wx:before {
+  content: "\e649";
+}
+
+.pos_pay-cash:before {
+  content: "\e647";
+}
+
+.pos_waiting:before {
+  content: "\e678";
+}
+
+.pos_reduce:before {
+  content: "\e606";
+}
+
+.pos_qinglvbiaozhunleft:before {
+  content: "\e644";
+}
+
+.pos_qinglvbiaozhunright:before {
+  content: "\e640";
+}
+
+.pos_quanbupaiqi-xiayiye:before {
+  content: "\e634";
+}
+
+.pos_quanbupaiqi-shangyiye:before {
+  content: "\e637";
+}
+
+.pos_menuTakeTicket:before {
+  content: "\e69b";
+}
+
+.pos_seatRotate:before {
+  content: "\e63e";
+}
+
+.pos_moreticketkind:before {
+  content: "\e632";
+}
+
+.pos_refresh:before {
+  content: "\e645";
+}
+
+.pos_expand:before {
+  content: "\e627";
+}
+
+.pos_allfilm:before {
+  content: "\e646";
+}
+
+.pos_weixiuico:before {
+  content: "\e62c";
+}
+
+.pos_xiayiyue:before {
+  content: "\e62d";
+}
+
+.pos_shangyiye:before {
+  content: "\e62e";
+}
+
+.pos_xiayiye:before {
+  content: "\e62f";
+}
+
+.pos_xiayitian:before {
+  content: "\e630";
+}
+
+.pos_shangyiyue:before {
+  content: "\e631";
+}
+
+.pos_shangyitian:before {
+  content: "\e633";
+}
+
+.pos_right-minimum:before {
+  content: "\e635";
+}
+
+.pos_arrowdown:before {
+  content: "\e638";
+}
+
+.pos_right-lock:before {
+  content: "\e639";
+}
+
+.pos_right-close:before {
+  content: "\e63a";
+}
+
+.pos_checkout:before {
+  content: "\e63b";
+}
+
+.pos_shopping:before {
+  content: "\e63d";
+}
+
+.pos_order:before {
+  content: "\e641";
+}
+
+.pos_coupon:before {
+  content: "\e643";
+}
+
+.pos_weixiuico1:before {
+  content: "\e628";
+}
+
+.pos_zhendongzuoico1:before {
+  content: "\e625";
+}
+
+.pos_repair:before {
+  content: "\e60d";
+}
+
+.pos_seat-right:before {
+  content: "\e624";
+}
+
+.pos_seat-left:before {
+  content: "\e623";
+}
+
+.pos_waiting1:before {
+  content: "\e61f";
+}
+
+.pos_wangsuo-ico:before {
+  content: "\e61e";
+}
+
+.pos_lock:before {
+  content: "\e61d";
+}
+
+.pos_qinglvzuo-heart-right:before {
+  content: "\e61c";
+}
+
+.pos_qinglvzuo-heart-left:before {
+  content: "\e61b";
+}
+
+.pos_reserved:before {
+  content: "\e619";
+}
+
+.pos_wangqu:before {
+  content: "\e616";
+}
+
+.pos_sold:before {
+  content: "\e615";
+}
+
+.pos_seatLevel3:before {
+  content: "\e613";
+}
+
+.pos_seatLevel2:before {
+  content: "\e612";
+}
+
+.pos_seatLevel1:before {
+  content: "\e611";
+}
+
+.pos_seatLevel4:before {
+  content: "\e610";
+}
+
+.pos_seatLevel5:before {
+  content: "\e60f";
+}
+
+.pos_e:before {
+  content: "\e60e";
+}
+
+.pos_repairing:before {
+  content: "\e60c";
+}
+
+.pos_seat:before {
+  content: "\e60a";
+}
+

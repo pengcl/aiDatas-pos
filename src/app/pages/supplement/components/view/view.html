@@ -1,0 +1,42 @@
+<ion-header class="header">
+  <ion-title class="auth-title">查看补登申请明细</ion-title>
+</ion-header>
+<ion-content class="auth-content">
+  <nz-table #addTable
+            nzBordered
+            class="table"
+            [nzData]="viewPage.datas"
+            [nzLoading]="viewPage.loading"
+            [(nzPageSize)]="viewPage.pageSize"
+            [nzShowQuickJumper]="false"
+            [nzShowSizeChanger]="false">
+    <thead>
+    <tr>
+      <th class="cth">支付方式</th>
+      <th class="cth">票价（元）</th>
+      <th class="cth">数量（张）</th>
+      <th class="cth">合计（元）</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of addTable.data">
+      <td class="ctd">{{ data.payModeName }}</td>
+      <td class="ctd">{{ data.ticketPrice }}</td>
+      <td class="ctd">{{ data.ticketNum }}</td>
+      <td class="ctd">{{ data.totalAmount }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="cancel()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

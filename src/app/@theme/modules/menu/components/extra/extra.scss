@@ -1,0 +1,35 @@
+ul {
+  background: linear-gradient(180deg, #2067DA 0%, #4778C7 100%);
+  box-shadow: 0 2px 4px 0 rgba(67, 101, 156, 0.45);
+  color: #fff;
+  margin-top: 8px !important;
+}
+ul, li {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline-block;
+
+  a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+
+    i, ion-icon {
+      font-size: 20px;
+      display: inline-block;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    span {
+      line-height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}

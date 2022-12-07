@@ -1,0 +1,10 @@
+nz-form-item {
+  width: 250px;
+}
+nz-table {
+  &::ng-deep {
+    th .ant-table-header-column {
+      display: block !important;
+    }
+  }
+}

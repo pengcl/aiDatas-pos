@@ -1,0 +1,60 @@
+<div class="number-box">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto"><span (click)="clickNumber('1')" class="num-box">1</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('2')" class="num-box">2</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('3')" class="num-box">3</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('4')" class="num-box">4</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('5')" class="num-box">5</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('6')" class="num-box">6</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('7')" class="num-box">7</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('8')" class="num-box">8</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('9')" class="num-box">9</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('0')" class="num-box">0</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('del')" class="num-box double-box">退格</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto"><span (click)="clickNumber('q')" class="num-box">q</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('w')" class="num-box">w</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('e')" class="num-box">e</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('r')" class="num-box">r</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('t')" class="num-box">t</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('y')" class="num-box">y</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('u')" class="num-box">u</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('i')" class="num-box">i</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('o')" class="num-box">o</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('p')" class="num-box">p</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('clean')" class="num-box double-box">清空</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto">
+        <span style="width:20px;display: block"></span>
+      </ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('a')" class="num-box">a</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('s')" class="num-box">s</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('d')" class="num-box">d</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('f')" class="num-box">f</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('g')" class="num-box">g</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('h')" class="num-box">h</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('j')" class="num-box">j</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('k')" class="num-box">k</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('l')" class="num-box">l</span></ion-col>
+      <ion-col></ion-col>
+      <ion-col size="auto" *ngIf="prev"><span (click)="clickKey('prev')" class="num-box double-box">上一个</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto">
+        <span style="width:50px;display: block"></span>
+      </ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('z')" class="num-box">z</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('x')" class="num-box">x</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('c')" class="num-box">c</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('v')" class="num-box">v</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('b')" class="num-box">b</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('n')" class="num-box">n</span></ion-col>
+      <ion-col size="auto"><span (click)="clickNumber('m')" class="num-box">m</span></ion-col>
+      <ion-col></ion-col>
+      <ion-col size="auto" *ngIf="next"><span (click)="clickKey('next')" class="num-box double-box">下一个</span></ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

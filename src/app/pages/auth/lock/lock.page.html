@@ -1,0 +1,33 @@
+<ion-content>
+    <form [formGroup]="form" class="auth-form">
+      <div class="page-title">
+        <h1>锁屏</h1>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <i class="user-label">用户：</i><i class="user-name">{{form.get('accountLoginName').value}}</i>
+          </ion-col>
+          <ion-col size="12" style="margin-top: 10px;">
+            <!--<input type="password" formControlName="accountLoginPassword" nz-input class="query-input" style="height: 40px;font-size: 16px;" placeholder="请输入登录密码后按回车键">-->
+
+            <mat-form-field class="example-full-width" appearance="outline" title="登录密码">
+              <mat-label>登录密码</mat-label>
+              <input #loginpd type="password" formControlName="accountLoginPassword" matInput placeholder="请输入登录密码">
+              <button mat-icon-button matSuffix [next]="false" [value]="form.get('accountLoginPassword').value" (valueChange)="change('accountLoginPassword',$event)" (keyChange)="keyChange('accountLoginPassword',$event)" cdkOverlayOrigin #accountLoginPassword="cdkOverlayOrigin" [appKeyboard]="accountLoginPassword">
+                <mat-icon>keyboard</mat-icon>
+              </button>
+            </mat-form-field>
+
+          </ion-col>
+          <ion-col size="6" style="margin-top: 20px;">
+            <ion-button (click)="login()"  expand="block">确定</ion-button>
+          </ion-col>
+          <ion-col size="6" style="margin-top: 20px;">
+            <ion-button (click)="clear()" color="medium" expand="block">清空</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </form>
+</ion-content>

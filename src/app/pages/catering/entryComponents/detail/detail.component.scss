@@ -1,0 +1,42 @@
+
+ion-list-header {
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  line-height: 18px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: #44569F;
+    height: 18px;
+    margin-right: 6px;
+  }
+}
+
+ion-col {
+  ion-grid {
+    margin: 10px 20px;
+    font-size: 16px;
+  }
+}
+
+.label, .value {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.label {
+  color: #777;
+  width: 120px;
+  text-align: right;
+}
+
+.value {
+  color: #333;
+  width: 200px;
+  text-align: left;
+}

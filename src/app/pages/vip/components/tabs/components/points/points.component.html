@@ -1,0 +1,63 @@
+<form nz-form [formGroup]="form" class="ant-advanced-search-form">
+  <ion-grid class="filter">
+    <ion-row>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="email">交易时间</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-date-picker nzFormat="yyyy-MM-dd" nzPlaceHolder="开始时间" formControlName="start"(nzOnOpenChange)="dateChange('start',$event)"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="email">至</nz-form-label>
+          <nz-form-control [nzSpan]="17">
+            <nz-date-picker nzFormat="yyyy-MM-dd" nzPlaceHolder="结束时间" formControlName="end" (ngModelChange)="dateChange('end',$event)"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </ion-col>
+      <ion-col size="auto">
+        <button nz-button nzType="primary" (click)="tradeQueryBtn()" >查询</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+<nz-table #groupingTable    
+  [nzFrontPagination]="false"
+  [nzData]="page.datas"
+  [nzLoading]="page.loading"
+  [nzTotal]="page.total"
+  [(nzPageIndex)]="page.pageIndex"
+  [(nzPageSize)]="page.pageSize"
+  [nzShowQuickJumper]="false"
+  [nzShowSizeChanger]="false"
+  (nzPageIndexChange)="changePageIndex($event)"
+  >
+  <thead>
+  <tr>
+    <th nzLeft >积分流水号</th>
+    <th>交易时间</th>
+    <th>会员卡号</th>
+    <th>积分数量</th>
+    <th>积分类型</th>
+    <th>交易商户</th>
+    <th>订单编码</th>
+    <th nzRight>操作人</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of groupingTable.data">
+    <td nzLeft>{{ data.recordCode }}</td>
+    <td>{{ data.recordBillTime }}</td>
+    <td>{{ data.cardNo }}</td>
+    <td>{{ data.recordBillPoints }}</td>
+    <td>{{ data.recordTypeName }}</td>
+    <td>{{ data.compName }}</td>
+    <td>{{ data.billCode }}</td>
+    <td>{{ data.operationName }}</td>
+  </tr>
+  </tbody>
+</nz-table>
+

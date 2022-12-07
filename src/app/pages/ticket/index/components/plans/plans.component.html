@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!--<ion-button>
+        <i class="pos-font pos_expand"></i>
+      </ion-button>-->
+      <ion-button (click)="prev()">
+        <ion-icon name="chevron-back-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="next()">
+        <ion-icon name="chevron-forward-circle"></ion-icon>
+      </ion-button>
+      <ion-button (click)="reload()">
+        <ion-icon name="reload"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <form [formGroup]="form" style="display: none">
+      <mat-form-field>
+        <mat-label>{{form.get('date').value | day}}</mat-label>
+        <input matInput [matDatepicker]="picker" (dateChange)="dateChange($event)">
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+    <ion-title (click)="picker.open()">
+      <span>{{form.get('date').value | day : true}}</span>
+      {{this.form.get('date').value | date : 'yyyy-MM-dd'}} {{this.form.get('date').value | week}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChange($event)" [value]="type">
+      <ion-segment-button value="film" layout="icon-bottom">
+        <ion-label>影片显示</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="hall" layout="icon-bottom">
+        <ion-label>影厅显示</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="time" layout="icon-bottom">
+        <ion-label>时间显示</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollY]="false">
+  <app-ticket-plans-type-film [loading]="loading" (askForFull)="presentFullModal($event)" class="ion-page animate__animated" [plans]="plans" *ngIf="plans && type === 'film'"></app-ticket-plans-type-film>
+  <app-ticket-plans-type-hall [loading]="loading" (askForFull)="presentFullModal($event)" class="ion-page animate__animated" [plans]="plans" *ngIf="plans && type === 'hall'"></app-ticket-plans-type-hall>
+  <app-ticket-plans-type-time [loading]="loading" (askForFull)="presentFullModal($event)" class="ion-page animate__animated" [plans]="plans" *ngIf="plans && type === 'time'"></app-ticket-plans-type-time>
+</ion-content>

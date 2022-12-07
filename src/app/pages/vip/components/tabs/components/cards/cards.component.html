@@ -1,0 +1,45 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h2>共{{memberCard?.length}}张卡:</h2>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let item of memberCard" size="3">
+      <!--
+       reCardStatus 会员关联卡的状态。 0为正常状态，-1为注销，-2为冻结
+       overdue 会员卡是否过期,0为没过期,1为过期
+       cardLevelType 会员卡类型，0 储值卡 ，1 权益卡
+       -->
+      <div class="card-box" [class.disabled]="item.overdue === 1 || item.reCardStatus !== 0"
+           [class.canceled]="item.reCardStatus === -1"
+           [class.frozen]="item.reCardStatus === -2"
+           [class.expired]="item.overdue === 1">
+        <div class="box-hd">
+          {{item.cinemaName}}
+          <span>{{item.cardLevelName}}</span>
+        </div>
+        <div class="box-bd">
+          <div class="card-no">
+            {{item.cardNo}}
+          </div>
+          <div class="balance-total" *ngIf="item.cardLevelType === 0">
+            余额：<span>{{item.balance | rmb}}</span>
+          </div>
+          <div class="balance-detail" *ngIf="item.cardLevelType === 0">
+            (<span>含赠送：{{item.remainMoneyCift | rmb}}</span>)
+          </div>
+          <div class="balance-total">
+            积分：<span>{{item.cardPoint}}</span>
+          </div>
+        </div>
+        <div class="box-ft">
+          <span *ngIf="item.cardValidDateStr" class="date">有效期至：{{item?.cardValidDateStr}}</span>
+          <span *ngIf="item.cardValidDateStr === ''" class="date">长期有效</span>
+          <span *ngIf="item.reCardStatus === 0 &&  item.overdue === 0 &&  item.isDefaultCard !== 1" class="default"
+            (click)="setDefaultCard(item)">设为默认卡</span>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

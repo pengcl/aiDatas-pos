@@ -1,0 +1,54 @@
+<ion-header class="header">
+  <ion-title class="auth-title">选择员工</ion-title>
+</ion-header>
+<ion-content class="auth-content">
+  <form [formGroup]="form" class="auth-form" style="margin-bottom: 10px;">
+    <div>
+      <span>用户姓名：<input formControlName="staffName" nz-input class="query-input" style="width: 150px;"></span>
+      <span style="margin-left: 10px;">用户账号：<input formControlName="accountLoginName" nz-input class="query-input" style="width: 150px;"></span>
+      <button nz-button nzType="primary" class="query-btn" style="margin-left: 10px" (click)="searchDatas(0)">查询</button>
+    </div>
+  </form>
+  <nz-table #addTable
+            nzBordered
+            class="table"
+            [nzFrontPagination]="false"
+            [nzData]="viewPage.datas"
+            [nzLoading]="viewPage.loading"
+            [nzTotal]="viewPage.total"
+            [(nzPageIndex)]="viewPage.pageIndex"
+            [(nzPageSize)]="viewPage.pageSize"
+            [nzShowQuickJumper]="false"
+            [nzShowSizeChanger]="false"
+            (nzPageIndexChange)="changePageIndex($event)"
+            (nzPageSizeChange)="changePageSize($event)">
+    <thead>
+    <tr>
+      <th class="cth">姓名</th>
+      <th class="cth">用户账号</th>
+      <th class="cth">所属组织</th>
+      <th class="cth">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of addTable.data">
+      <td class="ctd">{{data.staffName}}</td>
+      <td class="ctd">{{data.accountLoginName}}</td>
+      <td class="ctd">{{data.orgName}}</td>
+      <td class="opt"><span (click)="selectItem(data)" style="text-decoration: underline;color: #0D46C6;cursor: pointer;">选中</span></td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="11"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="cancel()" fill="outline" color="primary" expand="block" class="close-btn">关闭</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>选择会员卡 (共{{memberLoginOutputData?.memberReCardDTOs.length}}张)</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let card of memberLoginOutputData?.memberReCardDTOs" size="4">
+        <!-- 
+            reCardStatus 会员关联卡的状态。 0为正常状态，-1为注销，-2为冻结
+            overdue 会员卡是否过期,0为没过期,1为过期
+        -->
+        <div class="card-box" (click)="select(card)" [class.disabled]="card.overdue === 1 || card.reCardStatus !== 0"
+                                         [class.canceled]="card.reCardStatus === -1"
+                                         [class.frozen]="card.reCardStatus === -2"
+                                         [class.expired]="card.overdue === 1">
+          <div class="card-box-hd">{{card.cinemaName}}
+            <span>{{card.cardLevelName}}</span>
+          </div>
+          <div class="card-box-bd">
+            <div class="no">
+              {{card.cardNo}}
+            </div>
+            <div class="remain" *ngIf="card.cardLevelType === 0">
+              余额：<em>{{card.balance | currency: 'CNY':'symbol-narrow'}}</em>
+            </div>
+            <div class="detail" *ngIf="card.cardLevelType === 0">(含赠送：{{card.remainMoneyCift| currency: 'CNY':'symbol-narrow'}})</div>
+            <div class="remain">
+              积分：<span>{{card.cardPoint}}</span>
+            </div>
+          </div>
+          <div class="card-box-ft">
+            <span *ngIf="card.cardValidDateStr" class="date">有效期至：{{card?.cardValidDateStr}}</span>
+            <span *ngIf="card.cardValidDateStr === ''" class="date">长期有效</span>
+            <!-- 选择页不提供设置默认卡功能 -->
+            <!-- <span *ngIf="card.reCardStatus === 0 &&  card.overdue === 0 &&  card.isDefaultCard !== 1" class="default"
+              (click)="setDefaultCard(card)">设为默认卡</span> -->
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="10"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,14 @@
+<app-menu [ngStyle]="{display:isFullscreen ? 'none' : ''}"></app-menu>
+<ion-content [fullscreen]="true">
+  <mat-sidenav-container class="container" [class.fullscreen]="isFullscreen">
+    <mat-sidenav [opened]="!isFullscreen" mode="side" class="start-side">
+      <app-ticket-plans [loading]="loading" (askForReload)="reload()" class="ion-page"></app-ticket-plans>
+    </mat-sidenav>
+    <mat-sidenav [opened]="!isFullscreen" mode="side" position="end" class="end-side">
+      <app-ticket-tickets *ngIf="didEnter" class="ion-page"></app-ticket-tickets>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-ticket-hall #hallComponent [didEnter]="didEnter" class="ion-page"></app-ticket-hall>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ion-content>

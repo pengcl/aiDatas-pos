@@ -1,0 +1,158 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>充值</ion-title>
+    </ion-toolbar>
+    <ion-toolbar class="info">
+        <div class="info-content">
+            <span>{{memberDetail?.memberAlias}}</span>
+            <span>卡号：{{cardSelected?.cardNo}}({{cardSelected?.cardLevelName}})</span>
+            <span>余额：{{(cardSelected?.balance) | rmb}}(含赠送：{{cardSelected?.remainMoneyCift|rmb}})</span>
+            <span>积分：{{cardSelected?.cardPoint}}</span>
+        </div>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-grid class="activities">
+                    <ion-row *ngIf="activities">
+                        <ion-col
+                                *ngFor="let item of activities"
+                                [size]="12/5">
+                            <div (click)="selectActivity(item)" class="activity-box"
+                                 [class.curr]="item.uid === activity?.uid">
+                                <span class="tag" *ngIf="item.uid.indexOf('no') == -1">活动</span>
+                                <span class="box-label" [class.center]="!item.campaignName">{{item.originalAmount}}元</span>
+                                <div *ngIf="item.campaignName" class="box-detail">
+                                    <span>{{item.campaignName}}</span>
+                                    <button type="button" nzSize="small" nz-button nzType="default"
+                                            (click)="presentModal($event,item).then()">详情</button>
+                                </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="auto">
+                <span style="display: inline-block;vertical-align: middle;width: auto" class="label">充值金额：</span>
+            </ion-col>
+            <ion-col>
+                <ion-grid class="recharge ion-no-padding" style="margin: 0 10px">
+                    <ion-row>
+                        <ion-col size="auto">
+                            <nz-form-item style="width: 300px;">
+                                <nz-form-control [nzSpan]="24">
+                                    <input type="number" [readOnly]="disableInput" [(ngModel)]="customRechargeAmount" (ngModelChange)="customRechargeAmountChange($event)"
+                                           nzSize="large" nz-input placeholder="请输入充值金额">
+                                </nz-form-control>
+                            </nz-form-item>
+                        </ion-col>
+                        <ion-col size="auto">
+                            <button type="button" nzSize="large" nz-button nzType="default" class="customize-open" [class.disable-input]="disableInput" (click)="noSelectActivity()">{{disableInput ? '打开自定义' : '关闭自定义'}}</button>
+                        </ion-col>
+                      <ion-col>（不选择以上金额或活动，自定义充值金额）</ion-col>
+                      <ion-col size="12">
+                        <span>{{cardSelected?.rechargeLimitText}}</span>
+                      </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- 支付 -->
+    <ion-grid>
+        <ion-row>
+            <ion-col size="auto">
+                <span class="label">支付：</span>
+            </ion-col>
+            <ion-col>
+                <ion-grid class="activities">
+                    <ion-row>
+                        <ion-col
+                                *ngFor="let item of rechargePayTypeList.slice(0,isMore ? 999 : (rechargePayTypeList.length === 10 ? 10 : 9))"
+                                [size]="12/5">
+                            <div (click)="selectPay(item)" class="activity-box"
+                                 [class.curr]="item.modeCode === payType ">
+                                <span class="box-label center">{{item.modeName}}</span>
+                            </div>
+                        </ion-col>
+                        <ion-col *ngIf="rechargePayTypeList.length > 10" [size]="12/5">
+                            <div (click)="more()" class="activity-box">
+                                <span class="box-more">更多</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- 输入框 -->
+    <ion-grid>
+        <ion-row
+                *ngIf="payType ==='AliPay' || payType === 'WeixinPay' || payType === 'KuaiqianPay' || payType === 'wx_ali_pay' || payType === 'FuiouPay'">
+            <ion-col size="auto">
+                <span class="label">付款码：</span>
+            </ion-col>
+            <ion-col>
+                <nz-form-item style="width: 300px;">
+                    <nz-form-control [nzSpan]="14">
+                        <input #payAuthCodeInput (focus)="setFocus('payAuthCode')" [autofocus]="autofocusType === 'payAuthCode'" [(ngModel)]="payAuthCode"
+                        (ngModelChange)="payAuthCodeChange($event)" nzSize="large" nz-input placeholder="请输入付款码">
+                    </nz-form-control>
+                </nz-form-item>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="payType === 'UnionPay'">
+            <ion-col size="auto">
+                <span class="label">银行卡：</span>
+            </ion-col>
+            <ion-col>
+                <nz-form-item style="width: 300px;">
+                    <nz-form-control [nzSpan]="14">
+                        <input #bankCardCodeInput (focus)="setFocus('bankCardCode')" [autofocus]="autofocusType === 'bankCardCode'"
+                               [(ngModel)]="bankCardCode"
+                               nzSize="large" nz-input placeholder="请输入付款码">
+                    </nz-form-control>
+                </nz-form-item>
+            </ion-col>
+            <ion-col size="auto">
+                <span class="label">支付凭证：</span>
+            </ion-col>
+            <ion-col>
+                <nz-form-item style="width: 300px;">
+                    <nz-form-control [nzSpan]="14">
+                        <input (focus)="setFocus('payVoucherCode')" [autofocus]="autofocusType === 'payVoucherCode'"
+                               [(ngModel)]="payVoucherCode"
+                               nzSize="large" nz-input placeholder="请输入付款码">
+                    </nz-form-control>
+                </nz-form-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col style="align-self: center">
+                    <div class="extra-info">
+                        <span>应收：</span><em>{{rechargeParams?.rechargeAmount | rmb}}</em>
+                        <span>参与充值活动：</span><span>{{rechargeParams?.campaignName}}</span>
+                    </div>
+                </ion-col>
+                <ion-col size="2">
+                    <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+                </ion-col>
+                <ion-col size="2">
+                    <ion-button class="checkout" color="primary" expand="block" (click)="memberCardRecharge()">充值
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

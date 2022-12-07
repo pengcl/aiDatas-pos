@@ -1,0 +1,17 @@
+<ion-grid style="margin-top: 100px;">
+  <ion-row>
+    <ion-col size="12">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <span class="label">会员卡状态：</span>
+          </ion-col>
+          <ion-col size="auto">
+            <span class="value">{{card?.reCardStatusName}}</span>
+          </ion-col>
+          <ion-col><button type="button" nzSize="large" nz-button (click)="freezeOrThawCard()"> {{card?.reCardStatus ===0 ? '冻结':'解冻' }} </button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>

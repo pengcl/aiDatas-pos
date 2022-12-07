@@ -1,0 +1,30 @@
+ion-button {
+  --border-radius: 4px;
+}
+
+ion-back-button {
+  --border-radius: 4px;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 1em;
+  --padding-end: 1em;
+  --transition: background-color, opacity 100ms linear;
+  margin: 4px 2px;
+  height: 2.8em;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  --color: var(--ion-color-medium-contrast, #fff) !important;
+  --background: var(--ion-color-medium, #92949c) !important;
+  --background-focused: var(--ion-color-medium-tint, #9d9fa6) !important;
+  --background-focused-opacity: var(--ion-color-medium-tint, #9d9fa6) !important;
+  --background-hover: var(--ion-color-medium-tint, #9d9fa6) !important;
+  --background-hover-opacity: var(--ion-color-medium-tint, #9d9fa6) !important;
+  /*  --background: var(--ion-color-medium, #92949c) !important;*/
+  /*--ion-color-base: var(--ion-color-medium, #92949c) !important;
+  --ion-color-base-rgb: var(--ion-color-medium-rgb, rgba(146, 148, 156)) !important;
+  --ion-color-contrast: var(--ion-color-medium-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb, rgb(255, 255, 255)) !important;
+  --ion-color-shade: var(--ion-color-medium-shade, #808289) !important;
+  --ion-color-tint: var(--ion-color-medium-tint, #9d9fa6) !important;*/
+}

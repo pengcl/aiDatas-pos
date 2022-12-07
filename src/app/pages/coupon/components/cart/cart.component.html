@@ -1,0 +1,59 @@
+<ion-content [fullscreen]="true">
+  <app-empty *ngIf="items && items.length === 0"></app-empty>
+  <ion-list *ngIf="items && items.length > 0">
+    <ng-container *ngFor="let item of items;let i = index">
+      <ion-item lines="full">
+        <ion-label>
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col size="7">
+                <h2>{{item.ticketName}}</h2>
+              </ion-col>
+              <ion-col class="count" size="2">x1</ion-col>
+              <ion-col class="price" size="3">{{item.ticketPrice | rmb}}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngIf="item.cartTicketContainDTOList.length === 0" class="ion-no-padding">
+            <ion-row>
+              <ion-col size="7">
+                <p style="font-size: 12px">编号：{{item.ticketCode}}</p>
+              </ion-col>
+              <ion-col size="5">
+                <p style="font-size: 12px">{{item.validDateStr}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+        <ion-note>
+          <ion-icon *ngIf="item.cartTicketContainDTOList.length !== 0" name="caret-down-outline"></ion-icon>
+          <ion-icon (click)="remove(i)" name="trash-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+      <div *ngIf="item.cartTicketContainDTOList.length !== 0" class="detail">
+        <ion-item *ngFor="let ticket of item.cartTicketContainDTOList;let i = index" [lines]="i === item.cartTicketContainDTOList.length - 1 ? 'full' : ''">
+          <ion-label>
+            <h2>{{ticket.ticketName}} <span>{{ticket.validDateStr ? ticket.validDateStr : '激活后200天内有效'}}</span></h2>
+            <p>编号： {{ticket.ticketCode}}</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ng-container>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <span class="amount" slot="end"><span class="label">应收：</span><span class="value">{{items | amount | rmb}}</span></span>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="clean()" [disabled]="items.length === 0" color="medium" expand="full">清空</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="create()" [disabled]="items.length === 0" expand="full">结算</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

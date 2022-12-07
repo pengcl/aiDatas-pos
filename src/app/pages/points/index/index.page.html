@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <app-member (detailShow)="detailShow($event)" (change)="memberChange($event)" [quickMode]="true"></app-member>
+  </ion-header>
+  <ion-grid [class.member]="member" [class.show]="show" class="ion-no-padding">
+    <ion-row>
+      <ion-col size="8">
+        <div class="ion-page">
+          <ion-content #ionContent>
+            <app-empty *ngIf="!items || items.length === 0"></app-empty>
+            <ul *ngIf="items && items.length > 0">
+              <li *ngFor="let item of currentPageData(items,page)" size="2" [ngStyle]="{width:(100/grid.x + '%')}">
+                <div (click)="add(item)"
+                     [class.disabled]="item.resourceStock === 0 && item.isCombo !== 1 && item.isSeviceMer !== 1 && item.isSelfMer !== 1"
+                     class="item-box">
+                  <h2 class="name">{{item.resourceName}}</h2>
+                  <p class="price">{{item.pointsChangePoints}}积分+{{item.pointsChangePrice | rmb}}</p>
+                  <p class="surplus">
+                    <span
+                      *ngIf="item.isCombo !== 1 && item.isSeviceMer !== 1 && item.isSelfMer !== 1">库存：{{item.resourceStock === null ? '999' : item.resourceStock}}</span>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </ion-content>
+          <ion-footer>
+            <ion-toolbar>
+              <ion-grid>
+                <ion-row>
+                  <ion-col></ion-col>
+                  <ion-col size="auto">
+                    <pagination [page]="page" (change)="pageChange($event)"></pagination>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-toolbar>
+          </ion-footer>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <app-points-cart (change)="change($event)" [member]="member" [items]="details?.posShopCartResDTOList"
+                         class="ion-page"></app-points-cart>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

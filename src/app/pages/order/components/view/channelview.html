@@ -1,0 +1,51 @@
+<ion-header class="header">
+  <ion-title class="auth-title">选择渠道</ion-title>
+</ion-header>
+<ion-content class="auth-content">
+  <form [formGroup]="form" class="auth-form" style="margin-bottom: 10px;">
+    <div>渠道名称：<input formControlName="channelName" nz-input class="query-input" style="width: 30%;"> <button nz-button nzType="primary" class="query-btn" style="margin-left: 10px" (click)="ngOnInit()">查询</button></div>
+  </form>
+  <nz-table #addTable
+            nzBordered
+            class="table"
+            nzShowPagination = false
+            [nzData]="viewPage.datas"
+            [nzLoading]="viewPage.loading"
+            [nzTotal]="viewPage.total"
+            [(nzPageIndex)]="viewPage.pageIndex"
+            [(nzPageSize)]="viewPage.pageSize"
+            [nzShowQuickJumper]="false"
+            [nzShowSizeChanger]="false"
+            (nzPageIndexChange)="changePageIndex($event)"
+            (nzPageSizeChange)="changePageSize($event)">
+    <thead>
+    <tr>
+      <th class="cth" style="width: 80px;text-align: center;padding: 5px 5px;"><mat-checkbox class="example-margin" [checked]="checkedAll" (change)="selectAll($event)"></mat-checkbox></th>
+      <th class="cth">渠道名称</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of addTable.data">
+      <td class="ctd" style="width: 80px;text-align: center;padding: 5px 5px;">
+        <mat-checkbox class="example-margin" [checked]="data.isChecked" (change)="select(data,$event)" ></mat-checkbox>
+      </td>
+      <td class="ctd">{{ data.channelName }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="actions">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="10"></ion-col>
+        <ion-col size="1">
+          <ion-button (click)="cancel()" fill="outline" color="primary" expand="block" class="close-btn">取消</ion-button>
+        </ion-col>
+        <ion-col size="1">
+          <ion-button (click)="commit()" color="primary" expand="block" class="close-btn">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

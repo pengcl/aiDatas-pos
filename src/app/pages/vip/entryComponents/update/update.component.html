@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>修改会员密码</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" nz-form style="margin-top: 50px;">
+    <ion-grid>
+      <ion-row>
+        <ion-col>旧密码:</ion-col>
+        <ion-col size="6">
+          <nz-form-item>
+            <!-- nzValidateStatus="error" [nzSpan]="12" nzErrorTip="旧的密码不对" -->
+            <nz-form-control
+                    [nzErrorTip]="form.get('oldPassword').hasError('required') ? '请输入旧密码' : '密码只能由六位数字组成'">
+              <nz-input-group nzSize="large" nzSearch [nzAddOnAfter]="suffixOldButton">
+                <input type="password" nzSize="large" formControlName="oldPassword" [maxLength]="6" [minLength]="6" nz-input placeholder="请输入旧密码"/>
+              </nz-input-group>
+              <ng-template #suffixOldButton>
+                <button nz-button nzType="default" nzSize="large" nzSearch (click)="startup('oldPassword')">启动密码输入</button>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>新密码:</ion-col>
+        <ion-col size="6">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="form.get('newPassword').hasError('required') ? '请输入新密码' : '密码只能由六位数字组成'">
+              <nz-input-group nzSize="large" nzSearch [nzAddOnAfter]="suffixNewButton">
+                <input type="password" nzSize="large" formControlName="newPassword" [maxLength]="6" [minLength]="6" nz-input placeholder="请输入新密码"/>
+              </nz-input-group>
+              <ng-template #suffixNewButton>
+                <button nz-button nzType="default" nzSize="large" nzSearch (click)="startup('newPassword')">启动密码输入</button>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>确认新密码:</ion-col>
+        <ion-col size="6">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="form.get('confirmPassword').hasError('required') ? '请输入确认密码' : '密码只能由六位数字组成'">
+              <nz-input-group nzSize="large" nzSearch [nzAddOnAfter]="suffixNewButton">
+                <input type="password" nzSize="large" formControlName="confirmPassword" [maxLength]="6" [minLength]="6" nz-input placeholder="请输入新密码"/>
+              </nz-input-group>
+              <ng-template #suffixNewButton>
+                <button nz-button nzType="default" nzSize="large" nzSearch (click)="startup('confirmPassword')">启动密码输入</button>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="8"></ion-col>
+        <ion-col size="2">
+          <ion-button (click)="dismiss()" fill="outline" color="primary" expand="block">取消</ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="confirm()" color="primary" expand="block">确定</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

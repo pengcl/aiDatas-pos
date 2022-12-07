@@ -1,0 +1,251 @@
+:host {
+  background: #CDDFFC;
+}
+
+.price {
+  font-weight: bold
+}
+
+.amount {
+  text-align: right;
+
+  sub {
+    bottom: 0;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+}
+
+ion-content {
+  --background: transparent;
+
+  ion-grid {
+    margin: 10px 0 0;
+
+    &.products {
+    }
+
+    ion-col {
+      overflow: hidden;
+    }
+  }
+
+  .content-box {
+    h2 {
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .ticket-box {
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0px 3px 3px 0px rgba(165, 183, 237, 0.2);
+      margin: 5px;
+
+      ion-grid {
+        position: relative;
+        border-radius: 3px;
+        border: 1px solid #A7B3C9;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 50%;
+          margin-top: -10px;
+          border: 1px solid #A7B3C9;
+          margin-left: -10px;
+          left: 0;
+          box-sizing: border-box;
+          overflow: hidden;
+          border-radius: 10px;
+          background: #CDDFFC;
+          z-index: 1;
+          box-shadow: 0px 3px 3px 0px rgba(165, 183, 237, 0.2) inset;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 50%;
+          margin-top: -10px;
+          border: 1px solid #A7B3C9;
+          margin-right: -10px;
+          right: 0;
+          box-sizing: border-box;
+          overflow: hidden;
+          border-radius: 10px;
+          background: #CDDFFC;
+          box-shadow: 0px 3px 3px 0px rgba(165, 183, 237, 0.2) inset;
+        }
+      }
+
+      .ticket-info-box {
+        background: #FAF8DC;
+        padding: 3px;
+        border-right: 1px solid #A7B3C9;
+        position: relative;
+      }
+
+      .ticket-actions-box {
+        padding: 0 8px;
+
+        ion-button, ion-icon {
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0 3px;
+        }
+
+        ion-icon {
+          font-size: 20px;
+          color: #666;
+        }
+      }
+
+      ion-col {
+        align-self: center;
+
+        h3 {
+          font-size: 16px;
+          margin: 0;
+
+          sub {
+            bottom: 0;
+          }
+        }
+
+        p {
+          margin: 0;
+          font-size: 12px;
+          color: #656161;
+
+          & + p {
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+
+    .product-box {
+      border-radius: 3px;
+
+      .product-info-box {
+        padding: 5px;
+        margin: 5px;
+        background: #F9F9F3;
+        box-shadow: 0px 3px 3px 0px rgba(165, 183, 237, 0.2);
+        border-radius: 4px;
+        border: 1px solid #A7B3C9;
+        position: relative;
+
+        p {
+          text-align: center;
+          line-height: 1.2;
+
+          &.price {
+            color: red;
+          }
+        }
+
+        ion-grid {
+          ion-row {
+            ion-col {
+              font-size: 14px;
+              @media screen and (max-width: 1200px) {
+                font-size: 12px;
+              }
+
+              &:last-child {
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+
+      .product-actions-box {
+        padding: 0 5px;
+
+        ion-icon {
+          font-size: 20px;
+          color: #666;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+
+      ion-col {
+        align-self: center;
+
+        h3 {
+          font-size: 16px;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          word-wrap: break-word;
+          -webkit-hyphens: auto;
+          hyphens: auto;
+          line-height: 19px;
+          height: 38px;
+          @media screen and (max-width: 1200px) {
+            font-size: 13px;
+            line-height: 15px;
+            height: 30px;
+          }
+        }
+
+        p {
+          margin: 0;
+          font-size: 12px;
+          color: #656161;
+        }
+      }
+    }
+  }
+
+  ion-list.total {
+    background: transparent;
+
+    ion-item {
+      --background: rgba(255, 255, 255, 0.3);
+      font-size: 14px;
+      --min-height: 34px;
+      --padding-start: 12px;
+
+      ion-label {
+        margin: 5px 8px 5px 0px;
+      }
+
+      ion-checkbox {
+        --size: 20px;
+        margin: 2px 10px 2px 0 !important;
+      }
+
+      ion-note {
+        color: #000;
+
+        em {
+          color: red;
+          font-weight: bold;
+          font-style: normal;
+        }
+      }
+    }
+  }
+}
+
+ion-footer {
+  em {
+    color: red;
+    font-weight: bold;
+  }
+}
+

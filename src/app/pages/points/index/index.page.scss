@@ -1,0 +1,113 @@
+ion-content {
+  ion-header {
+    &::ng-deep {
+      ion-toolbar {
+        --background: transparent;
+      }
+    }
+  }
+
+  --background: #f5f5f5;
+
+  & > ion-grid {
+    height: calc(100% - 81px);
+
+    &.member {
+      height: calc(100% - 151px);
+      &.show {
+        height: calc(100% - 219px);
+      }
+    }
+
+    & > ion-row {
+      height: 100%;
+
+      & > ion-col {
+        height: 100%;
+
+        ul {
+          padding: 0;
+          margin: 5px;
+          list-style: none;
+
+          li {
+            float: left;
+            width: 16.666667%;
+          }
+        }
+      }
+    }
+  }
+
+  .item-box {
+    background: linear-gradient(360deg, rgba(255, 255, 255, 0.98) 0%, #E8EFFF 100%);
+    border-radius: 4px;
+    border: 1px solid #A4ADBC;
+    margin: 5px;
+    overflow: hidden;
+    cursor: pointer;
+
+    h2 {
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 10px 10px 5px;
+      text-align: center;
+    }
+
+    p {
+      margin: 5px 10px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.surplus {
+        margin: 0;
+        background: #fff;
+        text-align: left;
+        padding: 2px 10px;
+        color: #353535;
+        font-size: 14px;
+        height: 25px;
+        line-height: 21px;
+      }
+    }
+
+    &.disabled {
+      background: #E9EDF1;
+      border: 1px solid #D1D4D8;
+
+      h2 {
+        color: #B0B0B1;
+      }
+
+      .price {
+        color: #B0B0B1;
+      }
+
+      .surplus {
+        color: #B0B0B1;
+      }
+    }
+  }
+}
+
+pagination {
+  &::ng-deep {
+    .page-container {
+      height: auto;
+    }
+
+    span {
+      font-size: 12px !important;
+    }
+
+    ion-icon {
+      font-size: 31px !important;
+    }
+  }
+}
